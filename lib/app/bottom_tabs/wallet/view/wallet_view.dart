@@ -10,6 +10,7 @@ import 'package:mr_bet/app/bottom_tabs/component/component.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/tap_pay.dart';
 import 'package:mr_bet/app/bottom_tabs/wallet/controller/wallet_controller.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
+import 'package:mr_bet/giftcartapp.dart';
 import 'package:mr_bet/services/api_manager.dart';
 import 'package:mr_bet/util/theme.dart';
 import 'package:mr_bet/util/toast.dart';
@@ -1221,14 +1222,13 @@ class _LanguageWidgetState extends State<LanguageWidget> {
                     itemCount: language.length,
                     itemBuilder: (BuildContext ctx, index) {
                       return GestureDetector(
-                        onTap: ()  {
-                          setState(() async {
+                        onTap: () {
+                          setState(()  {
                             indexValue = index;
                             Locale locale = new Locale(language[index]
                                 ['code']); //languageCode=ru or es
                             Get.updateLocale(locale);
-                            await HelperFunctions.saveInPreference(
-                                "locale", language[index]['code']);
+                            GiftCartApp.updateLocale(language[index]['code']);
                           });
                         },
                         child: Container(

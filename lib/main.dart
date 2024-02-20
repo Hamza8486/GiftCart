@@ -11,12 +11,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/app/home/home_view.dart';
 import 'package:mr_bet/app/splash/splash_view.dart';
+import 'package:mr_bet/giftcartapp.dart';
 import 'package:mr_bet/services/fcm/local_notification.dart';
 import 'package:mr_bet/util/constant.dart';
 import 'package:mr_bet/util/locale_translation.dart';
-import 'package:mr_bet/util/toast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 late AndroidNotificationChannel channel;
@@ -110,10 +109,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // TODO: implement initState
+    initGiftCartApp();
     super.initState();
-    var locale = Locale('en');
-    Get.updateLocale(locale);
   }
 
   @override
@@ -122,9 +119,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       translationsKeys: AppTranslation().keys,
       home: SplashView(),
-      locale: const Locale('en','US'),
-      fallbackLocale: Locale('en','US'),
+      locale: const Locale('en', 'US'),
+      fallbackLocale: Locale('en', 'US'),
     );
+  }
+
+  void initGiftCartApp() async {
+    await GiftCartApp.getInstance();
   }
 }
 
@@ -177,6 +178,9 @@ class _Application extends State<Application> {
   void initState() {
     super.initState();
     messagePop();
+
+    updateLocale();
+
     FirebaseMessaging.instance
         .getToken(
             vapidKey:
@@ -192,10 +196,8 @@ class _Application extends State<Application> {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       debugPrint("Received... ${message.data.toString()}");
-      if(message.data["notification_type"]=="Claim"){
-
+      if (message.data["notification_type"] == "Claim") {
         Get.put(HomeController()).updatePopup(true);
-
       }
       Get.put(HomeController()).getProfileData();
       Get.put(HomeController()).getTransData();
@@ -218,5 +220,10 @@ class _Application extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return const MyApp();
+  }
+
+  void updateLocale() async {
+    if (GiftCartApp.prefs == null) await GiftCartApp.getInstance();
+    Get.updateLocale(Locale(GiftCartApp.selectedLocale));
   }
 }
