@@ -12,6 +12,7 @@ import 'package:mr_bet/services/api_manager.dart';
 
 import 'package:mr_bet/util/theme.dart';
 import 'package:mr_bet/util/toast.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 
 class HelpCenter extends StatelessWidget {
@@ -31,7 +32,7 @@ class HelpCenter extends StatelessWidget {
                   onTap: () {
                     Get.back();
                   },
-                  text: "Help Center   ",
+                  text: helpCenter.tr,
                   image: "assets/icons/share.svg",
                   color: AppColor.whiteColor),
               Expanded(
@@ -44,13 +45,13 @@ class HelpCenter extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.03,
                           ),
-                          textAuth(text: "Title"),
+                          textAuth(text: title.tr),
                           SizedBox(
                             height: Get.height * 0.01,
                           ),
 
                           betField(
-                            hint: "Enter title",
+                            hint: enterTitle.tr,
                             max: 1,
 
                             controller: text1,
@@ -61,13 +62,13 @@ class HelpCenter extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.03,
                           ),
-                          textAuth(text: "Write Message"),
+                          textAuth(text: writeMessage.tr),
                           SizedBox(
                             height: Get.height * 0.01,
                           ),
 
                           betField(
-                            hint: "Enter Message",
+                            hint: enterMessage.tr,
                             max: 7,
 
                             controller: text,
@@ -87,7 +88,7 @@ class HelpCenter extends StatelessWidget {
                                 buttonWidth: Get.width,
                                 buttonHeight: Get.height * 0.051,
                                 buttonRadius: BorderRadius.circular(30),
-                                buttonName: "Submit",
+                                buttonName: submit.tr,
                                 fontWeight: FontWeight.w500,
                                 textSize: AppSizes.size_15,
                                 buttonColor: Get.put(HomeController())

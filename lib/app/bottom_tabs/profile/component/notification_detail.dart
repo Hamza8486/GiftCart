@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:mr_bet/app/bottom_tabs/component/component.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 
@@ -135,7 +136,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                             ),
                                             SizedBox(width: 5,),
                                             AppText(
-                                              title: "on all orders",
+                                              title: onAllOrders.tr,
                                               size: 11,
                                               fontWeight: FontWeight.w400,
                                               color: AppColor.blackColor,

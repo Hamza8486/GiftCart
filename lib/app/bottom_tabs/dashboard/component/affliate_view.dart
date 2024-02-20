@@ -310,7 +310,7 @@ class _AffliateViewState extends State<AffliateView> {
                                                     width: 6,
                                                   ),
                                                   Text(
-                                                    "Special offer",
+                                                    specialOffer.tr,
                                                     style: GoogleFonts.italianno(
                                                         textStyle: TextStyle(
                                                             color: AppColor
@@ -341,7 +341,7 @@ class _AffliateViewState extends State<AffliateView> {
                                                           horizontal: 13,
                                                           vertical: 5),
                                                       child: AppText(
-                                                        title: "50% Off",
+                                                        title: fiftyOff.tr,
                                                         size: 12,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -466,13 +466,13 @@ class _AffliateViewState extends State<AffliateView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        title: "Refer your Contact",
+                        title: referYrContact.tr,
                         color: AppColor.greyLightColor2,
                         size: 14,
                         fontWeight: FontWeight.w600,
                       ),
                       AppText(
-                        title: "View all",
+                        title: viewAll.tr,
                         color: AppColor.whiteColor,
                         size: 12,
                         fontWeight: FontWeight.w500,
@@ -603,8 +603,8 @@ Widget redeemInfo() {
             SizedBox(
               height: Get.height * 0.03,
             ),
-            const AppText(
-                title: "How does it work",
+            AppText(
+                title: howDoesItWork.tr,
                 size: 20,
                 fontWeight: FontWeight.w600,
                 color: AppColor.blackColor),

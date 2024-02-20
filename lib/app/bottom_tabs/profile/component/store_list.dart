@@ -195,7 +195,7 @@ class _StoreListState extends State<StoreList> {
                                                         ),
 
                                                         SizedBox(width: 6,),
-                                                        Text("Special Offer",
+                                                        Text(specialOffer.tr,
                                                           style: GoogleFonts.italianno(
                                                               textStyle : TextStyle(
                                                                   color: AppColor.blackColor,
@@ -230,7 +230,7 @@ class _StoreListState extends State<StoreList> {
                                                         ),
                                                         SizedBox(width: 5,),
                                                         AppText(
-                                                          title: "on all orders",
+                                                          title:  onAllOrders.tr,
                                                           size: 11,
                                                           fontWeight: FontWeight.w400,
                                                           color: AppColor.blackColor,
@@ -256,7 +256,7 @@ class _StoreListState extends State<StoreList> {
                                                         child:
                                                         Center(
                                                           child: AppText(
-                                                            title: "Visit website",
+                                                            title: visitWebsite.tr,
                                                             size: 14,
                                                             fontWeight: FontWeight.w500,
                                                             color: AppColor.primaryColor,
@@ -267,7 +267,7 @@ class _StoreListState extends State<StoreList> {
                                                     GestureDetector(
                                                       onTap: (){
                                                         openWhatsApp(phoneNumber: item.whatsapp.toString(),
-                                                            message: "Welcome to mr grocery"
+                                                            message: welcomeToMyGrocery.tr
                                                         );
                                                       },
                                                       child: Image.asset("assets/images/chat.png",
@@ -400,7 +400,7 @@ class _StoreListState extends State<StoreList> {
                                                           height: 22,
                                                         ),
                                                         SizedBox(width: 6,),
-                                                        Text("Special offer",
+                                                        Text(specialOffer.tr,
                                                           style: GoogleFonts.italianno(
                                                               textStyle : TextStyle(
                                                                   color: AppColor.blackColor,
@@ -424,7 +424,7 @@ class _StoreListState extends State<StoreList> {
                                                           child: Padding(
                                                             padding: const EdgeInsets.symmetric(horizontal: 13,vertical: 5),
                                                             child: AppText(
-                                                              title: "50% Off",
+                                                              title: fiftyOff.tr,
                                                               size: 12,
                                                               fontWeight: FontWeight.w600,
                                                               color: AppColor.primaryColor,
@@ -433,7 +433,7 @@ class _StoreListState extends State<StoreList> {
                                                         ),
                                                         SizedBox(width: 5,),
                                                         AppText(
-                                                          title: "on all orders",
+                                                          title: onAllOrders.tr,
                                                           size: 11,
                                                           fontWeight: FontWeight.w400,
                                                           color: AppColor.blackColor,
@@ -572,7 +572,7 @@ class _StoreListState extends State<StoreList> {
                               Column(
                                 children: [
                                   SizedBox(height: Get.height*0.25,),
-                                  Center(child: AppText(title: "No Store Data",
+                                  Center(child: AppText(title: noStoreData.tr,
                                     color: AppColor.blackColor.withOpacity(0.7),
                                     size: 16,
                                     fontWeight: FontWeight.w500,
@@ -628,7 +628,7 @@ class _StoreListState extends State<StoreList> {
                                                   authController
                                                       .getStoreList[index].openTime==null?
                                                   AppText(
-                                                    title: "opens at 7AM onwards",
+                                                    title: opensAt7amOnwards.tr,
                                                     size: 10,
                                                     fontWeight: FontWeight.w700,
                                                     maxLines: 1,
@@ -696,7 +696,7 @@ class _StoreListState extends State<StoreList> {
                                                         child: Padding(
                                                           padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
                                                           child: AppText(
-                                                            title: "Offer available",
+                                                            title: offerAvailable.tr,
                                                             size: 11,
                                                             fontWeight: FontWeight.w400,
                                                             maxLines: 1,

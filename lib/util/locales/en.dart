@@ -380,4 +380,9 @@ import 'package:mr_bet/util/translation_keys.dart' as translation;
   translation.totalEarned :"Total Earned",
   translation.referYrContact :"Refer your Contact",
   translation.pleaseUploadPaymentCopy :"Please upload payment copy",
+  translation.pleaseEnterOrScanBarcode :"Please enter or scan bar code store",
+  translation.pleaseEnterAmount :"Please enter amount",
+  translation.noStoreData :"No Store Data",
+  translation.offerAvailable :"Offer available",
+  translation.offerAvailable :"Enter title",
 };
