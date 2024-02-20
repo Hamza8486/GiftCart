@@ -10,6 +10,7 @@ import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_slots.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/payment_model.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/slot_model.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/transaction_model.dart';
+import 'package:mr_bet/app/bottom_tabs/dashboard/model/winners_model.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/model/profile_model.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/model/user_store.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/model/winner_chat_model.dart';
@@ -22,6 +23,16 @@ import 'package:mr_bet/widgets/helper_function.dart';
 class HomeController extends GetxController {
 
   var slotAddList=<AddSlotModel>[].obs;
+
+
+  var userName="".obs;
+  updateUserName(val){
+    userName.value=val;
+
+    update();
+
+  }
+
 
   var showPopUp=false.obs;
   updatePopup(val){

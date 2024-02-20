@@ -22,15 +22,15 @@ class GetWinnersModel {
 }
 
 class Response {
-  List<Data>? data;
+  List<WinnerAllDataNew>? data;
 
   Response({this.data});
 
   Response.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <WinnerAllDataNew>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new WinnerAllDataNew.fromJson(v));
       });
     }
   }
@@ -44,7 +44,7 @@ class Response {
   }
 }
 
-class Data {
+class WinnerAllDataNew {
   int? id;
   int? bet;
   User? user;
@@ -55,7 +55,7 @@ class Data {
   bool? isScratch;
   bool? isMessage;
 
-  Data(
+  WinnerAllDataNew(
       {this.id,
         this.bet,
         this.user,
@@ -66,7 +66,7 @@ class Data {
         this.createdAt,
         this.isScratch});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  WinnerAllDataNew.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     bet = json['bet'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;

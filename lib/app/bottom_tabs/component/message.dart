@@ -340,6 +340,10 @@ class _ChatDetailState extends State<ChatDetail> {
                                           ApiManger().sendMessageWinner(
                                               id: widget.data.id.toString(),
                                               text: messageController.text);
+                                          messageController.clear();
+                                          setState(() {
+
+                                          });
                                         },
                                   child: Container(
                                     height: 45,

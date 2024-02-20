@@ -90,7 +90,7 @@ class _NotificationViewState extends State<NotificationView> {
                           padding: EdgeInsets.zero,
                           itemBuilder: (BuildContext context, int index) {
                             DateTime time = DateTime.parse(
-                              Get.put(HomeController()).notiList[index].dateController,
+                              Get.put(HomeController()).notiList[index].date,
                             );
                             return Padding(
                                 padding:  EdgeInsets.only(top:
@@ -146,7 +146,7 @@ class _NotificationViewState extends State<NotificationView> {
                                                       print(Get.put(HomeController()).notiList[index].time.toString());
                                                     },
                                                     child: AppText(
-                                                        title: DateFormat.Hm().format(DateTime.parse("${Get.put(HomeController()).notiList[index].dateController.toString()} ${Get.put(HomeController()).notiList[index].time.toString()}")),
+                                                        title: DateFormat.Hm().format(DateTime.parse("${Get.put(HomeController()).notiList[index].date.toString()} ${Get.put(HomeController()).notiList[index].time.toString()}")),
                                                         size: 11,
                                                         fontWeight: FontWeight.w500,
                                                         color: AppColor.primaryColor),

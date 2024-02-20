@@ -127,7 +127,7 @@ class _WinnersState extends State<Winners> {
                                         borderRadius: BorderRadius
                                             .circular(100),
                                         child: Image.network(
-                                            Get.put(HomeController()).winnerList[0].user.logo==null?"": Get.put(HomeController()).winnerList[0].user.logo,
+                                            Get.put(HomeController()).winnerList.last.user?.logo==null?"": Get.put(HomeController()).winnerList.last.user?.logo,
 
 
 
@@ -445,8 +445,8 @@ class _WinnersState extends State<Winners> {
                                                               .withOpacity(0.6),
                                                           textColor: AppColor.whiteColor,
                                                           onTap: () {
-                                                            Get.put(HomeController()).getWinnerChar(id:Get.put(HomeController()).winnerList[index].toString() );
-                                                            Get.to(ChatDetail(data:Get.put(HomeController()).winnerList[index] ,));
+                                                          Get.put(HomeController()).getWinnerChar(id:Get.put(HomeController()).winnerList[index].id.toString() );
+                                                           Get.to(ChatDetail(data:Get.put(HomeController()).winnerList[index] ,));
                                                           },
                                                           buttonName: "Message",
                                                           buttonHeight: Get.height * 0.04,
@@ -606,7 +606,7 @@ class _WinnersState extends State<Winners> {
                               Get.put(HomeController()).winnerList.isEmpty?SizedBox.shrink():
                               Center(
                               child: AppText(
-                                title:Get.put(HomeController()).winnerList[0].user.fullName.toString(),
+                                title:Get.put(HomeController()).winnerList.last.user.fullName.toString(),
                                 size:14,
 
                                 fontWeight: FontWeight.w600,

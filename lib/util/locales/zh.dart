@@ -131,7 +131,7 @@ Map<String, String> get zhMap => {
   translation.confirmSlots: "确认插槽",
   translation.pleaseAddAmount: "请加金额",
   translation.selectProvinceAndSlot: "请选择省和插槽",
-  translation.congratulationsScratchCoupon: "恭喜!:刮coupon！",
+  translation.congratulationsScratchCoupon: "恭喜!:！",
   translation.thisIsId: "这是ID ",
   translation.scratchMe: "抓我！",
   translation.ScratchItToGetCouponNumber: "刮擦以获取您的 \n优惠券编号",

@@ -98,7 +98,7 @@ Map<String, String> get itMap => {
   translation.faqs: "Domande frequenti",
   translation.helpAndSupport: "Aiuto e supporto ",
   translation.logout: "Logout",
-  translation.youAreLucky: "Sei fortunato David!",
+  translation.youAreLucky: "Sei fortunato!",
   translation.read10_04: "Leggi 10:04",
   translation.congratulationsScratchCoupon: "Congratulazioni!",
   translation.congrats: "Congratulazioni!",

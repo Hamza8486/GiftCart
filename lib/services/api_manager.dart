@@ -1777,7 +1777,7 @@ class ApiManger extends GetConnect {
         Get.put(HomeController()).getWinnerData();
         Get.put(HomeController()).messageCheckLoader(true);
         Get.put(HomeController()).getWinnerChar(
-          id: id.toString()
+          id:"93"
         );
 
       }

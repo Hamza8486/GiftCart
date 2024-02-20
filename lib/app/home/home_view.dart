@@ -54,6 +54,17 @@ class _HomeState extends State<Home> {
    );
  }
 
+ void showWinSlotOtherDataBottomSheet({required BuildContext context, String user=""}) {
+   showModalBottomSheet(
+     backgroundColor: Colors.transparent,
+     isScrollControlled: true,
+     isDismissible: true,
+     context: context,
+     builder: (context) => OtherUserWin(user: user,),
+   );
+ }
+
+
  @override
  void initState() {
    super.initState();
@@ -70,6 +81,12 @@ class _HomeState extends State<Home> {
        Get.put(HomeController()).updatePopup(true);
        // Show the bottom sheet
        showWinSlotDataBottomSheet(context);
+     }
+     if (message.data["notification_type"] == "Reward") {
+       // Update the flag in the controller
+       Get.put(HomeController()).updatePopup(true);
+       // Show the bottom sheet
+       showWinSlotOtherDataBottomSheet(context: context,user:message.data["text"].toString().split(' ').first );
      }
 
      // Call methods or update UI based on the message
@@ -277,7 +294,7 @@ class _WinSlotDataState extends State<WinSlotData> {
       });
 
       // Start another delayed timer to hide the widget after 3 more seconds (totaling 13 seconds)
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(Duration(seconds: 2), () {
         // Set the visibility to false after 3 more seconds
         setState(() {
           isVisible = false;
@@ -290,7 +307,7 @@ class _WinSlotDataState extends State<WinSlotData> {
         isShowButton = true;
       });
     });
-    Future.delayed(Duration(seconds: 18), () {
+    Future.delayed(Duration(seconds: 15), () {
       // Close the bottom sheet after 20 seconds
       Get.back();
       Get.put(HomeController()).updatePopup(false);
@@ -326,7 +343,7 @@ class _WinSlotDataState extends State<WinSlotData> {
                     child
                         : Image.asset(
                       "assets/fonts/4.gif",
-                      height: 600,
+                      height: Get.height*0.69,
                       fit: BoxFit.cover
                       ,
                       width: Get.width,
@@ -338,14 +355,14 @@ class _WinSlotDataState extends State<WinSlotData> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left:
-                          130,
-                          top: 18
+                          padding:  EdgeInsets.only(left:
+                          Get.width*0.33,
+                          top:   Get.height*0.018
                           ),
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 8),
+                                padding:  EdgeInsets.only(left: Get.width*0.01,),
                                 child: Obx(
                                         () {
                                       return ClipRRect(
@@ -409,10 +426,211 @@ class _WinSlotDataState extends State<WinSlotData> {
               ),
 
               isShowButton?
+              Row(
+                children: [
+                  Expanded(
+                    child: AppButton(
+                        buttonWidth: Get.width,
+                        buttonRadius: BorderRadius.circular(10),
+                        buttonName: 'Claim Now',
+                        gard: true,
+                        fontWeight: FontWeight.w600,
+                        textSize: 16,
+                        buttonColor: AppColor.primaryColor,
+                        textColor: AppColor.whiteColor,
+                        onTap: () {
+                          Get.back();
+                          Get.put(HomeController()).updatePopup(false);
+                          Get.to(ClaimView(), transition: Transition.rightToLeft);
+                        }),
+                  ),
+                  SizedBox(width: 30,),
+                  Expanded(
+                    child: AppButton(
+                        buttonWidth: Get.width,
+                        buttonRadius: BorderRadius.circular(10),
+                        buttonName: 'Cancel',
+                        gard: true,
+                        fontWeight: FontWeight.w600,
+                        textSize: 16,
+                        buttonColor: AppColor.primaryColor,
+                        textColor: AppColor.whiteColor,
+                        onTap: () {
+                          Get.back();
+                          Get.put(HomeController()).updatePopup(false);
+
+                        }),
+                  ),
+                ],
+              ):SizedBox.shrink(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class OtherUserWin extends StatefulWidget {
+  OtherUserWin({super.key,this.user=""});
+  String user;
+
+  @override
+  State<OtherUserWin> createState() => _OtherUserWinState();
+}
+
+class _OtherUserWinState extends State<OtherUserWin> {
+  bool isVisible = false;
+  bool isShowButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start a delayed timer to show the widget after 10 seconds
+    Future.delayed(Duration(seconds:6), () {
+      // Set the visibility to true after 10 seconds
+      setState(() {
+        isVisible = true;
+      });
+
+      // Start another delayed timer to hide the widget after 3 more seconds (totaling 13 seconds)
+      Future.delayed(Duration(seconds: 2), () {
+        // Set the visibility to false after 3 more seconds
+        setState(() {
+          isVisible = false;
+        });
+      });
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      // Set the visibility to false after 3 more seconds
+      setState(() {
+        isShowButton = true;
+      });
+    });
+    Future.delayed(Duration(seconds: 15), () {
+      // Close the bottom sheet after 20 seconds
+      Get.back();
+      Get.put(HomeController()).updatePopup(false);
+    });
+
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: 0.9,
+      minChildSize: 0.9,
+      maxChildSize: 0.9,
+      builder: (_, controller) => Container(
+        decoration: BoxDecoration(
+          color: AppColor.transParent,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              vertical: Get.height * 0.02, horizontal: Get.width * 0.05),
+          child: Column(
+            children: [
+
+
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius:
+                    BorderRadius.circular(10
+                    ),
+                    child
+                        : Image.asset(
+                      "assets/fonts/4.gif",
+                      height: Get.height*0.69,
+                      fit: BoxFit.cover
+                      ,
+                      width: Get.width,
+
+                    ),
+                  ),
+                  Visibility(
+                    visible: isVisible,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.only(left:
+                          Get.width*0.33,
+                              top:   Get.height*0.018
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:  EdgeInsets.only(left: Get.width*0.01,),
+                                child: Obx(
+                                        () {
+                                      return ClipRRect(
+                                        borderRadius:
+
+
+                                        BorderRadius.circular(
+
+                                            100),
+                                        child: CachedNetworkImage(
+                                          placeholder: (context, url) =>Center(
+                                              child: SpinKitThreeBounce(
+                                                  size: 16, color: AppColor.primaryColor)
+                                          ),
+                                          imageUrl:Get.put(HomeController()).image.value,
+                                          fit: Get.put(HomeController()).image.value.isEmpty
+                                              ? BoxFit.cover
+                                              : BoxFit.cover,
+                                          height: 82,
+                                          width: 82,
+                                          errorWidget: (context, url, error) => ClipRRect(
+                                            borderRadius:
+
+
+                                            BorderRadius.circular(100),
+                                            child: Image.asset(
+                                              "assets/images/persons.jpg",
+                                              fit: BoxFit.cover,
+                                              height: 82,
+                                              width: 82,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                ),
+                              ),
+                              SizedBox(height: 35,),
+                              Obx(
+                                      () {
+                                    return
+
+                                      AppText(
+                                        title:widget.user,
+                                        size:
+                                        Get.put(HomeController()).image.value.isEmpty?15:
+                                        15,
+                                        fontFamily: AppFont.medium,
+                                        fontWeight: FontWeight.w600,
+                                        color:AppColor.blackColor,
+                                      );
+                                  }
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+
+              isShowButton?
               AppButton(
                   buttonWidth: Get.width,
                   buttonRadius: BorderRadius.circular(10),
-                  buttonName: 'Claim Now',
+                  buttonName: 'Cancel',
                   gard: true,
                   fontWeight: FontWeight.w600,
                   textSize: 16,
@@ -420,8 +638,7 @@ class _WinSlotDataState extends State<WinSlotData> {
                   textColor: AppColor.whiteColor,
                   onTap: () {
                     Get.back();
-                    Get.put(HomeController()).updatePopup(false);
-                    Get.to(ClaimView(), transition: Transition.rightToLeft);
+
                   }):SizedBox.shrink(),
             ],
           ),
@@ -430,3 +647,4 @@ class _WinSlotDataState extends State<WinSlotData> {
     );
   }
 }
+

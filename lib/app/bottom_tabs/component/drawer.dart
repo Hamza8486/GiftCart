@@ -201,7 +201,7 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 10,),
                   Divider(color: Colors.grey.withOpacity(0.6),),
-                  SizedBox(height: 10,),
+
 
                   GetBuilder<HomeController>(
                     builder: (controller) {
@@ -210,6 +210,9 @@ class CustomDrawer extends StatelessWidget {
                             ? CrossAxisAlignment.start
                             : CrossAxisAlignment.start,
                         children: [
+                          SizedBox(height:
+                          controller.slotProfileId.isEmpty?
+                          10:0,),
                           GestureDetector(
                             onTap: controller.slotProfileId.isEmpty
                                 ? () {
@@ -221,26 +224,38 @@ class CustomDrawer extends StatelessWidget {
                             child: Container(
                               color: Colors.transparent,
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/frame1.svg",
-                                    height: Get.height * 0.024,
-                                    color: AppColor.grey3Color,
-                                  ),
-                                  SizedBox(
-                                    width: Get.width * 0.03,
-                                  ),
-                                  AppText(
-                                    title: claim.tr,
-                                    size: 15,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColor.boldBlackColor,
-                                  ),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/icons/frame1.svg",
+                                        height: Get.height * 0.024,
+                                        color: AppColor.grey3Color,
+                                      ),
+                                      SizedBox(
+                                        width: Get.width * 0.03,
+                                      ),
+                                      AppText(
+                                        title: claim.tr,
+                                        size: 15,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColor.boldBlackColor,
+                                      ),
 
+                                    ],
+                                  ),
+                                  controller.slotProfileId.isEmpty?SizedBox.shrink():
+                                  Image.asset("assets/images/logo.gif",
+                                    height: 60,
+                                    width: 60,
+                                  )
                                 ],
                               ),
                             ),
                           ),
+                          SizedBox(height:  controller.slotProfileId.isEmpty?
+                          10:0,),
                         ],
                       );
                     },
@@ -248,10 +263,6 @@ class CustomDrawer extends StatelessWidget {
 
 
 
-
-
-
-                  SizedBox(height: 10,),
                   Divider(color: Colors.grey.withOpacity(0.6),),
                   SizedBox(height: 10,),
                   GestureDetector(
