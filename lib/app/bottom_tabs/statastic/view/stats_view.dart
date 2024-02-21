@@ -11,6 +11,7 @@ import 'package:mr_bet/app/bottom_tabs/dashboard/view/dashboard_view.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/services/api_manager.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 import 'package:scratcher/scratcher.dart';
@@ -88,14 +89,14 @@ class _StatsViewState extends State<StatsView> {
                       Padding(
                         padding: const EdgeInsets.only(right: 30),
                         child: AppText(
-                          title: "Stats",
+                          title: stats.tr,
                           size: 18,
                           fontWeight: FontWeight.w500,
                           color: AppColor.boldBlackColor,
                         ),
                       ),
                       AppText(
-                        title: "Testimonials",
+                        title: testimonimals.tr,
                         size: 0,
                         fontWeight: FontWeight.w500,
                         color: AppColor.whiteColor,
@@ -143,7 +144,7 @@ class _StatsViewState extends State<StatsView> {
                                 width: Get.width*0.36,
                                 child: Obx(() {
                                   return dropDownAppAddAll(
-                                    hint: "Province",
+                                    hint: province.tr,
                                     child1:  SvgPicture.asset("assets/icons/layer.svg",height: Get.height*0.018,
                                       color: AppColor.boldBlackColor,
 
@@ -188,7 +189,7 @@ class _StatsViewState extends State<StatsView> {
                                 width: Get.width*0.3,
                                 child: Obx(() {
                                   return dropDownAppAddAll(
-                                    hint: "Grocery",
+                                    hint: grocery.tr,
                                       colorIcon:Colors.transparent,
                                     child1:  SizedBox.shrink(),
                                     width:  Get.put(AuthController())
@@ -341,7 +342,7 @@ class _StatsViewState extends State<StatsView> {
                                   Column(
                                     children: [
                                       AppText(
-                                        title: "Slots",
+                                        title: slots.tr,
                                         size: 12,
                                         fontFamily: AppFont.regular,
                                         fontWeight: FontWeight.w400,
@@ -375,7 +376,7 @@ class _StatsViewState extends State<StatsView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AppText(
-                          title: "Total Price: ",
+                          title: totalPrice.tr,
                           size: 15,
                           fontWeight: FontWeight.w500,
                           color: Colors.black,
@@ -632,7 +633,7 @@ class _StatsViewState extends State<StatsView> {
                           Column(
                             children: [
                               SizedBox(height: Get.height*0.15,),
-                              Center(child: AppText(title: "No  History!",
+                              Center(child: AppText(title: noHistory.tr,
                                 color: AppColor.blackColor.withOpacity(0.7),
                                 size: 16,
                                 fontWeight: FontWeight.w500,
@@ -750,7 +751,7 @@ class _StatsViewState extends State<StatsView> {
                                     height: Get.height * 0.03,
                                   ),
                                   AppText(
-                                    title: "Congratulations!",
+                                    title: congratulations.tr,
                                     size: AppSizes.size_16,
                                     fontFamily: AppFont.semi,
                                     fontWeight: FontWeight.w600,
@@ -788,7 +789,7 @@ class _StatsViewState extends State<StatsView> {
                                 height: Get.height * 0.03,
                               ),
                               AppText(
-                                title: "Congratulations!",
+                                title: congratulations.tr,
                                 size: AppSizes.size_16,
                                 fontFamily: AppFont.semi,
                                 fontWeight: FontWeight.w600,
@@ -823,7 +824,7 @@ class _StatsViewState extends State<StatsView> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                     child: AppButton(
-                      buttonName: "Ok",
+                      buttonName: ok.tr,
                       buttonColor: AppColor.primaryColor,
                       textColor: AppColor.whiteColor,
                       onTap: () {

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanQrPage extends StatefulWidget {
@@ -95,7 +97,7 @@ class _ScanResultDialogState extends State<ScanResultDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("QR Value"),
+      title: Text(QRValue.tr),
       content: TextFormField(
         initialValue: widget.qrData,
         readOnly: true,
@@ -106,7 +108,7 @@ class _ScanResultDialogState extends State<ScanResultDialog> {
             widget.onClose();
             Navigator.of(context).pop();
           },
-          child: Text("Done"),
+          child: Text(done.tr),
         ),
       ],
     );

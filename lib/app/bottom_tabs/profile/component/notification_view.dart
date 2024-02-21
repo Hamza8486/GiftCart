@@ -5,6 +5,7 @@ import 'package:mr_bet/app/bottom_tabs/component/component.dart';
 import 'package:mr_bet/app/bottom_tabs/profile/component/notification_detail.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
@@ -25,7 +26,7 @@ class _NotificationViewState extends State<NotificationView> {
         children: [
           TopBar(onTap1: (){},onTap: (){
             Get.back();
-          },text: "Notifications",
+          },text: notifications.tr,
               image: "assets/icons/share.svg",color: AppColor.whiteColor
           ),
 
@@ -75,7 +76,7 @@ class _NotificationViewState extends State<NotificationView> {
                           Column(
                             children: [
                               SizedBox(height: Get.height*0.38,),
-                              Center(child: AppText(title: "No Notification Data!",
+                              Center(child: AppText(title: noNotificationData.tr,
                                 color: AppColor.blackColor.withOpacity(0.7),
                                 size: 16,
                                 fontWeight: FontWeight.w500,

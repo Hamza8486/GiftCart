@@ -26,17 +26,14 @@ class _EarnRefrenceState extends State<EarnRefrence> {
 
   @override
   void initState() {
+    super.initState();
     fetchContacts();
   }
 
   Future<void> share() async {
     await WhatsappShare.share(
-      text:
-      "📢 Hey friends! Check out our amazing MR App - it's mind-blowing! 😎 Sign up using my referral code  and get rewarded with \$1! 💸 Don't miss out on this awesome opportunity, share the love on WhatsApp now.\n# ${Get
-          .put(HomeController())
-          .referCode
-          .value
-          .toString()}    Use this",
+      text: heyFriendsCheckAppText.tr +
+          "\n# ${Get.put(HomeController()).referCode.value.toString()}    Use this",
       linkUrl: 'https://flutter.dev/',
       phone: '911234567890',
     );
@@ -116,7 +113,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                                   horizontal: 16, vertical: 8),
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -132,11 +129,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                                       Obx(() {
                                         return AppText(
                                           title:
-                                          "\$${Get
-                                              .put(HomeController())
-                                              .totalEarning
-                                              .value
-                                              .toString()} ",
+                                              "\$${Get.put(HomeController()).totalEarning.value.toString()} ",
                                           size: AppSizes.size_24,
                                           color: AppColor.boldBlackColor,
                                           fontFamily: AppFont.medium,
@@ -166,29 +159,26 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                         Center(
                           child: Obx(() {
                             return GestureDetector(
-                              onTap: Get
-                                  .put(HomeController())
-                                  .referCode
-                                  .value
-                                  .isEmpty
+                              onTap: Get.put(HomeController())
+                                      .referCode
+                                      .value
+                                      .isEmpty
                                   ? () {
-                                flutterToastSuccess(msg: copied.tr);
-                                Clipboard.setData(ClipboardData(
-                                    text: Get
-                                        .put(HomeController())
-                                        .referCode
-                                        .value
-                                        .toString()));
-                              }
+                                      flutterToastSuccess(msg: copied.tr);
+                                      Clipboard.setData(ClipboardData(
+                                          text: Get.put(HomeController())
+                                              .referCode
+                                              .value
+                                              .toString()));
+                                    }
                                   : () {
-                                flutterToastSuccess(msg: copied.tr);
-                                Clipboard.setData(ClipboardData(
-                                    text: Get
-                                        .put(HomeController())
-                                        .referCode
-                                        .value
-                                        .toString()));
-                              },
+                                      flutterToastSuccess(msg: copied.tr);
+                                      Clipboard.setData(ClipboardData(
+                                          text: Get.put(HomeController())
+                                              .referCode
+                                              .value
+                                              .toString()));
+                                    },
                               child: Container(
                                 decoration: BoxDecoration(
                                   color: Colors.grey.withOpacity(0.5),
@@ -199,8 +189,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                                         horizontal: 25, vertical: 10),
                                     child: Obx(() {
                                       return AppText(
-                                        title: Get
-                                            .put(HomeController())
+                                        title: Get.put(HomeController())
                                             .referCode
                                             .value
                                             .toString(),
@@ -218,8 +207,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                         ),
                         Center(
                           child: AppText(
-                            title:
-                            copyOrShareRefCodeWithFriends.tr,
+                            title: copyOrShareRefCodeWithFriends.tr,
                             size: AppSizes.size_10,
                             fontFamily: AppFont.medium,
                             fontWeight: FontWeight.w500,
@@ -284,7 +272,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                               Container(
                                 decoration: BoxDecoration(
                                   color:
-                                  AppColor.primaryColor.withOpacity(0.25),
+                                      AppColor.primaryColor.withOpacity(0.25),
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: Padding(
@@ -299,8 +287,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                               ),
                               Expanded(
                                 child: AppText(
-                                  title:
-                                  copyTheRefCodeNShare.tr,
+                                  title: copyTheRefCodeNShare.tr,
                                   size: AppSizes.size_11,
                                   fontFamily: AppFont.medium,
                                   fontWeight: FontWeight.w500,
@@ -321,7 +308,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                               Container(
                                 decoration: BoxDecoration(
                                   color:
-                                  AppColor.primaryColor.withOpacity(0.25),
+                                      AppColor.primaryColor.withOpacity(0.25),
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: Padding(
@@ -336,8 +323,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                               ),
                               Expanded(
                                 child: AppText(
-                                  title:
-                                  askYourFriendToRegisterUsingRefCode.tr,
+                                  title: askYourFriendToRegisterUsingRefCode.tr,
                                   size: AppSizes.size_11,
                                   fontFamily: AppFont.medium,
                                   fontWeight: FontWeight.w500,
@@ -396,67 +382,66 @@ Widget earnWidget() {
     initialChildSize: 0.7,
     minChildSize: 0.7,
     maxChildSize: 0.7,
-    builder: (_, controller) =>
-        Container(
-          decoration: BoxDecoration(
-            color: AppColor.whiteColor,
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: Get.height * 0.02, horizontal: Get.width * 0.05),
-            child: Column(
+    builder: (_, controller) => Container(
+      decoration: BoxDecoration(
+        color: AppColor.whiteColor,
+        borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: Get.height * 0.02, horizontal: Get.width * 0.05),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/slide.png",
-                      scale: 3,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: Get.height * 0.03,
-                ),
-                AppText(
-                    title: infoAboutEarnings.tr,
-                    size: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.blackColor),
-                SizedBox(
-                  height: Get.height * 0.02,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Row(
-                            children: [
-                              AppText(
-                                  title: "${index + 1} - ",
-                                  size: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.blackColor),
-                              AppText(
-                                  title: clearExpDateForeachCoupon.tr,
-                                  size: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.blackColor),
-                            ],
-                          ),
-                        );
-                      }),
-                ),
+                Image.asset(
+                  "assets/images/slide.png",
+                  scale: 3,
+                )
               ],
             ),
-          ),
+            SizedBox(
+              height: Get.height * 0.03,
+            ),
+            AppText(
+                title: infoAboutEarnings.tr,
+                size: 20,
+                fontWeight: FontWeight.w600,
+                color: AppColor.blackColor),
+            SizedBox(
+              height: Get.height * 0.02,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 10,
+                  shrinkWrap: true,
+                  padding: EdgeInsets.zero,
+                  primary: false,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: Row(
+                        children: [
+                          AppText(
+                              title: "${index + 1} - ",
+                              size: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.blackColor),
+                          AppText(
+                              title: clearExpDateForeachCoupon.tr,
+                              size: 14,
+                              fontWeight: FontWeight.w500,
+                              color: AppColor.blackColor),
+                        ],
+                      ),
+                    );
+                  }),
+            ),
+          ],
         ),
+      ),
+    ),
   );
 }

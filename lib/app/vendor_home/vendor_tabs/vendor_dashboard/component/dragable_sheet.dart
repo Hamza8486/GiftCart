@@ -1093,7 +1093,7 @@ class _DraggableSheetState extends State<DraggableSheet> {
                                           horizontal: 5),
                                       child: Center(
                                         child: AppText(
-                                          title: "Grocery",
+                                          title: grocery.tr,
                                           size: 15,
                                           fontWeight: FontWeight.w600,
                                           color: homeController

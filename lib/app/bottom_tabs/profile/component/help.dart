@@ -121,19 +121,13 @@ class HelpCenter extends StatelessWidget {
 
 
      if (text1.text.isEmpty) {
-       flutterToast(msg: "Please enter title");
+       flutterToast(msg: pleaseEnterTitle.tr);
        return false;
      }
      if (text.text.isEmpty) {
-       flutterToast(msg: "Please enter message");
+       flutterToast(msg: pleaseEnterMessage.tr);
        return false;
      }
-
-
-
-
-
-
 
 
      return true;

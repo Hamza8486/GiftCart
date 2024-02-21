@@ -8,6 +8,7 @@ import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/services/api_manager.dart';
 import 'package:mr_bet/util/theme.dart';
 import 'package:mr_bet/util/toast.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 
 class SaveBanks extends StatefulWidget {
@@ -28,7 +29,7 @@ class _SaveBanksState extends State<SaveBanks> {
             children: [
               TopBar(onTap1: (){},onTap: (){
                 Get.back();
-              },text: "Saved Bank Accounts",
+              },text: savedBankAccounts.tr,
                   image: "assets/icons/share.svg",color: AppColor.whiteColor
               ),
               Expanded(
@@ -81,7 +82,7 @@ class _SaveBanksState extends State<SaveBanks> {
                                                   Row(
                                                     children: [
                                                       AppText(
-                                                        title: "Title :  ",
+                                                        title: title.tr+" : ",
                                                         size: AppSizes.size_15,
                                                         fontFamily: AppFont.medium,
                                                         fontWeight: FontWeight.w500,
@@ -101,7 +102,7 @@ class _SaveBanksState extends State<SaveBanks> {
                                                     onTap: (){
                                                       showAlertDialog(
                                                           context: context,
-                                                          text: 'Do you want to delete it ? ',
+                                                          text: doYouWantToDelete.tr,
                                                           yesOnTap: () {
                                                             Get.back();
                                                             showLoading(context: context);
@@ -118,7 +119,7 @@ class _SaveBanksState extends State<SaveBanks> {
                                               Row(
                                                 children: [
                                                   AppText(
-                                                    title: "IBAN Number :  ",
+                                                    title:ibanNumber.tr,
                                                     size: AppSizes.size_15,
                                                     fontFamily: AppFont.medium,
                                                     fontWeight: FontWeight.w500,
@@ -138,7 +139,7 @@ class _SaveBanksState extends State<SaveBanks> {
                                               Row(
                                                 children: [
                                                   AppText(
-                                                    title: "Account Number :  ",
+                                                    title: accountNumber.tr,
                                                     size: AppSizes.size_15,
                                                     fontFamily: AppFont.medium,
                                                     fontWeight: FontWeight.w500,

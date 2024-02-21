@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mr_bet/app/auth/login.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 final Shader linearGradient = const LinearGradient(
@@ -37,7 +38,7 @@ class OnBoardingView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                    "MR | Corporation",
+                    MRcorporation.tr,
                     style: GoogleFonts.poppins(
                       textStyle : TextStyle(
 
@@ -52,7 +53,7 @@ class OnBoardingView extends StatelessWidget {
                   padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04),
                   child: Center(
                     child: AppText(
-                      title:"At the heart of our business is a commitment to redefining your grocery experience. By offering premium grocery services, we aim to simplify your shopping needs, ensuring quality products are delivered to your doorstep.",
+                      title:atTheHeartOfText.tr,
                       color: AppColor.gray,
                       textAlign: TextAlign.center,
 
@@ -64,7 +65,7 @@ class OnBoardingView extends StatelessWidget {
                 SizedBox(height: Get.height*0.025),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04),
-                  child: AppButton(buttonName: "Get started", buttonColor: AppColor.primaryColor, textColor: AppColor.whiteColor, onTap: (){
+                  child: AppButton(buttonName: getStarted.tr, buttonColor: AppColor.primaryColor, textColor: AppColor.whiteColor, onTap: (){
                     Get.to(LoginView(),
                     transition: Transition.native
                     );

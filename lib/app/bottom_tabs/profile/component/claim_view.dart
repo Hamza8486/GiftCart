@@ -58,12 +58,12 @@ class _ClaimViewState extends State<ClaimView> {
     double videoDuration = await getVideoDuration(video.path);
 
     if (videoDuration > 15) {
-      flutterToast(msg: "Please select a video that is 15 seconds or less");
+      flutterToast(msg: pleaseSelectVideo15Orless.tr);
     } else {
       setState(() {
         selectedVideoPath = video.path;
         Get.put(HomeController()).videoFile = video;
-        flutterToast(msg: "Video Selected");
+        flutterToast(msg: videoSelected.tr);
       });
     }
   }

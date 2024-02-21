@@ -13,6 +13,7 @@ import 'package:mr_bet/app/auth/login.dart';
 import 'package:mr_bet/services/api_manager.dart';
 import 'package:mr_bet/util/theme.dart';
 import 'package:mr_bet/util/toast.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 import 'package:mr_bet/widgets/drop_down.dart';
@@ -57,7 +58,7 @@ class _UserStoreState extends State<UserStore> {
                       width: Get.width * 0.25,
                     ),
                     AppText(
-                      title: "Add Store",
+                      title: addSTore.tr,
                       color: AppColor.blackColor,
                       size: AppSizes.size_18,
                       fontFamily: AppFont.semi,
@@ -75,7 +76,7 @@ class _UserStoreState extends State<UserStore> {
                         SizedBox(
                           height: Get.height * 0.015,
                         ),
-                        textAuth(text: "Store Name"),
+                        textAuth(text: storeName.tr),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
@@ -89,18 +90,18 @@ class _UserStoreState extends State<UserStore> {
                             }
                             return null;
                           },
-                          hint: "Enter store name",
+                          hint: enterStoreName.tr,
                           controller: authController.storeNameController,
                         ),
                         SizedBox(
                           height: Get.height * 0.02,
                         ),
-                        textAuth(text: "Store Address"),
+                        textAuth(text: storeAddress.tr),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
                         betField(
-                            hint: "Enter store address",
+                            hint: enterStoreAddress.tr,
                             onTap:(){
                               Get.to(AddAddress());
                             },
@@ -114,7 +115,7 @@ class _UserStoreState extends State<UserStore> {
                         SizedBox(
                           height: Get.height * 0.02,
                         ),
-                        textAuth(text: "Province"),
+                        textAuth(text: province.tr),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
@@ -129,7 +130,7 @@ class _UserStoreState extends State<UserStore> {
                                     contentPadding: EdgeInsets.symmetric(vertical: Get.height*0.016),
                                     color2:  AppColor.greyColors,
 
-                                    hinText: "Select Province",
+                                    hinText:selectProvince.tr,
                                     value: authController.provinceId,
                                     onChanged: (value) async {
                                       setState(() {
@@ -148,12 +149,12 @@ class _UserStoreState extends State<UserStore> {
                         SizedBox(
                           height: Get.height * 0.017,
                         ),
-                        textAuth(text: "Phone Number"),
+                        textAuth(text: phoneNumber.tr),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
                         betField(
-                            hint: "Phone Number",
+                            hint: phoneNumber.tr,
                             controller: authController.mobileController,
                             textInputType: TextInputType.phone,
                             textInputAction: TextInputAction.next
@@ -161,7 +162,7 @@ class _UserStoreState extends State<UserStore> {
                         SizedBox(
                           height: Get.height * 0.017,
                         ),
-                        textAuth(text: "Upload Store Logo"),
+                        textAuth(text: uploadStoreLogo.tr),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
@@ -223,7 +224,7 @@ class _UserStoreState extends State<UserStore> {
                                           child:Padding(
                                               padding:  EdgeInsets.symmetric(horizontal: 12,vertical: 8),
                                               child:   AppText(
-                                                title: "Upload Store Logo",
+                                                title: uploadStoreLogo.tr,
                                                 size: AppSizes.size_10,
                                                 color: AppColor.boldBlackColor,
                                                 fontFamily: AppFont.medium,
@@ -278,13 +279,13 @@ class _UserStoreState extends State<UserStore> {
                         SizedBox(
                           height: Get.height * 0.017,
                         ),
-                        textAuth(text: "Upload license Document"),
+                        textAuth(text: uploadLicenseDoc.tr),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
 
                         ImagePick(
-                          text:"Upload",
+                          text:upload.tr,
                         ),
 
                         SizedBox(
@@ -305,7 +306,7 @@ class _UserStoreState extends State<UserStore> {
                     AppButton(
                         buttonWidth: Get.width,
                         buttonRadius: BorderRadius.circular(10),
-                        buttonName: "Add Store",
+                        buttonName: addSTore.tr,
                         fontWeight: FontWeight.w500,
                         textSize: AppSizes.size_15,
                         buttonColor: AppColor.primaryColor,
@@ -366,34 +367,34 @@ class _UserStoreState extends State<UserStore> {
 
 
     if (Get.put(AuthController()).storeNameController.text.isEmpty) {
-      flutterToast(msg: "Please enter store name");
+      flutterToast(msg: pleaseEnterStoreName.tr);
       return false;
     }
     if (Get.put(AuthController()).addressController.text.isEmpty) {
-      flutterToast(msg: "Please enter store address");
+      flutterToast(msg: pleaseEnterStoreAddress.tr);
       return false;
     }
 
     if (Get.put(AuthController()).mobileController.text.isEmpty) {
-      flutterToast(msg: "Please enter phone number");
+      flutterToast(msg: pleaseEnterPhone.tr);
       return false;
     }
     if (Get.put(AuthController()).mobileController.text.length<9) {
-      flutterToast(msg: "Please enter valid phone number");
+      flutterToast(msg: enterValidPhone.tr);
       return false;
     }
 
     if (Get.put(AuthController()).provinceId==null) {
-      flutterToast(msg: "Please select province");
+      flutterToast(msg: pleaseSelectProvince.tr);
       return false;
     }
     if (Get.put(AuthController()).file==null) {
 
-      flutterToast(msg: "Please upload store logo");
+      flutterToast(msg: pleaseUploadStoreLogo.tr);
       return false;
     }
     if (Get.put(AuthController()).file1==null) {
-      flutterToast(msg: "Please upload store license");
+      flutterToast(msg: pleaseUploadStoreLicense.tr);
       return false;
     }
 

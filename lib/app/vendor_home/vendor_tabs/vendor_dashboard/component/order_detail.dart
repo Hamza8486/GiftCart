@@ -332,7 +332,7 @@ class _OrderDetailState extends State<OrderDetail> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AppText(
-                                  title: "Subtotal",
+                                  title: subTotal.tr,
                                   size: 14,
                                   fontWeight: FontWeight.w400,
                                   color: AppColor.blackLightColor,

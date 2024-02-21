@@ -11,6 +11,7 @@ import 'package:mr_bet/app/auth/component.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/services/api_manager.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 import 'package:mr_bet/widgets/video_widget.dart';
 import 'package:share_plus/share_plus.dart';
@@ -101,7 +102,7 @@ class VideoViewDetail extends StatelessWidget {
                                       ),
                                       SizedBox(height: Get.height*0.01,),
                                       AppText(
-                                        title: "Good morning every one #goodmorning",
+                                        title: goodMorningEveryone.tr,
                                         size: 11,
                                         fontWeight: FontWeight.w400,
                                         color: AppColor.whiteColor.withOpacity(0.9),
@@ -290,8 +291,8 @@ class VideoViewDetail extends StatelessWidget {
               SizedBox(
                 height: Get.height * 0.03,
               ),
-              const AppText(
-                  title: "Comments",
+               AppText(
+                  title: comments.tr,
                   size: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColor.blackColor),
@@ -358,7 +359,7 @@ class VideoViewDetail extends StatelessWidget {
                                   border: InputBorder.none,
 
 
-                                  hintText: "Write comments!",
+                                  hintText: writeComments.tr,
                                   hintStyle: GoogleFonts.poppins(
                                       textStyle : TextStyle(
                                         fontSize: 12,

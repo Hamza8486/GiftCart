@@ -7,6 +7,7 @@ import 'package:mr_bet/app/bottom_tabs/component/message.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/util/theme.dart';
 import 'package:mr_bet/util/toast.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 
@@ -62,14 +63,14 @@ class _WinnersState extends State<Winners> {
                       Padding(
                         padding: const EdgeInsets.only(right: 30),
                         child: AppText(
-                          title: "Giveaway",
+                          title: giveAway.tr,
                           size: 18,
                           fontWeight: FontWeight.w500,
                           color: AppColor.boldBlackColor,
                         ),
                       ),
                       AppText(
-                        title: "Testimonials",
+                        title: testimonimals.tr,
                         size: 0,
                         fontWeight: FontWeight.w500,
                         color: AppColor.whiteColor,
@@ -351,7 +352,7 @@ class _WinnersState extends State<Winners> {
                                                                       .center,
                                                                   children: [
                                                                     AppText(
-                                                                      title: "Province",
+                                                                      title: province.tr,
                                                                       size: AppSizes
                                                                           .size_11,
                                                                       fontFamily: AppFont
@@ -390,7 +391,7 @@ class _WinnersState extends State<Winners> {
                                                                       .center,
                                                                   children: [
                                                                     AppText(
-                                                                      title: "Purchase Slots",
+                                                                      title: purchaseSlots.tr,
                                                                       size: AppSizes
                                                                           .size_11,
                                                                       fontFamily: AppFont
@@ -420,7 +421,7 @@ class _WinnersState extends State<Winners> {
                                                           height: Get.height * 0.015,
                                                         ),
                                                         AppText(
-                                                          title: "Prize:",
+                                                          title: price.tr,
                                                           size: AppSizes.size_13,
                                                           fontFamily: AppFont.semi,
                                                           fontWeight: FontWeight.w600,
@@ -430,7 +431,7 @@ class _WinnersState extends State<Winners> {
                                                           height: Get.height * 0.005,
                                                         ),
                                                         AppText(
-                                                          title:"Grocery",
+                                                          title:grocery.tr,
                                                           size: AppSizes.size_11,
                                                           fontFamily: AppFont.medium,
                                                           fontWeight: FontWeight.w400,
@@ -448,7 +449,7 @@ class _WinnersState extends State<Winners> {
                                                             Get.put(HomeController()).getWinnerChar(id:Get.put(HomeController()).winnerList[index].toString() );
                                                             Get.to(ChatDetail(data:Get.put(HomeController()).winnerList[index] ,));
                                                           },
-                                                          buttonName: "Message",
+                                                          buttonName: message.tr,
                                                           buttonHeight: Get.height * 0.04,
                                                           buttonWidth: Get.width,
                                                           buttonRadius: BorderRadius
@@ -466,7 +467,7 @@ class _WinnersState extends State<Winners> {
                                                             print(Get.put(HomeController()).winnerList[index].user.id.toString());
                                                             Get.back();
                                                           },
-                                                          buttonName: "Cancel",
+                                                          buttonName: cancel.tr,
                                                           buttonHeight: Get.height * 0.04,
                                                           buttonWidth: Get.width,
                                                           buttonRadius: BorderRadius
@@ -553,7 +554,7 @@ class _WinnersState extends State<Winners> {
                                                       child: AppText(
                                                         title:
                                                         Get.put(HomeController()).winnerList[index].isMessage==false?
-                                                        "View":"Message",
+                                                        view.tr:message.tr,
                                                         size: AppSizes.size_12,
                                                         fontFamily: AppFont.medium,
                                                         fontWeight: FontWeight.w600,
@@ -582,7 +583,7 @@ class _WinnersState extends State<Winners> {
                               ):Column(
                                 children: [
                                   SizedBox(height: Get.height*0.27,),
-                                  Center(child: AppText(title: "No Winners Data!",
+                                  Center(child: AppText(title: noWinnersData.tr,
                                     color: AppColor.blackColor.withOpacity(0.7),
                                     size: 16,
                                     fontWeight: FontWeight.w500,

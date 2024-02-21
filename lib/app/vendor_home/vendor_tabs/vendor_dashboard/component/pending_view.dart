@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
 
@@ -32,7 +33,7 @@ class PendingView extends StatelessWidget {
                   width: Get.width * 0.16,
                 ),
                 AppText(
-                  title: "Pending Payments",
+                  title: pendingPayments.tr,
                   color: AppColor.blackColor,
                   size: AppSizes.size_18,
                   fontFamily: AppFont.semi,

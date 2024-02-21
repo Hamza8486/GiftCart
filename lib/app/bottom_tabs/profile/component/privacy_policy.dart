@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mr_bet/app/bottom_tabs/component/component.dart';
 import 'package:mr_bet/util/theme.dart';
+import 'package:mr_bet/util/translation_keys.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
@@ -25,7 +26,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         children: [
           TopBar(onTap1: (){},onTap: (){
             Get.back();
-          },text: "Privacy Policy",
+          },text: privacyPolicy.tr,
               image: "assets/icons/share.svg",color: AppColor.whiteColor
           ),
 

@@ -42,7 +42,7 @@ class _WalletViewState extends State<WalletView> {
                   onTap: () {
                     Get.back();
                   },
-                  text: "Wallet",
+                  text: wallet.tr,
                   image: "assets/icons/share.svg",
                   color: AppColor.whiteColor),
               SizedBox(
@@ -69,7 +69,7 @@ class _WalletViewState extends State<WalletView> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: AppText(
-                            title: "Wallet",
+                            title: wallet.tr,
                             size: 12,
                             fontWeight: FontWeight.w500,
                             color: wallet == "wallet"
@@ -99,7 +99,7 @@ class _WalletViewState extends State<WalletView> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: AppText(
-                            title: "Gift Wallet",
+                            title: giftWallet.tr,
                             size: 12,
                             fontWeight: FontWeight.w500,
                             color: wallet == "gift"
@@ -127,8 +127,8 @@ class _WalletViewState extends State<WalletView> {
                         ),
                         AppText(
                           title: wallet == "gift"
-                              ? "Your Total winnings:"
-                              : "Your Total Balance:",
+                              ? yourTotalWinnings.tr
+                              : yourTotalBalance.tr,
                           size: 14,
                           fontWeight: FontWeight.w500,
                           color: AppColor.greyColors,
@@ -216,7 +216,7 @@ class _WalletViewState extends State<WalletView> {
                                                         buttonRadius:
                                                             BorderRadius
                                                                 .circular(100),
-                                                        buttonName: "Add Money",
+                                                        buttonName: addMoney.tr,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         buttonHeight:
@@ -241,12 +241,12 @@ class _WalletViewState extends State<WalletView> {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              textAuth(text: "Enter Amount"),
+                                                                              textAuth(text: enterAmount.tr),
                                                                               SizedBox(
                                                                                 height: Get.height * 0.01,
                                                                               ),
                                                                               betField(
-                                                                                hint: "Enter amount",
+                                                                                hint: enterAmount.tr,
                                                                                 textInputAction: TextInputAction.done,
                                                                                 onChange: (val) {
                                                                                   setState(() {
@@ -272,7 +272,7 @@ class _WalletViewState extends State<WalletView> {
                                                                                         buttonRadius: BorderRadius.circular(10),
                                                                                         borderColor: AppColor.primaryColor,
                                                                                         borderWidth: 1.5,
-                                                                                        buttonName: "Cancel",
+                                                                                        buttonName: cancel.tr,
                                                                                         buttonColor: AppColor.transParent,
                                                                                         textColor: AppColor.whiteColor,
                                                                                         onTap: () {
@@ -293,7 +293,7 @@ class _WalletViewState extends State<WalletView> {
                                                                                           textColor: AppColor.whiteColor,
                                                                                           onTap: Get.put(PaymentController()).checkPayment.value.isEmpty
                                                                                               ? () {
-                                                                                                  flutterToast(msg: "Please enter amount");
+                                                                                                  flutterToast(msg: pleaseEnterAmount.tr);
                                                                                                 }
                                                                                               : () {
                                                                                                   Get.put(PaymentController()).updateCheckLoader(true);
@@ -401,7 +401,7 @@ class _WalletViewState extends State<WalletView> {
                                                             BorderRadius
                                                                 .circular(10),
                                                         buttonName:
-                                                            "Upload Receipt",
+                                                            uploadReceipt.tr,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         buttonHeight:
@@ -434,12 +434,12 @@ class _WalletViewState extends State<WalletView> {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.start,
                                                                             children: [
-                                                                              textAuth(text: "Enter Amount"),
+                                                                              textAuth(text: enterAmount.tr),
                                                                               SizedBox(
                                                                                 height: Get.height * 0.01,
                                                                               ),
                                                                               betField(
-                                                                                hint: "Enter amount",
+                                                                                hint: enterAmount.tr,
                                                                                 textInputAction: TextInputAction.done,
                                                                                 onChange: (val) {
                                                                                   setState(() {
@@ -465,7 +465,7 @@ class _WalletViewState extends State<WalletView> {
                                                                                         buttonRadius: BorderRadius.circular(10),
                                                                                         borderColor: AppColor.primaryColor,
                                                                                         borderWidth: 1.5,
-                                                                                        buttonName: "Cancel",
+                                                                                        buttonName: cancel.tr,
                                                                                         buttonColor: AppColor.transParent,
                                                                                         textColor: AppColor.whiteColor,
                                                                                         onTap: () {
@@ -486,7 +486,7 @@ class _WalletViewState extends State<WalletView> {
                                                                                           textColor: AppColor.whiteColor,
                                                                                           onTap: Get.put(PaymentController()).checkPayment.value.isEmpty
                                                                                               ? () {
-                                                                                                  flutterToast(msg: "Please enter amount");
+                                                                                                  flutterToast(msg: pleaseEnterAmount.tr);
                                                                                                 }
                                                                                               : () {
                                                                                                   Get.put(PaymentController()).updateCheckLoader(true);
@@ -519,7 +519,7 @@ class _WalletViewState extends State<WalletView> {
                           height: Get.height * 0.04,
                         ),
                         AppText(
-                          title: "Transactions: ",
+                          title: transactions.tr,
                           size: 14,
                           fontWeight: FontWeight.w500,
                           color: AppColor.greyColors,
@@ -694,7 +694,7 @@ class _WalletViewState extends State<WalletView> {
                                               ),
                                               Center(
                                                   child: AppText(
-                                                title: "No Transaction Data",
+                                                title: noTransactionData.tr,
                                                 color: AppColor.blackColor
                                                     .withOpacity(0.7),
                                                 size: 16,
@@ -736,7 +736,7 @@ class _WalletViewState extends State<WalletView> {
                                                             10)),
                                                 child: Center(
                                                   child: AppText(
-                                                    title: "DB",
+                                                    title: db.tr,
                                                     size: AppSizes.size_14,
                                                     fontFamily: AppFont.medium,
                                                     fontWeight: FontWeight.w600,
@@ -752,7 +752,7 @@ class _WalletViewState extends State<WalletView> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   AppText(
-                                                    title: "Grocery coupon",
+                                                    title: groceryCoupon.tr,
                                                     size: AppSizes.size_15,
                                                     fontFamily: AppFont.medium,
                                                     fontWeight: FontWeight.w500,
@@ -795,7 +795,7 @@ class _WalletViewState extends State<WalletView> {
                 child: AppButton(
                     buttonWidth: Get.width,
                     buttonRadius: BorderRadius.circular(10),
-                    buttonName: "Upload Receipt",
+                    buttonName: uploadReceipt.tr,
                     fontWeight: FontWeight.w500,
                     buttonHeight: Get.height * 0.054,
                     textSize: AppSizes.size_15,
@@ -853,11 +853,11 @@ class _WalletViewState extends State<WalletView> {
 
   bool validateReceipt(BuildContext context) {
     if (Get.put(HomeController()).file1 == null) {
-      flutterToast(msg: "Please upload receipt");
+      flutterToast(msg: pleaseUploadReceipt.tr);
       return false;
     }
     if (Get.put(HomeController()).priceController.text.isEmpty) {
-      flutterToast(msg: "Please enter price");
+      flutterToast(msg: pleaseEnterPrice.tr);
       return false;
     }
 
@@ -1413,8 +1413,8 @@ class OtherUserWin extends StatelessWidget {
               SizedBox(
                 height: 38,
               ),
-              const AppText(
-                  title: "Today’s winner!",
+              AppText(
+                  title: todaysWinner.tr,
                   size: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColor.blackColor),
@@ -1435,9 +1435,8 @@ class OtherUserWin extends StatelessWidget {
                     SizedBox(
                       height: 25,
                     ),
-                    const AppText(
-                        title:
-                            "User12 have won \$3600 gift coupon\nfor one year grocery",
+                     AppText(
+                        title: userHaveWon.tr,
                         size: 16,
                         textAlign: TextAlign.center,
                         fontWeight: FontWeight.w500,
@@ -1451,7 +1450,7 @@ class OtherUserWin extends StatelessWidget {
               AppButton(
                   buttonWidth: Get.width,
                   buttonRadius: BorderRadius.circular(10),
-                  buttonName: "Message",
+                  buttonName: message.tr,
                   gard: true,
                   fontWeight: FontWeight.w600,
                   textSize: 16,

@@ -37,7 +37,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
         children: [
           TopBar(onTap1: (){},onTap: (){
             Get.back();
-          },text: "Notification Detail",
+          },text: notificationDetail.tr,
               image: "assets/icons/share.svg",color: AppColor.whiteColor
           ),
 
@@ -103,7 +103,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                               height: 22,
                                             ),
                                             SizedBox(width: 6,),
-                                            Text("Special offer",
+                                            Text(specialOffer.tr,
                                               style: GoogleFonts.italianno(
                                                   textStyle : TextStyle(
                                                       color: AppColor.blackColor,
@@ -127,7 +127,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
                                               child: Padding(
                                                 padding: const EdgeInsets.symmetric(horizontal: 13,vertical: 5),
                                                 child: AppText(
-                                                  title: "50% Off",
+                                                  title: fiftyOff.tr,
                                                   size: 12,
                                                   fontWeight: FontWeight.w600,
                                                   color: AppColor.primaryColor,
@@ -203,13 +203,13 @@ class _NotificationDetailState extends State<NotificationDetail> {
                     ),
                     SizedBox(height: 25,),
                     AppText(
-                        title: "Exclusive offer for you!",
+                        title: exclusiveOfferForYou.tr,
                         size: 14,
                         fontWeight: FontWeight.w600,
                         color: AppColor.blackColor),
                     SizedBox(height: 10,),
                     AppText(
-                        title: "Indulge in the ultimate culinary experience with our restaurant offer notifications! Receive a symphony of exclusive deals, seasonal specials, and enticing discounts, including irresistible buy-one-get-one offers. Elevate your dining journey as our notifications bring a banquet of savings directly to you, ensuring every meal is a celebration of flavors and value",
+                        title: indulgeInTheUltimateCulinary.tr,
                         size: 12,
                         fontWeight: FontWeight.w400,
                         color: AppColor.greyLightColor2),
@@ -231,7 +231,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
             child: AppButton(
                 buttonWidth: Get.width,
                 buttonRadius: BorderRadius.circular(10),
-                buttonName: "Order now",
+                buttonName: orderNow.tr,
                 fontWeight: FontWeight.w500,
                 textSize:16,
                 buttonColor: AppColor.primaryColor,

@@ -64,7 +64,7 @@ class NewProfileSettings extends StatelessWidget {
                             ),
                           ),
                           AppText(
-                            title: "Profile",
+                            title: profile.tr,
                             size: AppSizes.size_21,
                             fontFamily: AppFont.semi,
                             fontWeight: FontWeight.w500,
@@ -96,7 +96,7 @@ class NewProfileSettings extends StatelessWidget {
                           height: Get.height * 0.2,
                         ),
                         profileWidget(
-                            text: "Notification",
+                            text: notifications.tr,
                             image: "assets/icons/noti.svg",
                             child: toggleButton(),
                             onTap: () {}),
@@ -104,7 +104,7 @@ class NewProfileSettings extends StatelessWidget {
                           height: Get.height * 0.034,
                         ),
                         profileWidget(
-                            text: "FaceId/FingerPrint Lock",
+                            text: faceFinger.tr,
                             image: "assets/icons/face.svg",
                             child: toggleButton1(),
                             onTap: () {}),
@@ -112,7 +112,7 @@ class NewProfileSettings extends StatelessWidget {
                           height: Get.height * 0.034,
                         ),
                         profileWidget(
-                            text: "Switch Theme",
+                            text: switchTheme.tr,
                             image: "assets/icons/theme.svg",
                             child: toggleButton2(),
                             onTap: () {}),
@@ -120,7 +120,7 @@ class NewProfileSettings extends StatelessWidget {
                           height: Get.height * 0.034,
                         ),
                         profileWidget(
-                            text: "Saved Bank Accounts",
+                            text: savedBankAccounts.tr,
                             image: "assets/icons/card.svg",
                             child: SizedBox.shrink(),
                             onTap: () {
@@ -142,7 +142,7 @@ class NewProfileSettings extends StatelessWidget {
                           height: Get.height * 0.034,
                         ),
                         profileWidget(
-                            text: "Security",
+                            text: security.tr,
                             image: "assets/icons/security.svg",
                             child: SizedBox.shrink(),
                             onTap: () {
@@ -192,7 +192,7 @@ class NewProfileSettings extends StatelessWidget {
                             width: Get.width * 0.03,
                           ),
                           AppText(
-                            title: "Log Out",
+                            title: logout.tr,
                             size: AppSizes.size_14,
                             fontFamily: AppFont.bold,
                             color: AppColor.primaryColor,
@@ -276,7 +276,7 @@ class NewProfileSettings extends StatelessWidget {
                                   height: Get.height * 0.005,
                                 ),
                                 AppText(
-                                  title: "Total Earn",
+                                  title: totalEarned.tr,
                                   size: AppSizes.size_14,
                                   fontFamily: AppFont.regular,
                                   fontWeight: FontWeight.w500,
@@ -303,7 +303,7 @@ class NewProfileSettings extends StatelessWidget {
                                   color: AppColor.boldBlackColor,
                                 ),
                                 AppText(
-                                  title: "Days",
+                                  title: days.tr,
                                   size: AppSizes.size_14,
                                   fontFamily: AppFont.regular,
                                   fontWeight: FontWeight.w500,

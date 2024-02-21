@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'dart:async';
+
+import 'package:mr_bet/util/translation_keys.dart';
 
 
 
@@ -47,7 +50,7 @@ class _StopwatchPageState extends State<StopwatchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stopwatch Timer'),
+        title: Text(stopwatchTimer.tr),
       ),
       body: Center(
         child: Column(
@@ -63,17 +66,17 @@ class _StopwatchPageState extends State<StopwatchPage> {
               children: [
                 ElevatedButton(
                   onPressed: _stopwatch.isRunning ? _stopTimer : _startTimer,
-                  child: Text(_stopwatch.isRunning ? 'Stop' : 'Start'),
+                  child: Text(_stopwatch.isRunning ? stop.tr : start.tr),
                 ),
                 SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: _stopTimer,
-                  child: Text('Stop'),
+                  child: Text(stop.tr),
                 ),
                 SizedBox(width: 20),
                 ElevatedButton(
                   onPressed: _resetTimer,
-                  child: Text('Reset'),
+                  child: Text(reset.tr),
                 ),
               ],
             ),

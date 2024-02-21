@@ -249,7 +249,7 @@ class _EditProfileState extends State<EditProfile> {
                                         height: Get.height * 0.01,
                                       ),
                                       betField(
-                                        hint: "Occupation",
+                                        hint: occupation.tr,
                                         textInputAction: TextInputAction.done,
                                         controller: occup,
                                       ),
