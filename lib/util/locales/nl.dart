@@ -174,7 +174,7 @@ Map<String, String> get nlMap => {
   translation.pleaseSelectStartTime: "Selecteer starttijd",
   translation.infoAboutAds: "Info over advertenties",
   translation.clearExpiration: "Duidelijke vervaldata voor elke coupon.",
-  translation.giftWallet: "Gift Wallet",
+  translation.giftWallet: "Cadeau portemonnee",
   translation.hi: "Hoi, ",
   translation.totalBalance: "Totaal saldo",
   translation.enterAmount: "Voer bedrag in",
@@ -400,4 +400,8 @@ Map<String, String> get nlMap => {
   translation.pleaseUploadReceipt :"Upload ontvangstbewijs",
   translation.subTotal :"Subtotaal",
   translation.pendingPayments :"In afwachting van betaling",
+  translation.scratchCoupon: "Krasbon!",
+  translation.restaurants: "Restaurants",
+  translation.furniture: "Meubilair",
+  translation.liquorStore: "Slijterij",
 };

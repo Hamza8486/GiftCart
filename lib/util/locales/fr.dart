@@ -400,4 +400,8 @@ Map<String, String> get frMap => {
   translation.pleaseUploadReceipt :"Veuillez télécharger le reçu",
   translation.subTotal :"Sous-total",
   translation.pendingPayments :"Paiements en attente",
+  translation.scratchCoupon: "Coupon à gratter !",
+  translation.restaurants: "Restaurants",
+  translation.furniture: "Meubles",
+  translation.liquorStore: "Magasin d'alcool",
 };

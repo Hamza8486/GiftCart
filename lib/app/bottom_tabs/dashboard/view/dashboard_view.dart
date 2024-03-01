@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/wallet/view/wallet_view.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:mr_bet/app/auth/component.dart';
 import 'package:mr_bet/app/auth/controller.dart';
 import 'package:mr_bet/app/bottom_tabs/component/component.dart';
 import 'package:mr_bet/app/bottom_tabs/component/drawer.dart';
 import 'package:mr_bet/app/bottom_tabs/dashboard/model/slot_model.dart';
+import 'package:mr_bet/app/bottom_tabs/wallet/view/wallet_view.dart';
 import 'package:mr_bet/app/home/controller/home_controller.dart';
 import 'package:mr_bet/services/api_manager.dart';
 import 'package:mr_bet/util/theme.dart';
 import 'package:mr_bet/util/toast.dart';
 import 'package:mr_bet/widgets/app_button.dart';
 import 'package:mr_bet/widgets/app_text.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:scratcher/scratcher.dart';
 
 import '../../../../util/translation_keys.dart';
@@ -32,6 +32,7 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   double _opacity = 0.0;
   final homeController = Get.put(HomeController());
+
   //final auth = Get.put(AuthController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   int _current = 0;
@@ -72,13 +73,13 @@ class _DashboardViewState extends State<DashboardView> {
   int _hours = 0;
   int _minutes = 0;
   int _seconds = 0;
+
   //List<String> provinceList = [];
   @override
   void initState() {
     super.initState();
     //homeController.getAllTest(id: "");
     startTimer();
-
   }
 
   @override
@@ -89,8 +90,11 @@ class _DashboardViewState extends State<DashboardView> {
 
   Duration _getTimeUntil12am() {
     final now = DateTime.now();
-    final tomorrowMidnight = DateTime(now.year, now.month, now.day + 1, 0, 0, 0);
-    return tomorrowMidnight.isBefore(now) ? const Duration(seconds: 0) : tomorrowMidnight.difference(now);
+    final tomorrowMidnight =
+        DateTime(now.year, now.month, now.day + 1, 0, 0, 0);
+    return tomorrowMidnight.isBefore(now)
+        ? const Duration(seconds: 0)
+        : tomorrowMidnight.difference(now);
   }
 
   void startTimer() {
@@ -112,11 +116,13 @@ class _DashboardViewState extends State<DashboardView> {
       }
     });
   }
+
   double _calculateProgress() {
     final totalTimeInSeconds = 12 * 3600; // 12 hours in seconds
     final remainingTimeInSeconds = _hours * 3600 + _minutes * 60 + _seconds;
     return (totalTimeInSeconds - remainingTimeInSeconds) / totalTimeInSeconds;
   }
+
   List<String> bannerList = [
     'assets/images/banner1.png',
 
@@ -140,9 +146,7 @@ class _DashboardViewState extends State<DashboardView> {
                     _scaffoldKey.currentState?.openDrawer();
                     print("object");
                   },
-                  onTap1: () {
-
-                  },
+                  onTap1: () {},
                   text: "0${homeController.profileId.value}"),
               Expanded(
                   child: SingleChildScrollView(
@@ -152,7 +156,8 @@ class _DashboardViewState extends State<DashboardView> {
                       height: Get.height * 0.015,
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Get.width*0.035),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.035),
                       child: Stack(
                         children: [
                           CarouselSlider(
@@ -168,37 +173,31 @@ class _DashboardViewState extends State<DashboardView> {
                               reverse: true,
                               autoPlay: true,
                               autoPlayInterval: const Duration(seconds: 2),
-                              autoPlayAnimationDuration: const Duration(milliseconds: 400),
+                              autoPlayAnimationDuration:
+                                  const Duration(milliseconds: 400),
                               autoPlayCurve: Curves.fastOutSlowIn,
                               enlargeCenterPage: true,
                               scrollDirection: Axis.horizontal,
-                              onPageChanged: (index, reason) {
-
-                              },
+                              onPageChanged: (index, reason) {},
                               enlargeStrategy: CenterPageEnlargeStrategy.height,
                             ),
                             items: bannerList
                                 .map((item) => GestureDetector(
-                              onTap:
-                                  (){
-
-                              },
-                              child: Container(
-
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child:  Image.asset(
-                                    item.toString(),
-                                    width: Get.width,
-                                    fit: BoxFit.cover,
-
-                                  ),
-                                ),
-                              ),
-                            ))
+                                      onTap: () {},
+                                      child: Container(
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.asset(
+                                            item.toString(),
+                                            width: Get.width,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ))
                                 .toList(),
                           ),
-
                         ],
                       ),
                     ),
@@ -206,7 +205,8 @@ class _DashboardViewState extends State<DashboardView> {
                       height: Get.height * 0.015,
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                       child: Row(
                         children: [
                           Expanded(
@@ -232,11 +232,8 @@ class _DashboardViewState extends State<DashboardView> {
                                         colors: [
                                           AppColor.primaryColor1,
                                           AppColor.primaryColor,
-
-
                                         ],
                                       ),
-
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -258,7 +255,6 @@ class _DashboardViewState extends State<DashboardView> {
                               );
                             }),
                           ),
-
                         ],
                       ),
                     ),
@@ -272,44 +268,53 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                       child: Row(
                         children: [
-
                           Expanded(
                             child: SizedBox(
                                 width: Get.width,
                                 child: Obx(() {
                                   return dropDownAppAddAll(
                                     hint: selectProvince.tr,
-                                    child1:  SvgPicture.asset("assets/icons/layer.svg",height: Get.height*0.018,
+                                    child1: SvgPicture.asset(
+                                      "assets/icons/layer.svg",
+                                      height: Get.height * 0.018,
                                       color: AppColor.boldBlackColor,
-
                                     ),
-                                    width:  Get.put(AuthController())
-                                        .provinceList.isEmpty?Get.width * 0.36:Get.width * 0.36,
+                                    width: Get.put(AuthController())
+                                            .provinceList
+                                            .isEmpty
+                                        ? Get.width * 0.36
+                                        : Get.width * 0.36,
                                     height: Get.height * 0.3,
-                                    items:Get.put(AuthController()).provinceAllList,
+                                    items: Get.put(AuthController())
+                                        .provinceAllList,
                                     color: AppColor.primaryColor,
                                     value: provinceName,
                                     onChange: (value) {
                                       setState(() {
-
                                         provinceName = value;
 
                                         for (int i = 0;
-                                        i <
-                                            Get.put(AuthController())
-                                                .provinceList.length;
-                                        i++) {
-                                          if (value == Get.put(AuthController())
-                                              .provinceList[i].name){
+                                            i <
+                                                Get.put(AuthController())
+                                                    .provinceList
+                                                    .length;
+                                            i++) {
+                                          if (value ==
+                                              Get.put(AuthController())
+                                                  .provinceList[i]
+                                                  .name) {
                                             homeController.provinceId =
                                                 Get.put(AuthController())
-                                                    .provinceList[i].id;
+                                                    .provinceList[i]
+                                                    .id;
                                             homeController.updateProvincesName(
-                                                Get.put(AuthController()).provinceList[i].name);
+                                                Get.put(AuthController())
+                                                    .provinceList[i]
+                                                    .name);
                                             homeController.updateSlotName("");
-                                                       homeController.updateIsSelectProvince(
-                                                          value.toString());
-
+                                            homeController
+                                                .updateIsSelectProvince(
+                                                    value.toString());
                                           }
                                         }
                                       });
@@ -325,37 +330,52 @@ class _DashboardViewState extends State<DashboardView> {
                                 width: Get.width,
                                 child: Obx(() {
                                   return dropDownAppAddAll(
-                                    hint:selectSlot.tr,
-                                    child1:  SvgPicture.asset("assets/images/slot.svg",height: Get.height*0.018,
-                                      color: AppColor.boldBlackColor,
-
-                                    ),
-                                    width: Get.width * 0.36,
-                                    height: Get.height * 0.3,
-                                    items:types,
-                                    color: AppColor.primaryColor,
-                                    value: homeController.slot.value.isEmpty
-                                        ? null
-                                        : homeController.slot.value,
+                                      hint: selectSlot.tr,
+                                      child1: SvgPicture.asset(
+                                        "assets/images/slot.svg",
+                                        height: Get.height * 0.018,
+                                        color: AppColor.boldBlackColor,
+                                      ),
+                                      width: Get.width * 0.36,
+                                      height: Get.height * 0.3,
+                                      items: types,
+                                      color: AppColor.primaryColor,
+                                      value: homeController.slot.value.isEmpty
+                                          ? null
+                                          : homeController.slot.value,
                                       onChange: (value) {
                                         setState(() {
-                                          if (homeController.isSelectProvince.value != "") {
-                                            homeController.updateSlotName(value.toString());
+                                          if (homeController
+                                                  .isSelectProvince.value !=
+                                              "") {
+                                            homeController.updateSlotName(
+                                                value.toString());
 
                                             // Check if an item with the same provinceId already exists in the list
-                                            final existingSlotIndex = homeController.slotAddList.indexWhere(
-                                                  (slot) => slot.id == homeController.provinceId.toString(),
+                                            final existingSlotIndex =
+                                                homeController.slotAddList
+                                                    .indexWhere(
+                                              (slot) =>
+                                                  slot.id ==
+                                                  homeController.provinceId
+                                                      .toString(),
                                             );
 
                                             if (existingSlotIndex != -1) {
                                               // Update the existing slot with the new value
-                                              homeController.slotAddList[existingSlotIndex].slot = value.toString();
+                                              homeController
+                                                  .slotAddList[
+                                                      existingSlotIndex]
+                                                  .slot = value.toString();
                                             } else {
                                               // Add a new item to the list
                                               homeController.slotAddList.add(
                                                 AddSlotModel(
-                                                  name: homeController.selectProvince.value.toString(),
-                                                  id: homeController.provinceId.toString(),
+                                                  name: homeController
+                                                      .selectProvince.value
+                                                      .toString(),
+                                                  id: homeController.provinceId
+                                                      .toString(),
                                                   slot: value.toString(),
                                                   total: "",
                                                 ),
@@ -365,29 +385,33 @@ class _DashboardViewState extends State<DashboardView> {
                                             homeController.updateSlotName("");
                                             totalSlots = 0;
 
-                                            for (var slots in homeController.slotAddList) {
-                                              totalSlots += int.parse(slots.slot ?? "");
+                                            for (var slots
+                                                in homeController.slotAddList) {
+                                              totalSlots +=
+                                                  int.parse(slots.slot ?? "");
                                             }
 
                                             homeController.provinceId = null;
                                             provinceName = null;
                                             homeController.updateSlotName("");
-                                            homeController.updateIsSelectProvince("");
-                                            homeController.updateProvincesName("");
+                                            homeController
+                                                .updateIsSelectProvince("");
+                                            homeController
+                                                .updateProvincesName("");
                                           } else {
                                             homeController.provinceId = null;
-                                            homeController.updateIsSelectProvince("");
+                                            homeController
+                                                .updateIsSelectProvince("");
                                             homeController.updateSlotName("");
-                                            homeController.updateProvincesName("");
-                                            flutterToast(msg: selectProvince.tr);
+                                            homeController
+                                                .updateProvincesName("");
+                                            flutterToast(
+                                                msg: selectProvince.tr);
                                           }
                                         });
-                                      }
-                                  );
+                                      });
                                 })),
                           ),
-
-
                         ],
                       ),
                     ),
@@ -398,17 +422,16 @@ class _DashboardViewState extends State<DashboardView> {
                       margin:
                           EdgeInsets.symmetric(horizontal: Get.width * 0.03),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10),
                         gradient: new LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
                             AppColor.primaryColor1,
                             AppColor.primaryColor,
-
-
                           ],
-                        ),),
+                        ),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 12),
@@ -469,15 +492,15 @@ class _DashboardViewState extends State<DashboardView> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    color:
-                                                        AppColor.whiteColor),
+                                                    color: AppColor.whiteColor),
                                                 child: Column(
                                                   children: [
                                                     Padding(
-                                                      padding: const EdgeInsets.only(
-                                                          left: 20,
-                                                          top: 3,
-                                                          right: 3),
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 20,
+                                                              top: 3,
+                                                              right: 3),
                                                       child: Icon(
                                                         Icons.cancel_outlined,
                                                         color:
@@ -561,7 +584,7 @@ class _DashboardViewState extends State<DashboardView> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     AppText(
-                                      title: balance.tr+ ": ",
+                                      title: balance.tr + ": ",
                                       size: 13,
                                       fontFamily: AppFont.medium,
                                       fontWeight: FontWeight.w600,
@@ -570,132 +593,149 @@ class _DashboardViewState extends State<DashboardView> {
                                     SizedBox(
                                       height: Get.height * 0.009,
                                     ),
-                                    Obx(
-                                      () {
-                                        return
-                                          homeController.transactionLoadingValue.value?
-                                           const Center(
+                                    Obx(() {
+                                      return homeController
+                                              .transactionLoadingValue.value
+                                          ? const Center(
                                               child: SpinKitThreeBounce(
-                                                  size: 12, color: AppColor.whiteColor)):
-                                        homeController.totalAmountWallet.value=="0"?
-
-                                          AppText(
-                                          title: "\$0",
-                                          size:17,
-                                          fontFamily: AppFont.semi,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        ):AppText(
-                                          title: "\$${homeController.totalAmountWallet.value.toString()}",
-                                          size: 17,
-                                          fontFamily: AppFont.semi,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        );
-                                      }
-                                    ),
+                                                  size: 12,
+                                                  color: AppColor.whiteColor))
+                                          : homeController.totalAmountWallet
+                                                      .value ==
+                                                  "0"
+                                              ? AppText(
+                                                  title: "\$0",
+                                                  size: 17,
+                                                  fontFamily: AppFont.semi,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                )
+                                              : AppText(
+                                                  title:
+                                                      "\$${homeController.totalAmountWallet.value.toString()}",
+                                                  size: 17,
+                                                  fontFamily: AppFont.semi,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                );
+                                    }),
                                   ],
                                 ),
-
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    _hours == 0 && _minutes == 0 && _seconds == 0?
-
-                                    Center(
-                                      child: AppText(
-                                        title: timeClose.tr,
-                                        size: 13,
-                                        fontFamily: AppFont.semi,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ):
-                                    Center(
-                                      child: AppText(
-                                        title: remainingTime.tr,
-                                        size: 13,
-                                        fontFamily: AppFont.medium,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    _hours == 0 &&
+                                            _minutes == 0 &&
+                                            _seconds == 0
+                                        ? Center(
+                                            child: AppText(
+                                              title: timeClose.tr,
+                                              size: 13,
+                                              fontFamily: AppFont.semi,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : Center(
+                                            child: AppText(
+                                              title: remainingTime.tr,
+                                              size: 13,
+                                              fontFamily: AppFont.medium,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                     SizedBox(
                                       height: Get.height * 0.009,
                                     ),
                                     Row(
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(1000),
-                                          child
-                                              : CircularPercentIndicator(
+                                          borderRadius:
+                                              BorderRadius.circular(1000),
+                                          child: CircularPercentIndicator(
                                             radius: Get.height * 0.025,
                                             lineWidth: 2,
-                                            percent: (_hours / 24).clamp(0.0, 1.0), // Assuming 12 hours in total
+                                            percent:
+                                                (_hours / 24).clamp(0.0, 1.0),
+                                            // Assuming 12 hours in total
                                             center: Center(
                                               child: AppText(
-                                                title: _hours.toString().padLeft(2, '0'),
+                                                title: _hours
+                                                    .toString()
+                                                    .padLeft(2, '0'),
                                                 size: 13,
                                                 fontFamily: AppFont.medium,
                                                 fontWeight: FontWeight.w600,
                                                 color: Colors.black,
                                               ),
                                             ),
-                                            backgroundColor: AppColor.primaryColor.withOpacity(0.4),
-                                            progressColor: AppColor.primaryColor,
+                                            backgroundColor: AppColor
+                                                .primaryColor
+                                                .withOpacity(0.4),
+                                            progressColor:
+                                                AppColor.primaryColor,
                                             fillColor: Colors.white,
-
-                                          ),
-                                        ),
-
-                                        const SizedBox(width: 5),
-
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(1000),
-                                          child
-                                              : CircularPercentIndicator(
-                                            radius: Get.height * 0.025,
-                                            lineWidth: 2,
-                                            percent: (_minutes / 60).clamp(0.0, 1.0), // Assuming 12 hours in total
-                                            center: Center(
-                                              child: AppText(
-                                                title:_minutes.toString().padLeft(2, '0'),
-                                                size:13,
-                                                fontFamily: AppFont.medium,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                            backgroundColor: AppColor.primaryColor.withOpacity(0.4),
-                                            progressColor: AppColor.primaryColor,
-                                            fillColor: Colors.white,
-
                                           ),
                                         ),
                                         const SizedBox(width: 5),
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(1000),
-                                          child
-                                              : CircularPercentIndicator(
+                                          borderRadius:
+                                              BorderRadius.circular(1000),
+                                          child: CircularPercentIndicator(
                                             radius: Get.height * 0.025,
                                             lineWidth: 2,
-                                            percent: (_seconds / 60).clamp(0.0, 1.0),// Assuming 12 hours in total
+                                            percent:
+                                                (_minutes / 60).clamp(0.0, 1.0),
+                                            // Assuming 12 hours in total
                                             center: Center(
                                               child: AppText(
-                                                title: _seconds.toString().padLeft(2, '0'),
+                                                title: _minutes
+                                                    .toString()
+                                                    .padLeft(2, '0'),
                                                 size: 13,
                                                 fontFamily: AppFont.medium,
                                                 fontWeight: FontWeight.w600,
                                                 color: Colors.black,
                                               ),
                                             ),
-                                            backgroundColor: AppColor.primaryColor.withOpacity(0.4),
-                                            progressColor: AppColor.primaryColor,
+                                            backgroundColor: AppColor
+                                                .primaryColor
+                                                .withOpacity(0.4),
+                                            progressColor:
+                                                AppColor.primaryColor,
                                             fillColor: Colors.white,
-
                                           ),
                                         ),
-
+                                        const SizedBox(width: 5),
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(1000),
+                                          child: CircularPercentIndicator(
+                                            radius: Get.height * 0.025,
+                                            lineWidth: 2,
+                                            percent:
+                                                (_seconds / 60).clamp(0.0, 1.0),
+                                            // Assuming 12 hours in total
+                                            center: Center(
+                                              child: AppText(
+                                                title: _seconds
+                                                    .toString()
+                                                    .padLeft(2, '0'),
+                                                size: 13,
+                                                fontFamily: AppFont.medium,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            backgroundColor: AppColor
+                                                .primaryColor
+                                                .withOpacity(0.4),
+                                            progressColor:
+                                                AppColor.primaryColor,
+                                            fillColor: Colors.white,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -738,7 +778,7 @@ class _DashboardViewState extends State<DashboardView> {
                           EdgeInsets.symmetric(horizontal: Get.width * 0.2),
                       child: Obx(() {
                         return homeController.slotAdd.value
-                            ?  const Center(
+                            ? const Center(
                                 child: SpinKitThreeBounce(
                                     size: 25, color: AppColor.primaryColor))
                             : AppButton(
@@ -748,32 +788,29 @@ class _DashboardViewState extends State<DashboardView> {
                                 buttonName: confirmSlots.tr,
                                 fontWeight: FontWeight.w500,
                                 textSize: 16,
-                                buttonColor: homeController
-                                        .slotAddList.isNotEmpty
-                                    ? AppColor.primaryColor
-                                    : AppColor.primaryColor,
+                                buttonColor:
+                                    homeController.slotAddList.isNotEmpty
+                                        ? AppColor.primaryColor
+                                        : AppColor.primaryColor,
                                 textColor: AppColor.whiteColor,
-                                onTap:
-                                homeController.totalAmountWallet.value=="0"?(){
-                                  flutterToast(msg:pleaseAddAmount.tr);
-                                }:
-
-                                homeController.slotAddList.isEmpty
+                                onTap: homeController.totalAmountWallet.value ==
+                                        "0"
                                     ? () {
-                                        flutterToast(
-                                            msg:
-                                            wallet.tr);
-
+                                        flutterToast(msg: pleaseAddAmount.tr);
                                       }
-                                    : () {
-                                        homeController.updateAddSlot(true);
+                                    : homeController.slotAddList.isEmpty
+                                        ? () {
+                                            flutterToast(msg: wallet.tr);
+                                          }
+                                        : () {
+                                            homeController.updateAddSlot(true);
 
-                                        ApiManger().AddSLots(
-                                          prodQuantity: List<dynamic>.from(
-                                              homeController.slotAddList),
-                                          context: context,
-                                        );
-                                      });
+                                            ApiManger().AddSLots(
+                                              prodQuantity: List<dynamic>.from(
+                                                  homeController.slotAddList),
+                                              context: context,
+                                            );
+                                          });
                       }),
                     ),
                     SizedBox(
@@ -807,14 +844,13 @@ class _DashboardViewState extends State<DashboardView> {
                             ],
                           ),
 
-
-
                           Padding(
-                            padding:  EdgeInsets.only(right:Get.width * 0.02 ),
+                            padding: EdgeInsets.only(right: Get.width * 0.02),
                             child: SizedBox(
-                              height: Get.put(AuthController()).provinceList.isEmpty
-                                  ? Get.height * 0.055
-                                  : Get.height * 0.055,
+                              height:
+                                  Get.put(AuthController()).provinceList.isEmpty
+                                      ? Get.height * 0.055
+                                      : Get.height * 0.055,
                               child: PopupMenuButton(
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(
@@ -825,31 +861,31 @@ class _DashboardViewState extends State<DashboardView> {
                                 onSelected: (value) async {
                                   setState(() {
                                     homeController.getSlotData(
-                                                          id: value.toString(),
-                                                        );
-
-
-
+                                      id: value.toString(),
+                                    );
                                   });
                                 },
                                 constraints: BoxConstraints(
                                     minWidth: Get.height * 0.08,
                                     maxWidth: Get.height * 0.08,
-                                    maxHeight: Get.height*0.25),
+                                    maxHeight: Get.height * 0.25),
                                 itemBuilder: (BuildContext bc) {
                                   return List.generate(
-                                      Get.put(AuthController()).provinceList.length, (index ) {
-                                    return  PopupMenuItem(
-                                        padding:
-                                        const EdgeInsets.symmetric(horizontal: 12),
-                                        value:  Get.put(AuthController()).provinceList[index]
+                                      Get.put(AuthController())
+                                          .provinceList
+                                          .length, (index) {
+                                    return PopupMenuItem(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        value: Get.put(AuthController())
+                                            .provinceList[index]
                                             .id
                                             .toString(),
                                         child: AppText(
-                                          title: Get.put(AuthController()).provinceList[index]
+                                          title: Get.put(AuthController())
+                                              .provinceList[index]
                                               .name
                                               .toString(),
-
                                           size: AppSizes.size_13,
                                           fontWeight: FontWeight.w600,
                                           fontFamily: AppFont.medium,
@@ -857,10 +893,9 @@ class _DashboardViewState extends State<DashboardView> {
                                         ));
                                   });
                                 },
-                                child:Center(
+                                child: Center(
                                   child: Image.asset(
                                     "assets/images/filter.png",
-
                                   ),
                                 ),
                               ),
@@ -959,168 +994,173 @@ class _DashboardViewState extends State<DashboardView> {
                                     itemCount: homeController.getSlot.length,
                                     itemBuilder: (BuildContext ctx, index) {
                                       return GestureDetector(
-                                        onTap:
+                                          onTap: homeController.getSlot[index]
+                                                      .isScratch ==
+                                                  true
+                                              ? () {
+                                                  print(homeController
+                                                      .getSlot[index].id
+                                                      .toString());
 
-                                        homeController.getSlot[index].isScratch==true?(){
-                                          print(homeController.getSlot[index].id
-                                              .toString());
+                                                  // Get.generalDialog(
+                                                  //     pageBuilder: (context, __, ___) =>
+                                                  //         AlertDialog(
+                                                  //           shape: RoundedRectangleBorder(
+                                                  //             borderRadius: BorderRadius.circular(40), // Customize the border radius
+                                                  //           ),
+                                                  //
+                                                  //
+                                                  //           content: SizedBox(
+                                                  //             height: Get.height*0.35,
+                                                  //             width: Get.width*0.55,
+                                                  //             child: Column(
+                                                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                                                  //               children: [
+                                                  //
+                                                  //                 Center(
+                                                  //                   child: AppText(
+                                                  //                     title:"Scratch Coupon!",
+                                                  //                     size: 16,
+                                                  //                     fontFamily:
+                                                  //                     AppFont.semi,
+                                                  //                     fontWeight:
+                                                  //                     FontWeight.w600,
+                                                  //                     color: Colors.black,
+                                                  //                   ),
+                                                  //                 ),
+                                                  //                 SizedBox(height: Get.height*0.03,),
+                                                  //                 SizedBox(
+                                                  //                   height: Get.height * 0.2,
+                                                  //                   child: Center(
+                                                  //                     child: Scratcher(
+                                                  //                       brushSize: 50, // Adjust the brush size as needed
+                                                  //                       threshold: 40, // Adjust the threshold as needed
+                                                  //                       color: AppColor.primaryColor, // Initial scratch card color
+                                                  //                       image: Image.asset('assets/images/scratch.png'), // Custom brush image
+                                                  //                       onChange: (value) {
+                                                  //                         if (value >= 1.0 && !isScratched) {
+                                                  //                           setState(() {
+                                                  //                             isScratched = true; // Scratch threshold reached
+                                                  //                           });
+                                                  //                         }
+                                                  //                         print("Scratch progress: ${value * 100}%");
+                                                  //                       },
+                                                  //                       child: Container(
+                                                  //                           width: 300,
+                                                  //                           height: 200,
+                                                  //                           alignment: Alignment.center,
+                                                  //                           decoration: BoxDecoration(
+                                                  //                             color: AppColor.primaryColor, // Content revealed
+                                                  //                             borderRadius: BorderRadius.circular(10),
+                                                  //                             // boxShadow: isScratched
+                                                  //                             //     ? [] // No shadow when content is revealed
+                                                  //                             //     : [BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
+                                                  //                           ),
+                                                  //                           child: Column(
+                                                  //                             crossAxisAlignment: CrossAxisAlignment.center,
+                                                  //                             mainAxisAlignment: MainAxisAlignment.center,
+                                                  //                             children: [
+                                                  //
+                                                  //                               AppText(
+                                                  //                                 title:homeController.getSlot[index].code.toString(),
+                                                  //                                 size: 17,
+                                                  //                                 fontFamily:
+                                                  //                                 AppFont.bold,
+                                                  //                                 fontWeight:
+                                                  //                                 FontWeight.w800,
+                                                  //                                 color: Colors.white,
+                                                  //                               ),
+                                                  //                               SizedBox(height: Get.height*0.015,),
+                                                  //                               Image.asset("assets/images/sca.png",
+                                                  //                                 height: Get.height*0.1,
+                                                  //                               )
+                                                  //                             ],
+                                                  //                           )
+                                                  //                       ),
+                                                  //                     ),
+                                                  //                   ),
+                                                  //                 ),
+                                                  //                 SizedBox(height: Get.height*0.03,),
+                                                  //                 Padding(
+                                                  //                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
+                                                  //                   child: AppButton(
+                                                  //                     buttonName: "Cancel",
+                                                  //                     buttonColor: AppColor.primaryColor,
+                                                  //                     textColor: AppColor.whiteColor,
+                                                  //                     onTap: () {
+                                                  //                       Get.back();
+                                                  //                     },
+                                                  //                     buttonHeight: Get.height * 0.055,
+                                                  //                     buttonWidth: Get.width,
+                                                  //                     fontFamily: AppFont.medium,
+                                                  //                     textSize: 17,
+                                                  //                     buttonRadius: BorderRadius.circular(30),
+                                                  //                   ),
+                                                  //                 ),
+                                                  //               ],
+                                                  //             ),
+                                                  //           ),
+                                                  //
+                                                  //         ));
+                                                  showModalBottomSheet(
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      isScrollControlled: true,
+                                                      isDismissible: true,
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          SlotTrue(
+                                                            id: homeController
+                                                                .getSlot[index]
+                                                                .id
+                                                                .toString(),
+                                                            code: homeController
+                                                                .getSlot[index]
+                                                                .code
+                                                                .toString(),
+                                                          ));
+                                                }
+                                              : () {
+                                                  print(homeController
+                                                      .getSlot[index].id
+                                                      .toString());
+                                                  ApiManger().slotVView(
+                                                      id: homeController
+                                                          .getSlot[index].id
+                                                          .toString());
 
-                                          // Get.generalDialog(
-                                          //     pageBuilder: (context, __, ___) =>
-                                          //         AlertDialog(
-                                          //           shape: RoundedRectangleBorder(
-                                          //             borderRadius: BorderRadius.circular(40), // Customize the border radius
-                                          //           ),
-                                          //
-                                          //
-                                          //           content: SizedBox(
-                                          //             height: Get.height*0.35,
-                                          //             width: Get.width*0.55,
-                                          //             child: Column(
-                                          //               crossAxisAlignment: CrossAxisAlignment.start,
-                                          //               children: [
-                                          //
-                                          //                 Center(
-                                          //                   child: AppText(
-                                          //                     title:"Scratch Coupon!",
-                                          //                     size: 16,
-                                          //                     fontFamily:
-                                          //                     AppFont.semi,
-                                          //                     fontWeight:
-                                          //                     FontWeight.w600,
-                                          //                     color: Colors.black,
-                                          //                   ),
-                                          //                 ),
-                                          //                 SizedBox(height: Get.height*0.03,),
-                                          //                 SizedBox(
-                                          //                   height: Get.height * 0.2,
-                                          //                   child: Center(
-                                          //                     child: Scratcher(
-                                          //                       brushSize: 50, // Adjust the brush size as needed
-                                          //                       threshold: 40, // Adjust the threshold as needed
-                                          //                       color: AppColor.primaryColor, // Initial scratch card color
-                                          //                       image: Image.asset('assets/images/scratch.png'), // Custom brush image
-                                          //                       onChange: (value) {
-                                          //                         if (value >= 1.0 && !isScratched) {
-                                          //                           setState(() {
-                                          //                             isScratched = true; // Scratch threshold reached
-                                          //                           });
-                                          //                         }
-                                          //                         print("Scratch progress: ${value * 100}%");
-                                          //                       },
-                                          //                       child: Container(
-                                          //                           width: 300,
-                                          //                           height: 200,
-                                          //                           alignment: Alignment.center,
-                                          //                           decoration: BoxDecoration(
-                                          //                             color: AppColor.primaryColor, // Content revealed
-                                          //                             borderRadius: BorderRadius.circular(10),
-                                          //                             // boxShadow: isScratched
-                                          //                             //     ? [] // No shadow when content is revealed
-                                          //                             //     : [BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
-                                          //                           ),
-                                          //                           child: Column(
-                                          //                             crossAxisAlignment: CrossAxisAlignment.center,
-                                          //                             mainAxisAlignment: MainAxisAlignment.center,
-                                          //                             children: [
-                                          //
-                                          //                               AppText(
-                                          //                                 title:homeController.getSlot[index].code.toString(),
-                                          //                                 size: 17,
-                                          //                                 fontFamily:
-                                          //                                 AppFont.bold,
-                                          //                                 fontWeight:
-                                          //                                 FontWeight.w800,
-                                          //                                 color: Colors.white,
-                                          //                               ),
-                                          //                               SizedBox(height: Get.height*0.015,),
-                                          //                               Image.asset("assets/images/sca.png",
-                                          //                                 height: Get.height*0.1,
-                                          //                               )
-                                          //                             ],
-                                          //                           )
-                                          //                       ),
-                                          //                     ),
-                                          //                   ),
-                                          //                 ),
-                                          //                 SizedBox(height: Get.height*0.03,),
-                                          //                 Padding(
-                                          //                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
-                                          //                   child: AppButton(
-                                          //                     buttonName: "Cancel",
-                                          //                     buttonColor: AppColor.primaryColor,
-                                          //                     textColor: AppColor.whiteColor,
-                                          //                     onTap: () {
-                                          //                       Get.back();
-                                          //                     },
-                                          //                     buttonHeight: Get.height * 0.055,
-                                          //                     buttonWidth: Get.width,
-                                          //                     fontFamily: AppFont.medium,
-                                          //                     textSize: 17,
-                                          //                     buttonRadius: BorderRadius.circular(30),
-                                          //                   ),
-                                          //                 ),
-                                          //               ],
-                                          //             ),
-                                          //           ),
-                                          //
-                                          //         ));
-                                          showModalBottomSheet(
-                                              backgroundColor: Colors.transparent,
-                                              isScrollControlled: true,
-                                              isDismissible: true,
-                                              context: context,
-                                              builder: (context) =>   SlotTrue(
-                                                id:homeController.getSlot[index].id
-                                                    .toString() ,
-                                                code:homeController.getSlot[index].code
-                                                    .toString()  ,
-
-                                              ));
-                                        }:
-                                            () {
-                                          print(homeController.getSlot[index].id
-                                              .toString());
-                                          ApiManger().slotVView(id: homeController.getSlot[index].id.toString());
-
-                                          showModalBottomSheet(
-                                              backgroundColor: Colors.transparent,
-                                              isScrollControlled: true,
-                                              isDismissible: true,
-                                              context: context,
-                                              builder: (context) =>   SlotView(
-                                                id:homeController.getSlot[index].id
-                                                    .toString() ,
-                                                code:homeController.getSlot[index].code
-                                                    .toString()  ,
-
-
-                                              ));
-
-                                        },
-                                        child:
-
-
-
-                                     Container(
-                                                decoration:  BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: AppColor.primaryColor.withOpacity(0.25),),
-                                                child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(
-                                                            18.0),
-                                                    child: Icon(
-                                                      Icons.shopping_cart,
-                                                      color:
-
-
-                                                          AppColor.grey3Color,
-                                                      size: 25,
-                                                    )),
-                                              )
-
-                                      );
+                                                  showModalBottomSheet(
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      isScrollControlled: true,
+                                                      isDismissible: true,
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          SlotView(
+                                                            id: homeController
+                                                                .getSlot[index]
+                                                                .id
+                                                                .toString(),
+                                                            code: homeController
+                                                                .getSlot[index]
+                                                                .code
+                                                                .toString(),
+                                                          ));
+                                                },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: AppColor.primaryColor
+                                                  .withOpacity(0.25),
+                                            ),
+                                            child: const Padding(
+                                                padding: EdgeInsets.all(18.0),
+                                                child: Icon(
+                                                  Icons.shopping_cart,
+                                                  color: AppColor.grey3Color,
+                                                  size: 25,
+                                                )),
+                                          ));
                                     })
                                 : noData(height: Get.height * 0));
                       }),
@@ -1138,32 +1178,22 @@ class _DashboardViewState extends State<DashboardView> {
               top: Get.height * 0.048,
               right: 6,
               child: GestureDetector(
-                onTap: (){
+                onTap: () {
                   homeController.getTransData();
                   homeController.getSlotHis();
                   Get.to(const WalletView(),
-                      transition: Transition.rightToLeft
-                  );
+                      transition: Transition.rightToLeft);
                 },
                 child: Image.asset(
                   "assets/images/add.png",
-
-
-                  
                   height: 56,
                   width: 56,
-
                 ),
               ))
         ],
       ),
     );
   }
-
-
-
-
-
 
   List<DropdownMenuItem<int>> countryDataList({var dataList}) {
     List<DropdownMenuItem<int>> outputList = [];
@@ -1208,34 +1238,29 @@ class _DashboardViewState extends State<DashboardView> {
     }
     return outputList;
   }
-
-
-
-
 }
 
-
 class SlotView extends StatefulWidget {
-   SlotView({super.key,this.id ="",this.code =""});
-   String id ;
-   String code ;
+  SlotView({super.key, this.id = "", this.code = ""});
 
+  String id;
+
+  String code;
 
   @override
   State<SlotView> createState() => _SlotViewState();
 }
 
 class _SlotViewState extends State<SlotView> {
-  bool isScratched=false;
+  bool isScratched = false;
+
   @override
   Widget build(BuildContext context) {
     final isKeyBoard = MediaQuery.of(context).viewInsets.bottom != 0;
 
-
-
     return DraggableScrollableSheet(
       initialChildSize: isKeyBoard ? 0.99 : 0.99,
-      minChildSize: isKeyBoard? 0.99 : 0.99,
+      minChildSize: isKeyBoard ? 0.99 : 0.99,
       maxChildSize: 0.99,
       builder: (_, controller) => Container(
         decoration: BoxDecoration(
@@ -1248,116 +1273,121 @@ class _SlotViewState extends State<SlotView> {
               vertical: Get.height * 0.02, horizontal: Get.width * 0.05),
           child: Column(
             children: [
-              SizedBox(height: Get.height*0.2,),
-
+              SizedBox(
+                height: Get.height * 0.2,
+              ),
               Container(
                 height: 320,
                 width: 320,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white
-                ),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-
                   children: [
-                    SizedBox(height:
-                    isScratched?
-                    Get.height*0.06:Get.height*0.04,),
+                    SizedBox(
+                      height:
+                          isScratched ? Get.height * 0.06 : Get.height * 0.04,
+                    ),
                     AppText(
                       title:
-                      isScratched?
-                      "Congratulations!":"Scratch Coupon!",
+                          isScratched ? congratulations.tr : scratchCoupon.tr,
                       size: 15,
-                      color:
-                      isScratched?
-                      AppColor.primaryColor:AppColor.blackColor,
-
+                      color: isScratched
+                          ? AppColor.primaryColor
+                          : AppColor.blackColor,
                       fontWeight:
-                      isScratched?
-                      FontWeight.w700:FontWeight.w600,
+                          isScratched ? FontWeight.w700 : FontWeight.w600,
                     ),
-                    isScratched?SizedBox.shrink():
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 65),
-                      child: Divider(color: Colors.black.withOpacity(0.2),
-                      thickness: 1.5,
-                      ),
+                    isScratched
+                        ? SizedBox.shrink()
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 65),
+                            child: Divider(
+                              color: Colors.black.withOpacity(0.2),
+                              thickness: 1.5,
+                            ),
+                          ),
+                    SizedBox(
+                      height:
+                          isScratched ? Get.height * 0.01 : Get.height * 0.02,
                     ),
-                    SizedBox(height:
-                    isScratched?
-                    Get.height*0.01:Get.height*0.02,),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Get.width*0.17),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.17),
                       child: Scratcher(
-                        brushSize: 50, // Adjust the brush size as needed
-                        threshold: 40, // Adjust the threshold as needed
-                        color: isScratched ? Colors.transparent : Colors.grey, // Initial scratch card color
-                        image: Image.asset('assets/images/scratch.png',
+                        brushSize: 50,
+                        // Adjust the brush size as needed
+                        threshold: 40,
+                        // Adjust the threshold as needed
+                        color: isScratched ? Colors.transparent : Colors.grey,
+                        // Initial scratch card color
+                        image: Image.asset(
+                          'assets/images/scratch.png',
                           height: 131,
                           width: 200,
-                        ), // Custom brush image
+                        ),
+                        // Custom brush image
                         onChange: (value) {
                           print("This is id ${widget.id.toString()}");
 
                           if (value >= 1.0 && !isScratched) {
                             setState(() {
-
-                             isScratched = true;
-
+                              isScratched = true;
                             });
                           }
                           print("Scratch progress: ${value * 100}%");
                         },
                         child: Container(
-
-                          height:
-                          isScratched?
-                          161:141,
+                          height: isScratched ? 161 : 141,
                           width: 218,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: isScratched ? Colors.white : Colors.transparent, // Content revealed
+                            color: isScratched
+                                ? Colors.white
+                                : Colors.transparent, // Content revealed
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: isScratched
                                 ? [] // No shadow when content is revealed
-                                : [const BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
+                                : [
+                                    const BoxShadow(
+                                        blurRadius: 10, color: Colors.grey)
+                                  ], // Add a blurred effect
                           ),
                           child: isScratched
                               ? Column(
-                                children: [
-
-                                  AppText(
-                                    title: widget.code.toString(),
-                                    size: 22,
-                                    color: AppColor.blackColor,
-
-                                    fontWeight: FontWeight.w600,
+                                  children: [
+                                    AppText(
+                                      title: widget.code.toString(),
+                                      size: 22,
+                                      color: AppColor.blackColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    Image.asset(
+                                      "assets/images/sca.png",
+                                      height: 120,
+                                      width: 120,
+                                    )
+                                  ],
+                                )
+                              : Text(
+                                  scratchMe.tr,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                  Image.asset("assets/images/sca.png",
-                                  height: 120,
-                                    width: 120,
-                                  )
-                                ],
-                              )
-                              : const Text(
-                            'Scratch Me!',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
+                                ),
                         ),
                       ),
                     ),
-                    SizedBox(height: Get.height*0.02,),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
                     AppText(
-                      title: "Scratch it to get your\n coupon number",
+                      title: ScratchItToGetCouponNumber.tr,
                       size: 12,
                       color: AppColor.greyLightColor2,
                       textAlign: TextAlign.center,
-
                       fontWeight: FontWeight.w500,
                     ),
                   ],
@@ -1369,13 +1399,9 @@ class _SlotViewState extends State<SlotView> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                 child: AppButton(
-                  buttonName:
-                  isScratched?"Ok":
-                  "Cancel",
-                  gard:false,
+                  buttonName: isScratched ? ok.tr : cancel.tr,
+                  gard: false,
                   buttonColor: AppColor.whiteColor,
-
-
                   textColor: AppColor.blackColor.withOpacity(0.6),
                   onTap: () {
                     Get.back();
@@ -1395,29 +1421,27 @@ class _SlotViewState extends State<SlotView> {
   }
 }
 
-
-
 class SlotTrue extends StatefulWidget {
-  SlotTrue({super.key,this.id ="",this.code =""});
-  String id ;
-  String code ;
+  SlotTrue({super.key, this.id = "", this.code = ""});
 
+  String id;
+
+  String code;
 
   @override
   State<SlotTrue> createState() => _SlotTrueState();
 }
 
 class _SlotTrueState extends State<SlotTrue> {
-  bool isScratched=true;
+  bool isScratched = true;
+
   @override
   Widget build(BuildContext context) {
     final isKeyBoard = MediaQuery.of(context).viewInsets.bottom != 0;
 
-
-
     return DraggableScrollableSheet(
       initialChildSize: isKeyBoard ? 0.99 : 0.99,
-      minChildSize: isKeyBoard? 0.99 : 0.99,
+      minChildSize: isKeyBoard ? 0.99 : 0.99,
       maxChildSize: 0.99,
       builder: (_, controller) => Container(
         decoration: BoxDecoration(
@@ -1430,118 +1454,122 @@ class _SlotTrueState extends State<SlotTrue> {
               vertical: Get.height * 0.02, horizontal: Get.width * 0.05),
           child: Column(
             children: [
-              SizedBox(height: Get.height*0.2,),
-
+              SizedBox(
+                height: Get.height * 0.2,
+              ),
               Container(
                 height: 330,
                 width: 330,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white
-                ),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-
                   children: [
-                    SizedBox(height:
-                    isScratched?
-                    Get.height*0.05:Get.height*0.04,),
+                    SizedBox(
+                      height:
+                          isScratched ? Get.height * 0.05 : Get.height * 0.04,
+                    ),
                     AppText(
                       title:
-                      isScratched?
-                      "Congratulations!":"Scratch Coupon!",
+                          isScratched ? congratulations.tr : scratchCoupon.tr,
                       size: 15,
-                      color:
-                      isScratched?
-                      AppColor.primaryColor:AppColor.blackColor,
-
+                      color: isScratched
+                          ? AppColor.primaryColor
+                          : AppColor.blackColor,
                       fontWeight:
-                      isScratched?
-                      FontWeight.w700:FontWeight.w600,
+                          isScratched ? FontWeight.w700 : FontWeight.w600,
                     ),
-                    isScratched?SizedBox.shrink():
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 65),
-                      child: Divider(color: Colors.black.withOpacity(0.2),
-                        thickness: 1.5,
-                      ),
+                    isScratched
+                        ? SizedBox.shrink()
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 65),
+                            child: Divider(
+                              color: Colors.black.withOpacity(0.2),
+                              thickness: 1.5,
+                            ),
+                          ),
+                    SizedBox(
+                      height:
+                          isScratched ? Get.height * 0.01 : Get.height * 0.02,
                     ),
-                    SizedBox(height:
-                    isScratched?
-                    Get.height*0.01:Get.height*0.02,),
                     Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Get.width*0.17),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Get.width * 0.17),
                       child: Scratcher(
-                        brushSize: 50, // Adjust the brush size as needed
-                        threshold: 40, // Adjust the threshold as needed
-                        color: isScratched ? Colors.transparent : Colors.grey, // Initial scratch card color
-                        image: null, // Custom brush image
+                        brushSize: 50,
+                        // Adjust the brush size as needed
+                        threshold: 40,
+                        // Adjust the threshold as needed
+                        color: isScratched ? Colors.transparent : Colors.grey,
+                        // Initial scratch card color
+                        image: null,
+                        // Custom brush image
                         onChange: (value) {
                           if (value >= 1.0 && !isScratched) {
-                            setState(() {
-
-
-                            });
+                            setState(() {});
                           }
                           print("Scratch progress: ${value * 100}%");
                         },
                         child: Container(
-
-                          height:
-                          isScratched?
-                          141:141,
+                          height: isScratched ? 141 : 141,
                           width: 218,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: isScratched ? Colors.white : Colors.transparent, // Content revealed
+                            color: isScratched
+                                ? Colors.white
+                                : Colors.transparent, // Content revealed
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow:isScratched
+                            boxShadow: isScratched
                                 ? [] // No shadow when content is revealed
-                                : [const BoxShadow(blurRadius: 10, color: Colors.grey)], // Add a blurred effect
+                                : [
+                                    const BoxShadow(
+                                        blurRadius: 10, color: Colors.grey)
+                                  ], // Add a blurred effect
                           ),
                           child: isScratched
                               ? Column(
-                            children: [
-
-                              AppText(
-                                title: widget.code.toString(),
-                                size: 22,
-                                color: AppColor.blackColor,
-
-                                fontWeight: FontWeight.w600,
-                              ),
-                              Image.asset("assets/images/sca.png",
-                                height: 105,
-                                width: 105,
-                              )
-                            ],
-                          )
-                              : const Text(
-                            'Scratch Me!',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
+                                  children: [
+                                    AppText(
+                                      title: widget.code.toString(),
+                                      size: 22,
+                                      color: AppColor.blackColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    Image.asset(
+                                      "assets/images/sca.png",
+                                      height: 105,
+                                      width: 105,
+                                    )
+                                  ],
+                                )
+                              : Text(
+                                  scratchMe.tr,
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
                         ),
                       ),
                     ),
-                    SizedBox(height: Get.height*0.02,),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
                     Padding(
-                      padding:  EdgeInsets.only(left: 50),
+                      padding: EdgeInsets.only(left: 50),
                       child: Row(
-
                         children: [
                           AppText(
                             title: "Sr. Number : ",
                             size: 12,
                             color: AppColor.greyLightColor2,
                             textAlign: TextAlign.center,
-
                             fontWeight: FontWeight.w500,
                           ),
-                          SizedBox(width: Get.width*0.03,),
+                          SizedBox(
+                            width: Get.width * 0.03,
+                          ),
                           Row(
                             children: [
                               Text(
@@ -1553,19 +1581,16 @@ class _SlotTrueState extends State<SlotTrue> {
                                   decorationStyle: TextDecorationStyle.solid,
                                   wordSpacing: 2,
                                   decorationColor: AppColor.blackColor,
-
                                 ),
-
                               ),
                               Text(
                                 "00${widget.id.toString()}",
                                 style: TextStyle(
-                                  decoration: TextDecoration.underline,decorationColor: AppColor.blackColor,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: AppColor.blackColor,
                                   fontSize: 14,
                                   color: AppColor.greyLightColor2,
-
                                 ),
-
                               ),
                               Text(
                                 "00${widget.id.toString()}",
@@ -1574,16 +1599,16 @@ class _SlotTrueState extends State<SlotTrue> {
                                   fontSize: 14,
                                   color: AppColor.whiteColor,
                                   decorationColor: AppColor.blackColor,
-
                                 ),
-
                               ),
                             ],
                           )
                         ],
                       ),
                     ),
-                    SizedBox(height: Get.height*0.02,),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -1592,25 +1617,25 @@ class _SlotTrueState extends State<SlotTrue> {
                           size: 12,
                           color: AppColor.greyLightColor2,
                           textAlign: TextAlign.center,
-
                           fontWeight: FontWeight.w500,
                         ),
-                        SizedBox(width: Get.width*0.03,),
+                        SizedBox(
+                          width: Get.width * 0.03,
+                        ),
                         Column(
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  "00${widget.id.toString()}",
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 14,
-                                    color: AppColor.whiteColor,
-                                    decorationStyle: TextDecorationStyle.solid,
-                                    wordSpacing: 2,
-                                    decorationColor: AppColor.blackColor,
-
-                                  )),
+                                Text("00${widget.id.toString()}",
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 14,
+                                      color: AppColor.whiteColor,
+                                      decorationStyle:
+                                          TextDecorationStyle.solid,
+                                      wordSpacing: 2,
+                                      decorationColor: AppColor.blackColor,
+                                    )),
                                 Text(
                                   "7 Days",
                                   style: TextStyle(
@@ -1618,19 +1643,15 @@ class _SlotTrueState extends State<SlotTrue> {
                                     fontSize: 14,
                                     color: AppColor.greyLightColor2,
                                     decorationColor: AppColor.blackColor,
-
                                   ),
-
                                 ),
-                                Text(
-                                  "00${widget.id.toString()}",
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontSize: 14,
-                                    color: AppColor.whiteColor,
-                                    decorationColor: AppColor.blackColor,
-
-                                  )),
+                                Text("00${widget.id.toString()}",
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontSize: 14,
+                                      color: AppColor.whiteColor,
+                                      decorationColor: AppColor.blackColor,
+                                    )),
                               ],
                             ),
                           ],
@@ -1647,10 +1668,8 @@ class _SlotTrueState extends State<SlotTrue> {
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.01),
                 child: AppButton(
                   buttonName: "Ok",
-                  gard:false,
+                  gard: false,
                   buttonColor: AppColor.whiteColor,
-
-
                   textColor: AppColor.blackColor.withOpacity(0.6),
                   onTap: () {
                     Get.back();

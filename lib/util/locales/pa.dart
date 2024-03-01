@@ -400,4 +400,8 @@ Map<String, String> get paMap => {
   translation.pleaseUploadReceipt :"ਕਿਰਪਾ ਕਰਕੇ ਰਸੀਦ ਅੱਪਲੋਡ ਕਰੋ",
   translation.subTotal :"ਉਪ-ਯੋਗ",
   translation.pendingPayments :"ਬਕਾਇਆ ਭੁਗਤਾਨ",
+  translation.scratchCoupon: "ਸਕ੍ਰੈਚ ਕੂਪਨ!",
+  translation.restaurants: "ਰੈਸਟੋਰੈਂਟ",
+  translation.furniture: "ਫਰਨੀਚਰ",
+  translation.liquorStore: "ਸ਼ਰਾਬ ਦੀ ਦੁਕਾਨ",
 };

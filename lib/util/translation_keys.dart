@@ -401,3 +401,7 @@ final slots= "slots";
 final pleaseUploadReceipt= "pleaseUploadReceipt";
 final subTotal= "subTotal";
 final pendingPayments= "pendingPayments";
+final scratchCoupon= "scratchCoupon";
+final restaurants= "restaurants";
+final furniture= "Furniture";
+final liquorStore= "liquorStore";

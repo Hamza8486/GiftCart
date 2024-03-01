@@ -400,4 +400,8 @@ Map<String, String> get tlMap => {
   translation.pleaseUploadReceipt :"Mangyaring mag-upload ng resibo",
   translation.subTotal :"Subtotal",
   translation.pendingPayments :"Nakabinbing Mga Pagbabayad",
+  translation.scratchCoupon: "Scratch Coupon!",
+  translation.restaurants: "Mga restawran",
+  translation.furniture: "Muwebles",
+  translation.liquorStore: "Tindahan ng alak",
 };

@@ -400,4 +400,8 @@ Map<String, String> get itMap => {
   translation.pleaseUploadReceipt :"Si prega di caricare la ricevuta",
   translation.subTotal :"Totale parziale",
   translation.pendingPayments :"Pagamenti in sospeso",
+  translation.scratchCoupon: "Buono da grattare!",
+  translation.restaurants: "Ristoranti",
+  translation.furniture: "Mobili",
+  translation.liquorStore: "Negozio di liquori",
 };

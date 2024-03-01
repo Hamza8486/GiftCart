@@ -400,4 +400,8 @@ Map<String, String> get zhMap => {
   translation.pleaseUploadReceipt :"请上传收据",
   translation.subTotal :"小计",
   translation.pendingPayments :"待付款",
+  translation.scratchCoupon: "刮刮卡优惠券！",
+  translation.restaurants: "餐厅",
+  translation.furniture: "家具",
+  translation.liquorStore: "酒类商店",
 };

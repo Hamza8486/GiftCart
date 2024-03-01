@@ -400,4 +400,8 @@ Map<String, String> get esMap => {
   translation.pleaseUploadReceipt :"Please upload receipt",
   translation.subTotal :"Subtotal",
   translation.pendingPayments :"Pending Payments",
+  translation.scratchCoupon: "Rasca y Gana",
+  translation.restaurants: "Restaurantes",
+  translation.furniture: "Muebles",
+  translation.liquorStore: "Licorerías",
 };

@@ -656,7 +656,7 @@ class _NewWalletViewState extends State<NewWalletView> {
                                             .start,
                                         children: [
                                           AppText(
-                                            title: "Grocery coupon",
+                                            title: groceryCoupon.tr,
                                             size: 14,
                                             fontWeight: FontWeight.w600,
                                             color: AppColor.blackColor,
