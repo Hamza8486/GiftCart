@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/notification_detail.dart';
 import 'package:intl/intl.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/notification_detail.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/notification_detail.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
-import 'package:timeago/timeago.dart' as timeago;
 class NotificationView extends StatefulWidget {
   const NotificationView({super.key});
 
@@ -25,7 +26,7 @@ class _NotificationViewState extends State<NotificationView> {
         children: [
           TopBar(onTap1: (){},onTap: (){
             Get.back();
-          },text: "Notifications",
+          },text: notifications.tr,
               image: "assets/icons/share.svg",color: AppColor.whiteColor
           ),
 
@@ -72,16 +73,24 @@ class _NotificationViewState extends State<NotificationView> {
                           ):
                           Get.put(HomeController()).notiList.isEmpty?
 
-                          Column(
-                            children: [
-                              SizedBox(height: Get.height*0.38,),
-                              Center(child: AppText(title: "No Notification Data!",
-                                color: AppColor.blackColor.withOpacity(0.7),
-                                size: 16,
-                                fontWeight: FontWeight.w500,
-                              ))
-                            ],
-                          ):
+                          Column(children: [
+                            SizedBox(height:Get.height*0.3),
+                            Image.asset(
+                              "assets/icons/cloud.png",
+                              height: 50,
+                              width: 50,
+                            ),
+                            SizedBox(height: Get.height * 0.01),
+                            Center(
+                                child: AppText(
+                                  title: "No Data!",
+                                  size: 14,
+                                  color: AppColor.greyLightColor2,
+                                  textAlign: TextAlign.center,
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            SizedBox(height: Get.height * 0.01),
+                          ]):
                           ListView.builder(
                           itemCount:  Get.put(HomeController()).notiList.length,
                           shrinkWrap: true,
@@ -98,7 +107,15 @@ class _NotificationViewState extends State<NotificationView> {
                                 index==0?0:10,bottom:10),
                                 child:   GestureDetector(
                                   onTap: (){
-                                    Get.to(NotificationDetail());
+
+
+                                    Get.to(NotificationData(data:Get.put(HomeController()).notiList[index] ,
+                                      type: Get.put(HomeController()).notiList[index].title=="Slot Message"?"user":
+                                      Get.put(HomeController()).notiList[index].title=="Slot win"?"win":
+
+                                      "",
+
+                                    ));
                                   },
                                   child: Container(
                                     width: Get.width,
@@ -127,7 +144,11 @@ class _NotificationViewState extends State<NotificationView> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                                AppText(
-                                                  title: Get.put(HomeController()).notiList[index].title==null?"Notification":Get.put(HomeController()).notiList[index].title.toString(),
+                                                  title: Get.put(HomeController()).notiList[index].title==null?"Notification":
+                                                  Get.put(HomeController()).notiList[index].title=="Slot win"?"One year give way":
+                                                  Get.put(HomeController()).notiList[index].title=="Slot Message"?"User Message":
+
+                                                  Get.put(HomeController()).notiList[index].title.toString(),
                                                   size: 14,
                                                   fontWeight: FontWeight.w500,
                                                   color: AppColor.blackColor),

@@ -1,6 +1,6 @@
   import 'package:flutter/material.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 Widget textProfile({text,text1,Color?color,Color?textColor}){
   return  Column(

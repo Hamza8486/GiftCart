@@ -1,18 +1,24 @@
+import 'dart:io';
+
+import 'package:fast_contacts/fast_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/comman_widget/refer_contact_item.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/util/constant.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:whatsapp_share/whatsapp_share.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/constant.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EarnRefrence extends StatefulWidget {
   const EarnRefrence({Key? key}) : super(key: key);
@@ -22,35 +28,89 @@ class EarnRefrence extends StatefulWidget {
 }
 
 class _EarnRefrenceState extends State<EarnRefrence> {
-  List<Contact> contacts = [];
+  late List<Contact> contacts = [];
+  bool isLoading = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
+    super.initState();
     fetchContacts();
+    _scrollController.addListener(_scrollListener);
   }
 
-  Future<void> share() async {
-    await WhatsappShare.share(
-      text:
-      "📢 Hey friends! Check out our amazing MR App - it's mind-blowing! 😎 Sign up using my referral code  and get rewarded with \$1! 💸 Don't miss out on this awesome opportunity, share the love on WhatsApp now.\n# ${Get
-          .put(HomeController())
-          .referCode
-          .value
-          .toString()}    Use this",
-      linkUrl: 'https://flutter.dev/',
-      phone: '911234567890',
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      // When user reaches the end of the list, load more contacts
+      fetchContacts();
+    }
+  }
+
+  Future<void> fetchContacts() async {
+    if (!isLoading) {
+      setState(() {
+        isLoading = true;
+      });
+
+      List<Contact> fetchedContacts = await getContacts();
+      setState(() {
+        contacts.addAll(fetchedContacts);
+        isLoading = false;
+      });
+    }
+  }
+
+  _textMe(String phone) async {
+    if (Platform.isAndroid) {
+      var uri = "sms:+" +
+          phone +
+          "?body=Here%20is%20referal%20code" +
+          Get.put(HomeController()).referCode.value.toString().toString();
+      await launch(uri);
+    } else if (Platform.isIOS) {
+      // iOS
+      const uri = 'sms:0039-222-060-888&body=hello%20there';
+      await launch(uri);
+    }
+  }
+
+  whatsapp(String phone, String message) async {
+    var contact = "" + phone;
+    var androidUrl = "whatsapp://send?phone=$contact&text=" + message;
+    var iosUrl = "https://wa.me/$contact?text=${Uri.parse(message)}";
+
+    try {
+      if (Platform.isIOS) {
+        await launchUrl(Uri.parse(iosUrl));
+      } else {
+        await launchUrl(Uri.parse(androidUrl));
+      }
+    } on Exception {
+      flutterToast(msg: "Whatsapp not installed");
+    }
+  }
+  openWhatsapp() async {
+    await launchUrl(
+      Uri.parse(
+        AppConstants.wa_url(),
+      ),
     );
   }
 
-  void fetchContacts() async {
-    if (await FlutterContacts.requestPermission()) {
-      showLoading(context: context);
-      contacts = await FlutterContacts.getContacts(
-          withProperties: true, withPhoto: true);
-      Get.back();
-    }
-    setState(() {});
-  }
+  // Future<void> share() async {
+  //   await WhatsappShare.share(
+  //     text: heyFriendsCheckAppText.tr +
+  //         "\n# ${Get.put(HomeController()).referCode.value.toString()}    Use this",
+  //     linkUrl: 'https://flutter.dev/',
+  //     phone: '911234567890',
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +131,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
                   child: SingleChildScrollView(
+                    controller: _scrollController,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -132,11 +193,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                                       Obx(() {
                                         return AppText(
                                           title:
-                                          "\$${Get
-                                              .put(HomeController())
-                                              .totalEarning
-                                              .value
-                                              .toString()} ",
+                                          "\$${Get.put(HomeController()).totalEarning.value.toString()} ",
                                           size: AppSizes.size_24,
                                           color: AppColor.boldBlackColor,
                                           fontFamily: AppFont.medium,
@@ -166,16 +223,14 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                         Center(
                           child: Obx(() {
                             return GestureDetector(
-                              onTap: Get
-                                  .put(HomeController())
+                              onTap: Get.put(HomeController())
                                   .referCode
                                   .value
                                   .isEmpty
                                   ? () {
                                 flutterToastSuccess(msg: copied.tr);
                                 Clipboard.setData(ClipboardData(
-                                    text: Get
-                                        .put(HomeController())
+                                    text: Get.put(HomeController())
                                         .referCode
                                         .value
                                         .toString()));
@@ -183,8 +238,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                                   : () {
                                 flutterToastSuccess(msg: copied.tr);
                                 Clipboard.setData(ClipboardData(
-                                    text: Get
-                                        .put(HomeController())
+                                    text: Get.put(HomeController())
                                         .referCode
                                         .value
                                         .toString()));
@@ -199,8 +253,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                                         horizontal: 25, vertical: 10),
                                     child: Obx(() {
                                       return AppText(
-                                        title: Get
-                                            .put(HomeController())
+                                        title: Get.put(HomeController())
                                             .referCode
                                             .value
                                             .toString(),
@@ -218,8 +271,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                         ),
                         Center(
                           child: AppText(
-                            title:
-                            copyOrShareRefCodeWithFriends.tr,
+                            title: copyOrShareRefCodeWithFriends.tr,
                             size: AppSizes.size_10,
                             fontFamily: AppFont.medium,
                             fontWeight: FontWeight.w500,
@@ -232,7 +284,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                         Center(
                           child: GestureDetector(
                             onTap: () {
-                              share();
+                              openWhatsapp();
                             },
                             child: Image.asset(
                               "assets/icons/whats.png",
@@ -240,17 +292,74 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: Get.height * 0.035,
-                        ),
-                        textAuth(
-                            text: referralCode.tr, color: Colors.transparent),
-                        SizedBox(
-                          height: Get.height * 0.013,
-                        ),
-                        betField(
-                          hint: pasteCodehere.tr,
-                        ),
+                        Obx(() {
+                          return Get.put(HomeController()).refCodeHave.value
+                              ? SizedBox.shrink()
+                              : Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: Get.height * 0.035,
+                              ),
+                              textAuth(
+                                text: referralCode.tr,
+                                color: Colors.transparent,
+                              ),
+                              SizedBox(
+                                height: Get.height * 0.013,
+                              ),
+                              betField(
+                                  hint: pasteCodehere.tr,
+                                  textInputAction: TextInputAction.done,
+                                  onChange: (val) {
+                                    setState(() {});
+                                  },
+                                  controller: Get.put(HomeController())
+                                      .referrelController),
+                              SizedBox(
+                                height: Get.height * 0.013,
+                              ),
+                              Obx(() {
+                                return Get.put(HomeController())
+                                    .applyRef
+                                    .value
+                                    ? Center(
+                                    child: SpinKitThreeBounce(
+                                        size: 22,
+                                        color: AppColor.primaryColor))
+                                    : AppButton(
+                                  buttonName: "Apply",
+                                  buttonColor:
+                                  AppColor.primaryColor,
+                                  textColor: AppColor.whiteColor,
+                                  onTap: () {
+                                    if (Get.put(HomeController())
+                                        .referrelController
+                                        .text
+                                        .isEmpty) {
+                                      flutterToast(
+                                          msg:
+                                          "Please enter referrel code");
+                                    } else {
+                                      Get.put(HomeController())
+                                          .updateApplyRef(true);
+                                      ApiManger().useReferrelCode(
+                                          context: context,
+                                          code: Get.put(
+                                              HomeController())
+                                              .referrelController
+                                              .text);
+                                    }
+                                  },
+                                  buttonRadius:
+                                  BorderRadius.circular(10),
+                                  buttonWidth: Get.width,
+                                  buttonHeight: 50,
+                                );
+                              })
+                            ],
+                          );
+                        }),
                         SizedBox(
                           height: Get.height * 0.035,
                         ),
@@ -299,8 +408,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                               ),
                               Expanded(
                                 child: AppText(
-                                  title:
-                                  copyTheRefCodeNShare.tr,
+                                  title: copyTheRefCodeNShare.tr,
                                   size: AppSizes.size_11,
                                   fontFamily: AppFont.medium,
                                   fontWeight: FontWeight.w500,
@@ -336,8 +444,7 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                               ),
                               Expanded(
                                 child: AppText(
-                                  title:
-                                  askYourFriendToRegisterUsingRefCode.tr,
+                                  title: askYourFriendToRegisterUsingRefCode.tr,
                                   size: AppSizes.size_11,
                                   fontFamily: AppFont.medium,
                                   fontWeight: FontWeight.w500,
@@ -347,16 +454,136 @@ class _EarnRefrenceState extends State<EarnRefrence> {
                             ],
                           ),
                         ),
-                        Container(
-                          child: ListView(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            children: contacts.map((strone) {
-                              return ReferContactItem(
-                                  strone, AppConstants.referrlCode.toString());
-                            }).toList(),
-                          ),
+                        SizedBox(
+                          height: Get.height * 0.04,
                         ),
+                        AppText(
+                          title: "Refer your Contact",
+                          size: 14,
+                          fontFamily: AppFont.medium,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.blackColor,
+                        ),
+                        SizedBox(
+                          height: Get.height * 0.03,
+                        ),
+                        if (contacts.isEmpty)
+                          Center(
+                            child: SpinKitThreeBounce(
+                              size: 25,
+                              color: AppColor.primaryColor,
+                            ),
+                          )
+                        else
+                          ListView.builder(
+                            itemCount: contacts.length,
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: EdgeInsets.zero,
+                            itemBuilder: (context, index) {
+                              Contact contact = contacts[index];
+                              return
+                                contact.phones.first.number.length<6?SizedBox.shrink():
+                                Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 0),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 4,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 40,
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                                color: AppColor.lightBlue,
+                                                borderRadius: BorderRadius.circular(100)),
+                                            child: Center(
+                                              child: AppText(
+                                                title:
+                                                contact.displayName.isEmpty?"U":
+                                                contact.displayName[0],
+                                                size: 14,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppColor.whiteColor,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  contact.displayName.isEmpty ? "Username" : contact.displayName,
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: AppColor.blackColor,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  contact.phones.first.number.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: AppColor.blackColor,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            children: [
+                                              InkResponse(
+                                                onTap: () {
+                                                  whatsapp(contact.phones.first.number, "Hi this is your referral code ${Get.put(HomeController()).referCode.value.toString()} ");
+
+
+                                                },
+                                                child: Image.asset(
+                                                  "assets/images/wh.png",
+                                                  height: 25,
+                                                  width: 25,
+                                                ),
+                                              ),
+                                              SizedBox(width: 20),
+                                              InkResponse(
+                                                onTap: () {
+                                                  _textMe(contact.phones.first.number);
+                                                },
+                                                child: Image.asset(
+                                                  "assets/images/mess.png",
+                                                  height: 25,
+                                                  width: 25,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 6),
+                                    Divider(
+                                      color: AppColor.greyLightColor2.withOpacity(0.5),
+                                    ),
+                                    SizedBox(height: 6),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        SizedBox(
+                          height: Get.height * 0.02,
+                        ),
+                        if (isLoading)
+                          Center(
+                            child: CircularProgressIndicator(
+                              color: AppColor.primaryColor,
+                            ), // Or any loading indicator
+                          ),
                         SizedBox(
                           height: Get.height * 0.02,
                         ),
@@ -372,12 +599,10 @@ class _EarnRefrenceState extends State<EarnRefrence> {
               right: 20,
               child: GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) => earnWidget());
+                  Get.to(AllData(
+                    name: "Earn and reference",
+                    link: "https://admin.mr-corp.ca/help/Earn%20and%20refrence",
+                  ));
                 },
                 child: Image.asset(
                   "assets/icons/info.png",
@@ -389,74 +614,16 @@ class _EarnRefrenceState extends State<EarnRefrence> {
       ),
     );
   }
-}
 
-Widget earnWidget() {
-  return DraggableScrollableSheet(
-    initialChildSize: 0.7,
-    minChildSize: 0.7,
-    maxChildSize: 0.7,
-    builder: (_, controller) =>
-        Container(
-          decoration: BoxDecoration(
-            color: AppColor.whiteColor,
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30), topRight: Radius.circular(30)),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: Get.height * 0.02, horizontal: Get.width * 0.05),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/slide.png",
-                      scale: 3,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: Get.height * 0.03,
-                ),
-                AppText(
-                    title: infoAboutEarnings.tr,
-                    size: 20,
-                    fontWeight: FontWeight.w600,
-                    color: AppColor.blackColor),
-                SizedBox(
-                  height: Get.height * 0.02,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: 10,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Row(
-                            children: [
-                              AppText(
-                                  title: "${index + 1} - ",
-                                  size: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.blackColor),
-                              AppText(
-                                  title: clearExpDateForeachCoupon.tr,
-                                  size: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColor.blackColor),
-                            ],
-                          ),
-                        );
-                      }),
-                ),
-              ],
-            ),
-          ),
-        ),
-  );
+  Future<List<Contact>> getContacts() async {
+    bool isGranted = await Permission.contacts.status.isGranted;
+    if (!isGranted) {
+      isGranted = await Permission.contacts.request().isGranted;
+    }
+    if (isGranted) {
+      return await FastContacts.getAllContacts();
+    }
+    return [];
+  }
+
 }

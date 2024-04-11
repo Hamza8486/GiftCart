@@ -8,18 +8,19 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/detail.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
-import 'package:mr_bet/widgets/image_pick.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/detail.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/helper_function.dart';
+import 'package:giftcart/widgets/image_pick.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -50,7 +51,10 @@ class _PromoteBusinessState extends State<PromoteBusiness> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TopBar(
-                  onTap1: () {},
+                  onTap1: () {
+                    print("object");
+                    Get.to(AllData(name: "Promote business",link: "https://admin.mr-corp.ca/help/Promote%20business",));
+                  },
                   onTap: () {
                     Get.back();
                   },
@@ -523,12 +527,8 @@ class _PromoteBusinessState extends State<PromoteBusiness> {
               right: 12,
               child: GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) => addsInfoWidget());
+                  Get.to(AllData(name: "Promote business",link: "https://admin.mr-corp.ca/help/Promote%20business",));
+
                 },
                 child: Image.asset(
                   "assets/icons/info.png",
@@ -573,6 +573,7 @@ class _CreateAddViewState extends State<CreateAddView> {
   String? _offerType;
   String isWebsite = "";
   File? file;
+  File? file1;
   bool isSchedule = true;
 
   @override
@@ -597,74 +598,9 @@ class _CreateAddViewState extends State<CreateAddView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: Get.height * 0.02,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (builder) => bottomSheet(onCamera: () {
-                                  Navigator.pop(context);
-                                  HelperFunctions.pickImage(ImageSource.camera)
-                                      .then((value) {
-                                    setState(() {
-                                      file = value!;
-                                    });
-                                  });
-                                }, onGallery: () {
-                                  Navigator.pop(context);
-                                  HelperFunctions.pickImage(ImageSource.gallery)
-                                      .then((value) {
-                                    setState(() {
-                                      file = value!;
-                                    });
-                                  });
-                                }));
-                      },
-                      child: Container(
-                        width: Get.width,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border:
-                                Border.all(color: AppColor.greyLightColor2)),
-                        child: file == null
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset("assets/icons/image.svg"),
-                                  SizedBox(
-                                    height: Get.height * 0.01,
-                                  ),
-                                  AppText(
-                                      title: uploadAddImage.tr,
-                                      size: 16,
-                                      textAlign: TextAlign.center,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColor.blackColor),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  AppText(
-                                      title: "(358*150px)",
-                                      size: 12,
-                                      textAlign: TextAlign.center,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColor.greyLightColor2)
-                                ],
-                              )
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.file(
-                                  file as File,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                      ),
-                    ),
+
+
+
                     SizedBox(
                       height: Get.height * 0.02,
                     ),
@@ -727,7 +663,7 @@ class _CreateAddViewState extends State<CreateAddView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               textAuth(
-                                  text: offerType.tr,
+                                  text: "Discount",
                                   color: Colors.transparent),
                               SizedBox(
                                 height: Get.height * 0.01,
@@ -735,6 +671,8 @@ class _CreateAddViewState extends State<CreateAddView> {
                               betField(
                                   hint: typeHere.tr,
                                   max: 1,
+                                  textInputType:
+                                  TextInputType.phone,
                                   controller: offerValue,
                                   textInputAction: TextInputAction.done),
                             ],
@@ -933,16 +871,24 @@ class _CreateAddViewState extends State<CreateAddView> {
                                   isRead: true,
                                   isCur: false,
                                   onTap: () async {
-                                    final TimeOfDay? pickedTime =
-                                        await showTimePicker(
+                                    final TimeOfDay? pickedTime = await showTimePicker(
                                       context: context,
                                       initialTime: TimeOfDay.now(),
-                                      builder: (BuildContext context,
-                                          Widget? child) {
+                                      builder: (BuildContext context, Widget? child) {
                                         return MediaQuery(
-                                          data: MediaQuery.of(context).copyWith(
-                                              alwaysUse24HourFormat: true),
-                                          child: child!,
+                                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                                          child: Theme(
+                                            data: ThemeData.light().copyWith(
+                                              focusColor: AppColor.primaryColor,
+                                              primaryColor: AppColor.primaryColor,
+                                              colorScheme: ColorScheme.light(
+                                                primary: AppColor.primaryColor,
+                                              ),
+                                              buttonTheme: ButtonThemeData(
+                                                  buttonColor: AppColor.primaryColor),
+                                            ),
+                                            child: child!,
+                                          ),
                                         );
                                       },
                                     );
@@ -953,12 +899,12 @@ class _CreateAddViewState extends State<CreateAddView> {
                                           '${pickedTime.minute.toString().padLeft(2, '0')}:00';
                                       setState(() {
                                         startTimeController.text =
-                                            '${pickedTime.hour.toString().padLeft(2, '0')}:'
+                                        '${pickedTime.hour.toString().padLeft(2, '0')}:'
                                             '${pickedTime.minute.toString().padLeft(2, '0')}:00';
-                                        print(thisIsTime.tr +
-                                            " ${startTimeController.text}");
+                                        print(thisIsTime.tr + " ${startTimeController.text}");
                                       });
                                     }
+
                                   },
                                   textInputType: TextInputType.phone,
                                   textInputAction: TextInputAction.done),
@@ -993,9 +939,19 @@ class _CreateAddViewState extends State<CreateAddView> {
                                       builder: (BuildContext context,
                                           Widget? child) {
                                         return MediaQuery(
-                                          data: MediaQuery.of(context).copyWith(
-                                              alwaysUse24HourFormat: true),
-                                          child: child!,
+                                          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+                                          child: Theme(
+                                            data: ThemeData.light().copyWith(
+                                              focusColor: AppColor.primaryColor,
+                                              primaryColor: AppColor.primaryColor,
+                                              colorScheme: ColorScheme.light(
+                                                primary: AppColor.primaryColor,
+                                              ),
+                                              buttonTheme: ButtonThemeData(
+                                                  buttonColor: AppColor.primaryColor),
+                                            ),
+                                            child: child!,
+                                          ),
                                         );
                                       },
                                     );
@@ -1017,6 +973,149 @@ class _CreateAddViewState extends State<CreateAddView> {
                                   textInputType: TextInputType.phone,
                                   textInputAction: TextInputAction.done),
                             ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: Get.height * 0.02,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (builder) => bottomSheet(onCamera: () {
+                                    Navigator.pop(context);
+                                    HelperFunctions.pickImage(ImageSource.camera)
+                                        .then((value) {
+                                      setState(() {
+                                        file = value!;
+                                      });
+                                    });
+                                  }, onGallery: () {
+                                    Navigator.pop(context);
+                                    HelperFunctions.pickImage(ImageSource.gallery)
+                                        .then((value) {
+                                      setState(() {
+                                        file = value!;
+                                      });
+                                    });
+                                  }));
+                            },
+                            child: Container(
+                              width: Get.width,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                  Border.all(color: AppColor.greyLightColor2)),
+                              child: file == null
+                                  ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset("assets/icons/image.svg"),
+                                  SizedBox(
+                                    height: Get.height * 0.01,
+                                  ),
+                                  AppText(
+                                      title: uploadAddImage.tr,
+                                      size: 14,
+                                      textAlign: TextAlign.center,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColor.blackColor),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  AppText(
+                                      title: "(358*150px)",
+                                      size: 12,
+                                      textAlign: TextAlign.center,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColor.greyLightColor2)
+                                ],
+                              )
+                                  : ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.file(
+                                  file as File,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 20,),
+                        Expanded(
+                          child
+                              : GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (builder) => bottomSheet(onCamera: () {
+                                    Navigator.pop(context);
+                                    HelperFunctions.pickImage(ImageSource.camera)
+                                        .then((value) {
+                                      setState(() {
+                                        file1 = value!;
+                                      });
+                                    });
+                                  }, onGallery: () {
+                                    Navigator.pop(context);
+                                    HelperFunctions.pickImage(ImageSource.gallery)
+                                        .then((value) {
+                                      setState(() {
+                                        file1 = value!;
+                                      });
+                                    });
+                                  }));
+                            },
+                            child: Container(
+                              width: Get.width,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border:
+                                  Border.all(color: AppColor.greyLightColor2)),
+                              child: file1 == null
+                                  ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset("assets/icons/image.svg"),
+                                  SizedBox(
+                                    height: Get.height * 0.01,
+                                  ),
+                                  AppText(
+                                      title: "Upload Logo",
+                                      size: 14,
+                                      textAlign: TextAlign.center,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColor.blackColor),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  AppText(
+                                      title: "(358*150px)",
+                                      size: 12,
+                                      textAlign: TextAlign.center,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppColor.greyLightColor2)
+                                ],
+                              )
+                                  : ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.file(
+                                  file1 as File,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -1103,6 +1202,7 @@ class _CreateAddViewState extends State<CreateAddView> {
                         onDaySelected: _onDaySelected,
                       ),
                     ),
+
                     SizedBox(
                       height: Get.height * 0.03,
                     ),

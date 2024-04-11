@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 Future<bool?> flutterToast({msg}) {
@@ -62,7 +62,7 @@ Future<bool> showExit({context, onTap}) async {
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
+                        backgroundColor: Colors.white,
                       ),
                       child: Text(no.tr, style: TextStyle(color: Colors.black)),
                     )),
@@ -71,7 +71,7 @@ Future<bool> showExit({context, onTap}) async {
                       child: ElevatedButton(
                         onPressed: onTap,
                         style: ElevatedButton.styleFrom(
-                            primary: AppColor.primaryColor),
+                            backgroundColor: AppColor.primaryColor),
                         child: Text(
                           yes.tr,
                           style: TextStyle(color: AppColor.whiteColor),
@@ -114,7 +114,7 @@ Future<bool> deleteAddress({context, onTap}) async {
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
+                        backgroundColor: Colors.white,
                       ),
                       child: Text(no.tr, style: TextStyle(color: Colors.black)),
                     )),
@@ -123,7 +123,7 @@ Future<bool> deleteAddress({context, onTap}) async {
                       child: ElevatedButton(
                         onPressed: onTap,
                         style: ElevatedButton.styleFrom(
-                            primary: AppColor.primaryColor),
+                            backgroundColor: AppColor.primaryColor),
                         child: Text(
                           yes.tr,
                           style: TextStyle(color: AppColor.whiteColor),
@@ -168,7 +168,7 @@ Future<bool> showExitPopup(context, index, onChange) async {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                         ),
                         child:
                             Text(no.tr, style: TextStyle(color: Colors.black)),
@@ -178,7 +178,7 @@ Future<bool> showExitPopup(context, index, onChange) async {
                         child: ElevatedButton(
                           onPressed: () async {},
                           style: ElevatedButton.styleFrom(
-                              primary: AppColor.primaryColor),
+                              backgroundColor: AppColor.primaryColor),
                           child: Text(
                             yes.tr,
                             style: TextStyle(color: AppColor.whiteColor),

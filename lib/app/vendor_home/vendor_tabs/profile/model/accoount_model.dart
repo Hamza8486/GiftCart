@@ -49,14 +49,30 @@ class AllDataAccount {
   String? cardName;
   String? ibnNo;
   String? accountNo;
+  String? transitNumber;
+  String? institutionNumber;
+  String? username;
+  String? address;
 
-  AllDataAccount({this.user, this.cardName, this.ibnNo, this.accountNo});
+  AllDataAccount(
+      {this.user,
+        this.cardName,
+        this.ibnNo,
+        this.accountNo,
+        this.transitNumber,
+        this.institutionNumber,
+        this.username,
+        this.address});
 
   AllDataAccount.fromJson(Map<String, dynamic> json) {
     user = json['user'];
     cardName = json['card_name'];
     ibnNo = json['ibn_no'];
     accountNo = json['account_no'];
+    transitNumber = json['transit_number'];
+    institutionNumber = json['institution_number'];
+    username = json['username'];
+    address = json['address'];
   }
 
   Map<String, dynamic> toJson() {
@@ -65,6 +81,10 @@ class AllDataAccount {
     data['card_name'] = this.cardName;
     data['ibn_no'] = this.ibnNo;
     data['account_no'] = this.accountNo;
+    data['transit_number'] = this.transitNumber;
+    data['institution_number'] = this.institutionNumber;
+    data['username'] = this.username;
+    data['address'] = this.address;
     return data;
   }
 }

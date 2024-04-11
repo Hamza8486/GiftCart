@@ -3,12 +3,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class SlotHistoryData extends StatefulWidget {
   const SlotHistoryData({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class _SlotHistoryDataState extends State<SlotHistoryData> {
                                 )
                               ],
                             ):
-                            Get.put(HomeController()).slotHistList.isNotEmpty?
+                            Get.put(HomeController()).slotHistList.isEmpty?
                             ListView.builder(
                                 itemCount: Get.put(HomeController()).slotHistList.length,
                                 shrinkWrap: true,
@@ -150,16 +150,24 @@ class _SlotHistoryDataState extends State<SlotHistoryData> {
                                 })
 
 
-                                :Column(
-                              children: [
-                                SizedBox(height: Get.height*0.37,),
-                                Center(child: AppText(title: noOrderBookingData.tr,
-                                  color: AppColor.blackColor.withOpacity(0.7),
-                                  size: 16,
-                                  fontWeight: FontWeight.w500,
-                                ))
-                              ],
-                            );
+                                :Column(children: [
+                              SizedBox(height:Get.height*0.35),
+                              Image.asset(
+                                "assets/icons/cloud.png",
+                                height: 50,
+                                width: 50,
+                              ),
+                              SizedBox(height: Get.height * 0.01),
+                              Center(
+                                  child: AppText(
+                                    title: "No Data!",
+                                    size: 14,
+                                    color: AppColor.greyLightColor2,
+                                    textAlign: TextAlign.center,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                              SizedBox(height: Get.height * 0.01),
+                            ]);
                         }
                     ),
                     SizedBox(

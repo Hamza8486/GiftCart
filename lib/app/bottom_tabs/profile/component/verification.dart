@@ -1,11 +1,11 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 //
-// import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-// import 'package:mr_bet/app/bottom_tabs/profile/component/component.dart';
-// import 'package:mr_bet/util/theme.dart';
-// import 'package:mr_bet/widgets/app_button.dart';
-// import 'package:mr_bet/widgets/app_text.dart';
+// import 'package:giftcart/app/bottom_tabs/component/component.dart';
+// import 'package:giftcart/app/bottom_tabs/profile/component/component.dart';
+// import 'package:giftcart/util/theme.dart';
+// import 'package:giftcart/widgets/app_button.dart';
+// import 'package:giftcart/widgets/app_text.dart';
 //
 //
 // class Verification extends StatelessWidget {

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/app_textfield.dart';
-import 'package:mr_bet/widgets/drop_down.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/app_textfield.dart';
+import 'package:giftcart/widgets/drop_down.dart';
 
 Widget textAuth({text,Color?color}){
   return Row(
@@ -13,7 +14,7 @@ Widget textAuth({text,Color?color}){
         title: "$text",
         size: 14,
         fontWeight: FontWeight.w500,
-        color: AppColor.boldBlackColor,
+        color: AppColor.boldBlackColor.withOpacity(0.8),
       ),
       AppText(
         title: " *",
@@ -33,6 +34,7 @@ Widget betField({String? Function(String?)? validator,TextEditingController?cont
   bool isPref= true,
   bool isRead=false,
   bool isCur=true,
+  List<TextInputFormatter>? listInputParam,
   int?max,
   Widget?child,
   Widget?child1,
@@ -43,8 +45,10 @@ final VoidCallback? onTap,
 }){
   return AppTextField(
     isborderline: true,
+    listInputParam:listInputParam,
     autovalidateMode: AutovalidateMode.onUserInteraction,
     isborderline2: true,
+
     validator: validator,
     obsecure: obscure,
     onTap: onTap,

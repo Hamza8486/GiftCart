@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/notification_view.dart';
-import 'package:mr_bet/app/bottom_tabs/wallet/view/wallet_view.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/notification_view.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 Widget dashboardTopBar({onTap,onTap1,text,boo}){
   return Container(
@@ -71,25 +70,29 @@ Widget profileWidget({text, image , Widget? child,onTap}) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                ClipRRect(
-                  child: SvgPicture.asset(
-                    image,
-                    height: Get.height * 0.027,
-                    color: AppColor.primaryColor,
+            Expanded(
+              child: Row(
+                children: [
+                  ClipRRect(
+                    child: SvgPicture.asset(
+                      image,
+                      height: Get.height * 0.027,
+                      color: AppColor.primaryColor,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: Get.width * 0.03,
-                ),
-                AppText(
-                  title: text,
-                  size: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.boldBlackColor,
-                ),
-              ],
+                  SizedBox(
+                    width: Get.width * 0.03,
+                  ),
+                  Expanded(
+                    child: AppText(
+                      title: text,
+                      size: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.boldBlackColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
             child?? SizedBox.shrink(),
 
@@ -262,6 +265,7 @@ Widget TopBar({onTap,onTap1,text,image,color,bool isValue=false,Widget?Child}){
               child: Image.asset("assets/icons/backs.png",
               height: 30,
                 width: 30,
+                color: AppColor.blackColor,
               )),
               AppText(
                 title: text,

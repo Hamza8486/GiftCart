@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/util/translation_keys.dart';
+import 'package:giftcart/util/translation_keys.dart';
 
 import '../../../../../util/theme.dart';
 import '../../../../../widgets/app_button.dart';

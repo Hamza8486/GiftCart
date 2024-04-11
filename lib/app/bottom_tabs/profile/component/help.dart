@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
 
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/app/home/home_view.dart';
-import 'package:mr_bet/services/api_manager.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/app/home/home_view.dart';
+import 'package:giftcart/services/api_manager.dart';
 
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/app_button.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
 
 class HelpCenter extends StatelessWidget {
    HelpCenter({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class HelpCenter extends StatelessWidget {
                   onTap: () {
                     Get.back();
                   },
-                  text: "Help Center   ",
+                  text: helpCenter.tr,
                   image: "assets/icons/share.svg",
                   color: AppColor.whiteColor),
               Expanded(
@@ -44,13 +45,13 @@ class HelpCenter extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.03,
                           ),
-                          textAuth(text: "Title"),
+                          textAuth(text: title.tr),
                           SizedBox(
                             height: Get.height * 0.01,
                           ),
 
                           betField(
-                            hint: "Enter title",
+                            hint: enterTitle.tr,
                             max: 1,
 
                             controller: text1,
@@ -61,13 +62,13 @@ class HelpCenter extends StatelessWidget {
                           SizedBox(
                             height: Get.height * 0.03,
                           ),
-                          textAuth(text: "Write Message"),
+                          textAuth(text: writeMessage.tr),
                           SizedBox(
                             height: Get.height * 0.01,
                           ),
 
                           betField(
-                            hint: "Enter Message",
+                            hint: enterMessage.tr,
                             max: 7,
 
                             controller: text,
@@ -87,7 +88,7 @@ class HelpCenter extends StatelessWidget {
                                 buttonWidth: Get.width,
                                 buttonHeight: Get.height * 0.051,
                                 buttonRadius: BorderRadius.circular(30),
-                                buttonName: "Submit",
+                                buttonName: submit.tr,
                                 fontWeight: FontWeight.w500,
                                 textSize: AppSizes.size_15,
                                 buttonColor: Get.put(HomeController())
@@ -120,19 +121,13 @@ class HelpCenter extends StatelessWidget {
 
 
      if (text1.text.isEmpty) {
-       flutterToast(msg: "Please enter title");
+       flutterToast(msg: pleaseEnterTitle.tr);
        return false;
      }
      if (text.text.isEmpty) {
-       flutterToast(msg: "Please enter message");
+       flutterToast(msg: pleaseEnterMessage.tr);
        return false;
      }
-
-
-
-
-
-
 
 
      return true;

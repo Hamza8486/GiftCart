@@ -4,13 +4,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/order_detail.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/order_detail.dart';
 
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class OrdersView extends StatelessWidget {
   const OrdersView({Key? key}) : super(key: key);

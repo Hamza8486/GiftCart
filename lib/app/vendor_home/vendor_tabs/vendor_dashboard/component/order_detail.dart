@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class OrderDetail extends StatefulWidget {
   const OrderDetail({super.key});
@@ -332,7 +332,7 @@ class _OrderDetailState extends State<OrderDetail> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AppText(
-                                  title: "Subtotal",
+                                  title: subTotal.tr,
                                   size: 14,
                                   fontWeight: FontWeight.w400,
                                   color: AppColor.blackLightColor,

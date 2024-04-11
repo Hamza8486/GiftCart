@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../../util/translation_keys.dart';
 import '../../../../../util/theme.dart';
 import '../../../../../widgets/app_text.dart';
 
-class RedeemInfoBottomSheet extends StatelessWidget {
+class RedeemInfoBottomSheet extends StatefulWidget {
   const RedeemInfoBottomSheet({super.key});
 
   @override
+  State<RedeemInfoBottomSheet> createState() => _RedeemInfoBottomSheetState();
+}
+
+class _RedeemInfoBottomSheetState extends State<RedeemInfoBottomSheet> {
+  bool isLoading=true;
+  final _key = UniqueKey();
+  @override
+
   Widget build(BuildContext context) {
     return
       DraggableScrollableSheet(
@@ -43,49 +52,54 @@ class RedeemInfoBottomSheet extends StatelessWidget {
                   color: AppColor.blackColor),
               SizedBox(height: Get.height * 0.025),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Stack(
                   children: [
-                    Center(
-                      child: Image.asset(
-                        "assets/images/rewardInfoo.png",
-                        width: 242,
-                        height: 394,
-                      ),
+                    WebView(
+                      key: _key,
+                      javascriptMode: JavascriptMode.unrestricted,
+                      onPageFinished: (finish) {
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                      initialUrl: 'https://admin.mr-corp.ca/help/Afffiliate',
                     ),
-                    SizedBox(height: Get.height * 0.02),
-                    AppText(
-                        title:
-                        oneReferYourFriend.tr,
-                        size: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.blackColor),
-                    SizedBox(height: Get.height * 0.015),
-                    AppText(
-                        title:
-                        twoAfter100Users.tr,
-                        size: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.blackColor),
-                    SizedBox(height: Get.height * 0.015),
-                    AppText(
-                        title:
-                        threeYouCanEarn.tr,
-                        size: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.blackColor),
-                    SizedBox(height: Get.height * 0.015),
-                    AppText(
-                        title:fourNoInviteLimit.tr,
-                        size: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.blackColor),
-                    SizedBox(height: Get.height * 0.015),
-                    AppText(
-                        title: fiveEasyWithdrawals.tr,
-                        size: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.blackColor),
+                    isLoading ? Container(
+                        height: Get.height,
+                        width: Get.width,
+                        color: Colors.white,
+                        child:Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            SizedBox(
+                              height: Get.height * 0.35,
+                            ),
+                            Center(
+                              child: Container(
+                                height: 57,width: 57,
+
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),
+                                  color: AppColor.primaryColor,),
+                                child:  Padding(
+                                  padding: EdgeInsets.all(15.0),
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 3,
+                                      backgroundColor: Colors.white,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                          AppColor.primaryColor.withOpacity(0.5) //<-- SEE HERE
+
+                                      ),
+                                      // strokeWidth: 5,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ))
+                        : Stack(),
                   ],
                 ),
               ),

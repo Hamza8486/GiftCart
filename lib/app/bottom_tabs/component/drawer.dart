@@ -1,31 +1,29 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/affliate_main.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/affliate_view.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/promote_business.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/transaction.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/wallet.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/claim_view.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/earn_refrence.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/faq_view.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/game_mannual.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/help.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/store_list.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/tap_pay.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/testmonials.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/view/profile_view.dart';
-import 'package:mr_bet/app/bottom_tabs/wallet/view/wallet_view.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/auth/login.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/affliate_main.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/promote_business.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/transaction.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/wallet.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/claim_view.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/earn_refrence.dart';
+
+import 'package:giftcart/app/bottom_tabs/profile/component/help.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/store_list.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/tap_pay.dart';
+import 'package:giftcart/app/bottom_tabs/profile/view/profile_view.dart';
+import 'package:giftcart/app/coupon_app_rewards/view/coupon_app_rewards.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/helper_function.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../util/translation_keys.dart';
 
@@ -158,7 +156,7 @@ class CustomDrawer extends StatelessWidget {
 
           Container(
             width: 303,
-            height: Get.height*0.95,
+
             color: AppColor.whiteColor,
             child: Padding(
               padding: EdgeInsets.only(left: Get.width * 0.05,right: Get.width*0.05),
@@ -201,7 +199,7 @@ class CustomDrawer extends StatelessWidget {
                   ),
                   SizedBox(height: 10,),
                   Divider(color: Colors.grey.withOpacity(0.6),),
-
+                  SizedBox(height: 10,),
 
                   GetBuilder<HomeController>(
                     builder: (controller) {
@@ -209,10 +207,8 @@ class CustomDrawer extends StatelessWidget {
                         crossAxisAlignment: controller.slotProfileId.isEmpty
                             ? CrossAxisAlignment.start
                             : CrossAxisAlignment.start,
+
                         children: [
-                          SizedBox(height:
-                          controller.slotProfileId.isEmpty?
-                          10:0,),
                           GestureDetector(
                             onTap: controller.slotProfileId.isEmpty
                                 ? () {
@@ -243,19 +239,18 @@ class CustomDrawer extends StatelessWidget {
                                         color: AppColor.boldBlackColor,
                                       ),
 
+
                                     ],
                                   ),
-                                  controller.slotProfileId.isEmpty?SizedBox.shrink():
+                                  controller.slotProfileId.isEmpty?Container():
                                   Image.asset("assets/images/logo.gif",
-                                    height: 60,
-                                    width: 60,
+                                    height: 55,
+                                    width: 55,
                                   )
                                 ],
                               ),
                             ),
                           ),
-                          SizedBox(height:  controller.slotProfileId.isEmpty?
-                          10:0,),
                         ],
                       );
                     },
@@ -263,12 +258,16 @@ class CustomDrawer extends StatelessWidget {
 
 
 
+
+
+
+                  SizedBox(height: 10,),
                   Divider(color: Colors.grey.withOpacity(0.6),),
                   SizedBox(height: 10,),
                   GestureDetector(
                     onTap: () {
-
-                      Get.to(GameManual(), transition: Transition.rightToLeft);
+                      Get.to(AllData(name: "User Manual",link: "https://admin.mr-corp.ca/help/User%20Mannual",));
+                     // Get.to(GameManual(), transition: Transition.rightToLeft);
                     },
                     child: Row(
                       children: [
@@ -326,6 +325,9 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 10,),
                   GestureDetector(
                     onTap: (){
+                      Get.put(HomeController()).getTransData();
+                      Get.put(HomeController()).getProfileData();
+                      Get.put(HomeController()).getSlotHis();
                       Get.to(NewWalletView(),
                           transition: Transition.rightToLeft
                       );
@@ -371,11 +373,13 @@ class CustomDrawer extends StatelessWidget {
                           SizedBox(
                             width: Get.width * 0.03,
                           ),
-                          AppText(
-                            title: referAndEarnRewards.tr,
-                            size: 15,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.boldBlackColor,
+                          Expanded(
+                            child: AppText(
+                              title: referAndEarnRewards.tr,
+                              size: 15,
+                              fontWeight: FontWeight.w400,
+                              color: AppColor.boldBlackColor,
+                            ),
                           ),
                         ],
                       ),
@@ -400,11 +404,13 @@ class CustomDrawer extends StatelessWidget {
                           SizedBox(
                             width: Get.width * 0.03,
                           ),
-                          AppText(
-                            title: ordersAndBookings.tr,
-                            size: 15,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.boldBlackColor,
+                          Expanded(
+                            child: AppText(
+                              title: ordersAndBookings.tr,
+                              size: 15,
+                              fontWeight: FontWeight.w400,
+                              color: AppColor.boldBlackColor,
+                            ),
                           ),
                         ],
                       ),
@@ -444,6 +450,35 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 10,),
                   GestureDetector(
                     onTap: () {
+                      Get.put(HomeController()).getInvoiceData();
+                      Get.put(HomeController()).updateCoins("");
+                      Get.to(RewardView());
+                    },
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            "assets/images/coin1.png",
+                            height: Get.height * 0.025,
+                          ),
+                          SizedBox(
+                            width: Get.width * 0.03,
+                          ),
+                          AppText(
+                            title: "Reward",
+                            size: 15,
+                            fontWeight: FontWeight.w400,
+                            color: AppColor.boldBlackColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Divider(color: Colors.grey.withOpacity(0.6),),
+                  SizedBox(height: 10,),
+                  GestureDetector(
+                    onTap: () {
                       Get.put(HomeController()).getAdsData();
                       Get.to(PromoteBusiness(),
                           transition: Transition.rightToLeft
@@ -470,99 +505,113 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10,),
-                  Divider(color: Colors.grey.withOpacity(0.6),),
-                  SizedBox(height: 10,),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(TapPay(),
-                          transition: Transition.rightToLeft
-                      );
-                    },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            "assets/icons/frame7.svg",
-                            height: Get.height * 0.025,
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.03,
-                          ),
-                          AppText(
-                            title: tapAndPay.tr,
-                            size: 15,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.boldBlackColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10,),
-                  Divider(color: Colors.grey.withOpacity(0.6),),
-                  SizedBox(height: 10,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
 
-                      GestureDetector(
-                        onTap: () {
-                          Get.put(HomeController()).getFaqData();
-                          Get.to(FaqView(),
-                              transition: Transition.rightToLeft);
-                        },
-                        child: Container(
-                          color: Colors.transparent,
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                "assets/icons/frame8.svg",
-                                height: Get.height * 0.028,
-                              ),
-                              SizedBox(
-                                width: Get.width * 0.03,
-                              ),
-                              AppText(
-                                title: faqs.tr,
-                                size: 15,
-                                fontWeight: FontWeight.w400,
-                                color: AppColor.boldBlackColor,
-                              ),
-                            ],
+                Obx(
+                  () {
+                    return
+                      Get.put(HomeController()).rewardEarning.value=="0"?SizedBox.shrink():
+
+                      Column(
+
+                      children: [
+                        Divider(color: Colors.grey.withOpacity(0.6),),
+                        SizedBox(height: 10,),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(TapPay(),
+                                transition: Transition.rightToLeft
+                            );
+                          },
+                          child: Container(
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  "assets/icons/frame7.svg",
+                                  height: Get.height * 0.025,
+                                ),
+                                SizedBox(
+                                  width: Get.width * 0.03,
+                                ),
+                                AppText(
+                                  title: tapAndPay.tr,
+                                  size: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColor.boldBlackColor,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Divider(color: Colors.grey.withOpacity(0.6),),
-                  SizedBox(height: 10,),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(HelpCenter(),
-                          transition: Transition.rightToLeft
-                      );
-                    },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            "assets/icons/frame9.svg",
-                            height: Get.height * 0.028,
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.027,
-                          ),
-                          AppText(
-                            title: helpAndSupport.tr,
-                            size: 15,
-                            fontWeight: FontWeight.w400,
-                            color: AppColor.boldBlackColor,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                        SizedBox(height: 10,),
+                      ],
+                    );
+                  }
+                ),
+                  // Divider(color: Colors.grey.withOpacity(0.6),),
+                  // SizedBox(height: 10,),
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //
+                  //     GestureDetector(
+                  //       onTap: () {
+                  //         Get.to(AllData(name: "FAQ",link: "https://admin.mr-corp.ca/help/Faq",));
+                  //         // Get.put(HomeController()).getFaqData();
+                  //         // Get.to(FaqView(),
+                  //         //     transition: Transition.rightToLeft);
+                  //       },
+                  //       child: Container(
+                  //         color: Colors.transparent,
+                  //         child: Row(
+                  //           children: [
+                  //             SvgPicture.asset(
+                  //               "assets/icons/frame8.svg",
+                  //               height: Get.height * 0.028,
+                  //             ),
+                  //             SizedBox(
+                  //               width: Get.width * 0.03,
+                  //             ),
+                  //             AppText(
+                  //               title: faqs.tr,
+                  //               size: 15,
+                  //               fontWeight: FontWeight.w400,
+                  //               color: AppColor.boldBlackColor,
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // SizedBox(height: 10,),
+                  // Divider(color: Colors.grey.withOpacity(0.6),),
+                  // SizedBox(height: 10,),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Get.to(HelpCenter(),
+                  //         transition: Transition.rightToLeft
+                  //     );
+                  //   },
+                  //   child: Container(
+                  //     child: Row(
+                  //       children: [
+                  //         SvgPicture.asset(
+                  //           "assets/icons/frame9.svg",
+                  //           height: Get.height * 0.028,
+                  //         ),
+                  //         SizedBox(
+                  //           width: Get.width * 0.027,
+                  //         ),
+                  //         AppText(
+                  //           title: helpAndSupport.tr,
+                  //           size: 15,
+                  //           fontWeight: FontWeight.w400,
+                  //           color: AppColor.boldBlackColor,
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
 
                   SizedBox(height: 10,),
                   Divider(color: Colors.grey.withOpacity(0.6),),
@@ -573,6 +622,7 @@ class CustomDrawer extends StatelessWidget {
                       showExit(
                           context: context,
                           onTap: () async {
+                            ApiManger().logoutApi();
                             await  Get.delete<HomeController>();
 
                             await  HelperFunctions().clearPrefs();
@@ -606,8 +656,56 @@ class CustomDrawer extends StatelessWidget {
                   ),
 
                   SizedBox(
-                    height: Get.height * 0.02,
-                  )
+                    height: Get.height * 0.03,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap:(){
+                          launchTwitter(urlDef: "https://www.facebook.com/mrcorp.ca");
+                        },
+                        child: Image.asset('assets/icons/facebook.png',
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
+                      SizedBox(width: 25,),
+                      GestureDetector(
+                        onTap:(){launchTwitter(urlDef: "https://www.instagram.com/mrcorp.ca/");
+                        },
+                        child: Image.asset('assets/icons/instagram.png',
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
+                      SizedBox(width: 25,),
+                      GestureDetector(
+                        onTap:(){
+                          launchTwitter(urlDef: "https://www.instagram.com/mrcorp.ca/");
+                        },
+                        child: Image.asset('assets/icons/linkedin.png',
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
+                      SizedBox(width: 25,),
+                      GestureDetector(
+                        onTap:(){
+                          launchTwitter(urlDef: "https://twitter.com/mrcorp_ca");
+                        },
+                        child: Image.asset('assets/icons/twitter.png',
+                          height: 30,
+                          width: 30,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: Get.height * 0.066,
+                  ),
+
+
+
                 ],
               ),
             ),
@@ -615,5 +713,14 @@ class CustomDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+void launchTwitter({String urlDef=""}) async {
+  String url = "$urlDef";
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

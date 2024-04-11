@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:mr_bet/app/bottom_tabs/scanner.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/scanner.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 import '../../util/translation_keys.dart';
 import 'vendor_tabs/vendor_dashboard/component/payments.dart';

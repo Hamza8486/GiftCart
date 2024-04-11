@@ -3,13 +3,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/bottom_tabs/wallet/view/wallet_view.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/bottom_tabs/wallet/view/wallet_view.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class AffliateView extends StatefulWidget {
   const AffliateView({super.key});
@@ -310,7 +310,7 @@ class _AffliateViewState extends State<AffliateView> {
                                                     width: 6,
                                                   ),
                                                   Text(
-                                                    "Special offer",
+                                                    specialOffer.tr,
                                                     style: GoogleFonts.italianno(
                                                         textStyle: TextStyle(
                                                             color: AppColor
@@ -341,7 +341,7 @@ class _AffliateViewState extends State<AffliateView> {
                                                           horizontal: 13,
                                                           vertical: 5),
                                                       child: AppText(
-                                                        title: "50% Off",
+                                                        title: fiftyOff.tr,
                                                         size: 12,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -466,13 +466,13 @@ class _AffliateViewState extends State<AffliateView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       AppText(
-                        title: "Refer your Contact",
+                        title: referYrContact.tr,
                         color: AppColor.greyLightColor2,
                         size: 14,
                         fontWeight: FontWeight.w600,
                       ),
                       AppText(
-                        title: "View all",
+                        title: viewAll.tr,
                         color: AppColor.whiteColor,
                         size: 12,
                         fontWeight: FontWeight.w500,
@@ -603,8 +603,8 @@ Widget redeemInfo() {
             SizedBox(
               height: Get.height * 0.03,
             ),
-            const AppText(
-                title: "How does it work",
+            AppText(
+                title: howDoesItWork.tr,
                 size: 20,
                 fontWeight: FontWeight.w600,
                 color: AppColor.blackColor),

@@ -1,26 +1,44 @@
 {
   "project_info": {
-    "project_number": "19401065664",
-    "project_id": "couponapp-b6d59",
-    "storage_bucket": "couponapp-b6d59.appspot.com"
+    "project_number": "331583215578",
+    "project_id": "giftcart-600b6",
+    "storage_bucket": "giftcart-600b6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:19401065664:android:8cec6a43c9ae2e819d5925",
+        "mobilesdk_app_id": "1:331583215578:android:1d580d0f65690b1f15d2e3",
         "android_client_info": {
-          "package_name": "com.mrcorporation.coupon"
+          "package_name": "com.mrcorp.giftcart"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "331583215578-o9ao269d4qbqru45tgi1u007jbejh6kg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mrcorp.giftcart",
+            "certificate_hash": "86f7902548fc5ffd1d2dba591effedc7cccf4c04"
+          }
+        },
+        {
+          "client_id": "331583215578-ka3ojn6sm5nf3935q68noia4cq8co719.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAinMlRmUVIBCFu6aoF43nxDko83NdnIyI"
+          "current_key": "AIzaSyCOWwkNx_pswdcpM2ATHOMLSQ2yOUOxtwE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331583215578-ka3ojn6sm5nf3935q68noia4cq8co719.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

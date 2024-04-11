@@ -2,11 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/app/home/home_view.dart';
-import 'package:mr_bet/app/onboarding/view.dart';
-import 'package:mr_bet/app/vendor_home/vendor_home.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/home/home_view.dart';
+import 'package:giftcart/app/onboarding/view.dart';
+import 'package:giftcart/app/vendor_home/vendor_home.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 
 hideKeyBoard(BuildContext context){
   FocusScope.of(context).unfocus();

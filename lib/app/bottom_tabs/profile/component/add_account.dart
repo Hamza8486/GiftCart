@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_button.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
 
 class AddAccounts extends StatefulWidget {
   const AddAccounts({Key? key}) : super(key: key);
@@ -19,7 +20,9 @@ class AddAccounts extends StatefulWidget {
 
 class _AddAccountsState extends State<AddAccounts> {
   var name = TextEditingController();
-  var iban = TextEditingController();
+  var transitNum = TextEditingController();
+  var instNum = TextEditingController();
+  var address = TextEditingController();
   var number = TextEditingController();
 
   @override
@@ -37,7 +40,7 @@ class _AddAccountsState extends State<AddAccounts> {
                       onTap: () {
                         Get.back();
                       },
-                      text: addBankAccounts,
+                      text: "Add Bank Accounts",
                       image: "assets/icons/share.svg",
                       color: AppColor.whiteColor),
                   Expanded(
@@ -49,42 +52,74 @@ class _AddAccountsState extends State<AddAccounts> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: Get.height * 0.015,
-                            ),
-                            Image.asset("assets/images/card.png"),
-                            SizedBox(
                               height: Get.height * 0.03,
                             ),
-                            textAuth(text: cardHolderName.tr),
+                            textAuth(text: 'Card Holder Name'),
                             SizedBox(
                               height: Get.height * 0.01,
                             ),
                             betField(
-                              hint: cardHolderName.tr,
+                              hint: "Card Holder Name",
+
                               controller: name,
                             ),
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            textAuth(text: ibanNumber_),
+                            textAuth(text: 'Account Number'),
                             SizedBox(
                               height: Get.height * 0.01,
                             ),
                             betField(
-                                hint: ibanNumber_,
-                                controller: iban,
+                                hint: 'Account Number',
+                                controller: number,
+                                textInputType: TextInputType.phone,
+                                listInputParam: [
+                                  LengthLimitingTextInputFormatter(
+                                      18),
+                                ],
+                                textInputAction: TextInputAction.done),
+                            SizedBox(
+                              height: Get.height * 0.02,
+                            ),
+                            textAuth(text: "Transit Number"),
+                            SizedBox(
+                              height: Get.height * 0.01,
+                            ),
+                            betField(
+                                hint: "Transit Number",
+                                controller: transitNum,
+                                listInputParam: [
+                                  LengthLimitingTextInputFormatter(
+                                      11),
+                                ],
                                 textInputType: TextInputType.phone),
                             SizedBox(
                               height: Get.height * 0.02,
                             ),
-                            textAuth(text: accountNumber.tr),
+                            textAuth(text: "Institution number"),
                             SizedBox(
                               height: Get.height * 0.01,
                             ),
                             betField(
-                                hint: accountNumber.tr,
-                                controller: number,
-                                textInputType: TextInputType.phone,
+                                hint: "Institution number",
+                                controller: instNum,
+                                listInputParam: [
+                                  LengthLimitingTextInputFormatter(11),
+                                ], // Limit input length programmatically
+
+                                textInputType: TextInputType.phone),
+                            SizedBox(
+                              height: Get.height * 0.02,
+                            ),
+                            textAuth(text: "Address"),
+                            SizedBox(
+                              height: Get.height * 0.01,
+                            ),
+                            betField(
+                                hint: "Address",
+                                controller: address,
+                                textInputType: TextInputType.streetAddress,
                                 textInputAction: TextInputAction.done),
                           ],
                         ),
@@ -114,10 +149,12 @@ class _AddAccountsState extends State<AddAccounts> {
                                     if (validateAccount(context)) {
                                       Get.put(HomeController())
                                           .updateLoader(true);
-                                      ApiManger().addBankAccountResp(
-                                          name: name.text,
-                                          iban: iban.text,
-                                          title: number.text);
+                                      ApiManger().addBank1(
+                                          userName: name.text,
+                                          transit: transitNum.text,
+                                          account: number.text,
+                                          address: address.text,
+                                          instNum: instNum.text);
                                     }
                                   }),
                             ),
@@ -159,7 +196,7 @@ class _AddAccountsState extends State<AddAccounts> {
                   color: Colors.black26,
                   child: Center(
                       child: SpinKitThreeBounce(
-                          size: 25, color: AppColor.blackColor)),
+                          size: 25, color: AppColor.primaryColor)),
                 );
         })
       ],
@@ -168,15 +205,24 @@ class _AddAccountsState extends State<AddAccounts> {
 
   bool validateAccount(BuildContext context) {
     if (name.text.isEmpty) {
-      flutterToast(msg: pleaseEnterCardHolderName);
+      flutterToast(msg: "Enter card holder name");
       return false;
     }
-    if (iban.text.isEmpty) {
-      flutterToast(msg: pleaseEnterIbanNum);
+
+    if (number.text.isEmpty) {
+      flutterToast(msg: "Enter account number");
+      return false;
+    }
+    if (transitNum.text.isEmpty) {
+      flutterToast(msg: "Enter transit number");
       return false;
     }
     if (number.text.isEmpty) {
-      flutterToast(msg: pleaseEnterAccNum);
+      flutterToast(msg: "Enter institution number");
+      return false;
+    }
+    if (number.text.isEmpty) {
+      flutterToast(msg: "Enter address");
       return false;
     }
 

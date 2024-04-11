@@ -2,13 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/auth/partner_signup/business_info.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/auth/partner_signup/business_info.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 

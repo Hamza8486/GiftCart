@@ -5,45 +5,47 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/verification.dart';
+import 'package:giftcart/util/translation_keys.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/auth/forget/model/resend_model.dart';
-import 'package:mr_bet/app/auth/forget/view/new_password.dart';
-import 'package:mr_bet/app/auth/forget/view/otp.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/app/auth/model/store_model.dart';
-import 'package:mr_bet/app/auth/partner_signup/business_info.dart';
-import 'package:mr_bet/app/auth/province_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/account.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/all_user_slots.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/bet_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/comment_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/like_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_ads_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_slots.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/payment_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/slot_history_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/stat_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/testmonials.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/transaction_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/winners_model.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/notification_model.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/profile_model.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/support_model.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/user_store.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/winner_chat_model.dart';
-import 'package:mr_bet/app/bottom_tabs/wallet/controller/wallet_controller.dart';
-import 'package:mr_bet/app/bottom_tabs/wallet/model/wallet_model.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/app/home/home_view.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/app/vendor_home/vendor_home.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/model/accoount_model.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/model/business_profile_model.dart';
-import 'package:mr_bet/util/constant.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/auth/forget/view/otp.dart';
+import 'package:giftcart/app/auth/login.dart';
+import 'package:giftcart/app/auth/model/store_model.dart';
+import 'package:giftcart/app/auth/partner_signup/business_info.dart';
+import 'package:giftcart/app/auth/province_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/account.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/all_user_slots.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/comment_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/like_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/my_ads_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/my_slots.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/payment_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/province_user_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/slot_history_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/stat_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/testmonials.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/transaction_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/winners_model.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/notification_model.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/profile_model.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/support_model.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/user_store.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/winner_chat_model.dart';
+import 'package:giftcart/app/bottom_tabs/wallet/controller/wallet_controller.dart';
+import 'package:giftcart/app/bottom_tabs/wallet/model/wallet_model.dart';
+import 'package:giftcart/app/coupon_app_rewards/model/rewards_model.dart';
+import 'package:giftcart/app/coupon_app_rewards/view/coupon_app_rewards.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/app/home/home_view.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/app/vendor_home/vendor_home.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/model/accoount_model.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/model/business_profile_model.dart';
+import 'package:giftcart/util/constant.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 
 
 class ApiManger extends GetConnect {
@@ -111,29 +113,7 @@ class ApiManger extends GetConnect {
 
 
 
-  static Future<GetBetModel?> getBetApi() async {
-    var response = await http.get(
-      Uri.parse(AppConstants.baseURL+AppConstants.getBet),
 
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json',
-        HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
-      },
-    );
-
-    if (response.statusCode == 200) {
-      var jsonString = jsonDecode(response.body);
-      print("response.body");
-      print(response.body);
-      return GetBetModel.fromJson(jsonString);
-    } else {
-      log(response.statusCode.toString());
-
-      //show error message
-      return null;
-    }
-  }
 
 
 
@@ -172,6 +152,29 @@ class ApiManger extends GetConnect {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': 'application/json',
         HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var jsonString = jsonDecode(response.body);
+      print("response.body");
+      print(response.body);
+      return FaqModel.fromJson(jsonString);
+    } else {
+      log(response.statusCode.toString());
+
+      //show error message
+      return null;
+    }
+  }
+  static Future<FaqModel?> getFaq1() async {
+    var response = await http.get(
+      Uri.parse(AppConstants.baseURL+AppConstants.faq),
+
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        HttpHeaders.authorizationHeader: "Token ${Get.put(VendorController()).token.value}"
       },
     );
 
@@ -732,6 +735,104 @@ class ApiManger extends GetConnect {
     }
   }
 
+
+
+  socialLoginResponse({required BuildContext context,email,name,token}) async {
+    try {
+      dio.FormData data = dio.FormData.fromMap({
+        'email': email.toString(),
+        'full_name':name.toString(),
+
+        'device_id': token.toString(),
+      });
+      print("Data::::: ${data.fields}");
+      var response = await dio.Dio().post(
+          AppConstants.baseURL + AppConstants.social_login,
+          data: data,
+          options: dio.Options(headers: {HttpHeaders.contentTypeHeader: "application/json",
+
+
+          })
+      );
+      debugPrint(response.toString());
+      debugPrint(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        print(response.data);
+        if(response.data["response"]["data"]["role"]=="Business"){
+          HelperFunctions.saveInPreference(
+              "token", response.data["response"]['access_token'].toString());
+
+          HelperFunctions.saveInPreference(
+              "name", response.data["response"]['data']['full_name'].toString());
+
+          HelperFunctions.saveInPreference(
+              "email", response.data["response"]['data']['email'].toString());
+
+
+          HelperFunctions.saveInPreference(
+              "phone",
+              response.data["response"]['data']['phone_number']==null?"":
+              response.data["response"]['data']['phone_number'].toString());
+          HelperFunctions.saveInPreference(
+              "type", "business");
+
+          Get.offAll(VendorHome());
+
+        }
+        else{
+          HelperFunctions.saveInPreference(
+              "token", response.data["response"]['access_token'].toString());
+
+          HelperFunctions.saveInPreference(
+              "name", response.data["response"]['data']['full_name'].toString());
+
+          HelperFunctions.saveInPreference(
+              "email", response.data["response"]['data']['email'].toString());
+
+
+          HelperFunctions.saveInPreference(
+              "phone",
+              response.data["response"]['data']['phone_number']==null?"":
+              response.data["response"]['data']['phone_number'].toString());
+          HelperFunctions.saveInPreference(
+              "type", "user");
+
+          HelperFunctions.saveInPreference(
+              "image",
+              response.data["response"]['data']["logo"]==null?""
+                  :            response.data["response"]['data']["logo"].toString());
+          Get.offAll(Home());
+
+        }
+        flutterToast(msg: "Successful Login");
+
+
+
+
+
+
+        Get.put(AuthController()).updateSocialLogin(false);
+      }
+
+    } on dio.DioError catch (e) {
+      Get.put(AuthController()).updateSocialLogin(false);
+      print(e.response?.data.toString());
+      if(e.response?.data["response"]["message"].toString()=="Profile not complete!"){
+        flutterToast(msg: e.response?.data["response"]["message"].toString());
+        email = Get.put(AuthController()).emailRegController.text;
+        Get.put(AuthController()).clearBusiness();
+        Get.to(BusinessInformation());
+
+      }
+      else{
+        flutterToast(msg: e.response?.data["response"]["message"].toString());
+
+
+      }
+
+    }
+  }
+
   editUserResponse({context,name,phone,province,}) async {
     try {
       late dio.MultipartFile x, lisenceFile;
@@ -832,7 +933,7 @@ class ApiManger extends GetConnect {
         print(response.toString());
         if (response.statusCode == 200 || response.statusCode == 201) {
 
-          Get.put(HomeController()).getAllBetData();
+          Get.put(HomeController()).getProvDataData();
 
           Get.put(HomeController()).getSlotData(id: "");
           Get.put(HomeController()).getTransData();
@@ -877,6 +978,40 @@ class ApiManger extends GetConnect {
               }));
       print(response.toString());
       if (response.statusCode == 200 || response.statusCode == 201) {
+
+
+        print(response.data);
+
+      }
+
+    } on dio.DioError catch (e) {
+
+      print(e.response?.data);
+    }
+  }
+
+  logoutApi1() async {
+
+    try {
+
+
+
+
+
+
+      var response = await dio.Dio().post(
+          AppConstants.baseURL + AppConstants.logout,
+
+
+          options: dio.Options(
+
+              headers: {
+                HttpHeaders.authorizationHeader: "Token ${Get.put(VendorController()).token.value}"
+
+              }));
+      print(response.toString());
+      if (response.statusCode == 200 || response.statusCode == 201) {
+
 
         print(response.data);
 
@@ -1274,125 +1409,30 @@ class ApiManger extends GetConnect {
         AppConstants.baseURL + AppConstants.forget,
         data: data,
       );
-      if (response.statusCode == 200) {
-        Get.to(OtpScreen());
+      if (response.statusCode == 200||response.statusCode == 201) {
+        print(response.data.toString());
+        Get.back();
         Get.put(AuthController()).updateForgetLoader(false);
 
 
-        flutterToast(msg: "Successfully Code Sent");
+        flutterToast(msg: "Password has been reset and sent to your email!");
       }
-      else if(response.statusCode==202){
-        flutterToast(msg: response.data["error"].toString());
-        Get.put(AuthController()).updateForgetLoader(false);
-      }
+
     } on dio.DioError catch (e) {
+      print(e.response?.data.toString());
       Get.put(AuthController()).updateForgetLoader(false);
-      flutterToast(msg: e.response?.data["error"].toString());
-      debugPrint("e.response");
-      debugPrint(e.response.toString());
-    }
-  }
-
-  //...........Resend Code.........................
-
-  static Future<ResendModel?> resendResponse(
-      {var email, required BuildContext context}) async {
-    Map<String, dynamic> body = <String, dynamic>{};
-    body['email'] = email;
-
-    var response = await http
-        .post(Uri.parse(AppConstants.baseURL+AppConstants.resend),
-
-
-        body: body);
-
-    if (response.statusCode == 200) {
-      var jsonString = jsonDecode(response.body);
-      Get.put(AuthController()).updateResendLoader(false);
-      flutterToast(msg: "Code resent successfully");
-
-      return ResendModel.fromJson(jsonString);
-    } else if (response.statusCode == 202) {
-
-      var jsonString = jsonDecode(response.body);
-      flutterToast(msg: jsonString["error"].toString());
-      Get.put(AuthController()).updateResendLoader(false);
-      return ResendModel.fromJson(jsonString);
-    }
-    Get.put(AuthController()).updateResendLoader(false);
-    return null;
-  }
-
-  //...........Verify Code.........................
-
-  verifyResponse({ context, email, code}) async {
-    try {
-      dio.FormData data = dio.FormData.fromMap({
-        'email': email,
-        'forgot_password_code': code,
-      });
-      var response = await dio.Dio().post(
-        AppConstants.baseURL + AppConstants.verify,
-        data: data,
-      );
-      if (response.statusCode == 200) {
-        Get.put(AuthController()).updateVerifyLoader(false);
-        Get.to(NewPassword());
-
-
-        flutterToast(msg: "Please set your password");
-      }
-      else if(response.statusCode==202){
-        flutterToast(msg: "Invalid Code");
-
-        Get.put(AuthController()).updateVerifyLoader(false);
-      }
-    } on dio.DioError catch (e) {
-
-
-      Get.put(AuthController()).updateVerifyLoader(false);
-      flutterToast(msg: "Invalid Code");
+      flutterToast(msg: e.response?.data["response"]["message"].toString());
       debugPrint("e.response");
       debugPrint(e.response.toString());
     }
   }
 
 
-  //...........Change Password.........................
-
-  changePassResponse({ context, email, password}) async {
-    try {
-      dio.FormData data = dio.FormData.fromMap({
-        'email': email,
-        'password': password,
-      });
-      var response = await dio.Dio().post(
-        AppConstants.baseURL + AppConstants.resetPass,
-        data: data,
-      );
-      if (response.statusCode == 200) {
-
-        Get.put(AuthController()).updatePasswordLoader(false);
-        Get.offAll(LoginView());
-        Get.put(AuthController()).clearForget();
-
-        flutterToast(msg: "Password reset successfully");
-      }
-      else if (response.statusCode == 202) {
 
 
 
-        Get.put(AuthController()).updatePasswordLoader(false);
-        flutterToast(msg: response.data["error"].toString());
-      }
-    } on dio.DioError catch (e) {
-      Get.put(AuthController()).updatePasswordLoader(false);
-      flutterToast(msg: e.response?.data["error"].toString());
-      debugPrint("e.response");
-      debugPrint(e.response.toString());
 
-    }
-  }
+
 
 
 
@@ -1449,7 +1489,7 @@ class ApiManger extends GetConnect {
       return null;
     }
   }
-  claimReward({name,phone,email,id,addrss,XFile?file}) async {
+  claimReward({name,phone,email,id,addrss,XFile?file,String bc=""}) async {
     try {
       late dio.MultipartFile x, lisenceFile;
 
@@ -1475,6 +1515,7 @@ class ApiManger extends GetConnect {
 
         print("Data::::: ${data.fields}");
         print("Data::::: ${data.fields}");
+
         var response = await dio.Dio().post(
             AppConstants.baseURL + AppConstants.claimReward,
             data: data,
@@ -1486,16 +1527,20 @@ class ApiManger extends GetConnect {
             })
 
         );
+        print(response.realUri.toString());
         if (response.statusCode == 200 || response.statusCode == 201) {
 
           Get.put(HomeController()).updateIsClaim(false);
+          print(response.data);
+          print(response.data);
+          print(response.data);
          // Get.put(HomeController()).getAllTest(id: "");
           Get.put(HomeController()).getProfileData();
 
 
           Get.put(HomeController()).videoFile=null;
           Get.put(HomeController()).claimProfile=null;
-          Get.offAll(Home());
+          Get.off(VerificationView(phone: phone.toString(),id: id.toString(),address:address.toString(),));
 
           flutterToastSuccess(msg: "Claim request submitted! Please wait admin approval");
 
@@ -1503,11 +1548,11 @@ class ApiManger extends GetConnect {
 
       } on dio.DioError catch (e) {
         Get.put(HomeController()).updateIsClaim(false);
-        print( e.response?.data.toString());
+        print( e.response.toString());
        // flutterToast(msg: e.response?.data["response"].toString());
       }
     } on dio.DioError catch (e) {
-      print( e.response?.data.toString());
+      print( e.response.toString());
       Get.put(HomeController()).updateIsClaim(false);
      // flutterToast(msg: e.response?.data["response"].toString());
     }
@@ -1611,7 +1656,7 @@ class ApiManger extends GetConnect {
             data: data,
             options: dio.Options(headers: {
               HttpHeaders.contentTypeHeader: "application/json",
-              HttpHeaders.authorizationHeader: "Bearer ${Get.put(HomeController()).token.value}"
+              HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
 
 
             })
@@ -1673,7 +1718,7 @@ class ApiManger extends GetConnect {
   addPaymentWalet({ amount,id}) async {
     try {
       dio.FormData data = dio.FormData.fromMap({
-        'transaction_id':id.toString(),
+        'client_secret':id.toString(),
         'amount':amount.toString(),
       });
       print(data.fields);
@@ -1698,12 +1743,104 @@ class ApiManger extends GetConnect {
         Get.put(PaymentController()).updateCheckPayment("");
         Get.put(PaymentController()).updatePaymentId("");
         print(response.data.toString());
-        flutterToastSuccess(msg: "Payment Added Successfully");
+        flutterToastSuccess(msg: "Payment added successfully");
         Get.put(HomeController()).getTransData();
 
       }
     } on dio.DioError catch (e) {
       Get.put(PaymentController()).updateCheckLoader(false);
+      print(e.response?.data.toString());
+    }
+  }
+
+
+
+  addInvoice({ amount,required BuildContext context}) async {
+    try {
+      dio.FormData data = dio.FormData.fromMap({
+        'coins':amount.toString(),
+      });
+      print(data.fields);
+      print(data.fields);
+      var response = await dio.Dio().post(
+          "${AppConstants.baseURL}${AppConstants.add_invoice}",
+          data: data,
+          options: dio.Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+
+
+          })
+
+      );
+      print(data.fields);
+      print(data.fields);
+      print(response.toString());
+      if (response.statusCode == 200) {
+        Get.put(PaymentController()).updateRedeemLoader(false);
+        Get.put(HomeController()).updateCoins("");
+
+        print(response.data.toString());
+        Get.back();
+        flutterToastSuccess(msg: "Coins redeem successfully!");
+        showModalBottomSheet(
+            backgroundColor:
+            Colors.transparent,
+            isScrollControlled:
+            true,
+            isDismissible: true,
+            context: context,
+            builder: (context) =>
+                RedeemSuccessfull(
+
+
+                ));
+        Get.put(HomeController()).getInvoiceData();
+
+      }
+    } on dio.DioError catch (e) {
+      Get.put(PaymentController()).updateRedeemLoader(false);
+      print(e.response?.data.toString());
+    }
+  }
+
+
+
+  useReferrelCode({ code,required BuildContext context}) async {
+    try {
+      dio.FormData data = dio.FormData.fromMap({
+        'code':code.toString(),
+      });
+      print(data.fields);
+      print(data.fields);
+      var response = await dio.Dio().post(
+          "${AppConstants.baseURL}${AppConstants.user_refrell}",
+          data: data,
+          options: dio.Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+
+
+          })
+
+      );
+      print(data.fields);
+      print(data.fields);
+      print(response.toString());
+      if (response.statusCode == 200) {
+        Get.put(HomeController()).updateApplyRef(false);
+        Get.put(HomeController()).getProfileData();
+
+
+        print(response.data.toString());
+
+        flutterToastSuccess(msg: "Referrel apply successfully!");
+
+
+      }
+    } on dio.DioError catch (e) {
+      Get.put(HomeController()).updateApplyRef(false);
+      flutterToastSuccess(msg: e.response?.data["response"]["message"]);
       print(e.response?.data.toString());
     }
   }
@@ -1777,7 +1914,7 @@ class ApiManger extends GetConnect {
         Get.put(HomeController()).getWinnerData();
         Get.put(HomeController()).messageCheckLoader(true);
         Get.put(HomeController()).getWinnerChar(
-          id:"93"
+          id: id.toString()
         );
 
       }
@@ -1805,6 +1942,31 @@ class ApiManger extends GetConnect {
       print("response.body");
       print(response.body);
       return GetWalletModel.fromJson(jsonString);
+    } else {
+      log(response.statusCode.toString());
+
+      //show error message
+      return null;
+    }
+  }
+
+
+  static Future<GetRewardsModel?> getRewardsModel() async {
+    var response = await http.get(
+      Uri.parse("${AppConstants.baseURL}${AppConstants.get_invoice}"),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+      },
+    );
+    print(response.request?.url.toString());
+
+    if (response.statusCode == 200) {
+      var jsonString = jsonDecode(response.body);
+      print("response.body");
+      print(response.body);
+      return GetRewardsModel.fromJson(jsonString);
     } else {
       log(response.statusCode.toString());
 
@@ -1886,32 +2048,30 @@ class ApiManger extends GetConnect {
     }
   }
 
-  deleteCal({id}) async {
-    try {
-      var response = await dio.Dio().get(
-          "${AppConstants.baseURL}${AppConstants.delAccount}?account_id=${id.toString()}",
-          options: dio.Options(headers: {HttpHeaders.contentTypeHeader: "application/json",
-            HttpHeaders.authorizationHeader: "Bearer ${Get.put(HomeController()).token.value}"
+  static Future<VendorAccountModel?> getAccountVendor1() async {
+    var response = await http.get(
+      Uri.parse("${AppConstants.baseURL}${AppConstants.getAccount}"),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+      },
+    );
 
-          })
-      );
-      debugPrint(response.toString());
-      debugPrint(response.statusCode.toString());
-      if (response.statusCode == 200) {
-        flutterToast(msg: "Deleted");
-        Get.back();
-        Get.put(HomeController()).getAccountData();
-        debugPrint(response.data.toString());
-        debugPrint(response.data.toString());
-      }
-    } on dio.DioError catch (e) {
-      Get.back();
+    if (response.statusCode == 200) {
+      var jsonString = jsonDecode(response.body);
+      print("response.body");
+      print(response.body);
+      return VendorAccountModel.fromJson(jsonString);
+    } else {
+      log(response.statusCode.toString());
 
-      flutterToast(msg: e.response?.data["message"].toString());
-      debugPrint("e.response");
-      debugPrint(e.response.toString());
+      //show error message
+      return null;
     }
   }
+
+
 
   postCommentsModel({context, String id='',String text=''}) async {
     try {
@@ -2137,6 +2297,7 @@ class ApiManger extends GetConnect {
         );
         if (response.statusCode == 200 || response.statusCode == 201) {
           print( response?.data.toString());
+          Get.put(HomeController()).getProfileData();
           Get.back();
           Get.put(HomeController()).updatePaymentProof(false);
           Get.put(HomeController()).getPayHisData();
@@ -2148,12 +2309,12 @@ class ApiManger extends GetConnect {
         }
 
       } on dio.DioError catch (e) {
-        flutterToast(msg:e.response?.data.toString());
+        flutterToast(msg:e.response?.data["response"]["message"].toString());
         Get.put(HomeController()).updatePaymentProof(false);
-        print( e.response.toString());
+        print( e.response?.data["response"]["message"].toString());
       }
     } on dio.DioError catch (e) {
-      flutterToast(msg:e.response?.data.toString());
+      flutterToast(msg:e.response?.data["response"]["message"].toString());
       Get.put(HomeController()).updatePaymentProof(false);
       print( e.response.toString() );
     }
@@ -2448,6 +2609,72 @@ class ApiManger extends GetConnect {
     } on dio.DioError catch (e) {
       Get.put(VendorController()).updateBankLoader(false);
       print(e.response?.data.toString());
+    }
+  }
+
+
+  addBank1({ transit,userName,account,address,instNum}) async {
+    try {
+      dio.FormData data = dio.FormData.fromMap({
+        'username':userName.toString(),
+        'transit_number':transit.toString(),
+        'institution_number':instNum.toString(),
+        'address':address.toString(),
+        'account_no':account.toString(),
+
+      });
+      print(data.fields);
+      print(data.fields);
+      var response = await dio.Dio().post(
+          "${AppConstants.baseURL}${AppConstants.addBank}",
+          data: data,
+          options: dio.Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+            HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+
+
+          })
+
+      );
+      print(data.fields);
+      print(data.fields);
+      print(response.toString());
+      if (response.statusCode == 200 ||response.statusCode == 201) {
+        Get.put(HomeController()).getAccountData();
+        Get.back();
+
+
+        flutterToastSuccess(msg: "Account added successfully");
+        Get.put(HomeController()).updateLoader(false);
+
+      }
+    } on dio.DioError catch (e) {
+      Get.put(HomeController()).updateLoader(false);
+      print(e.response?.data.toString());
+    }
+  }
+
+  static Future<GetProvinceUserModel?> getProvUserModel() async {
+
+    var response =   await http.get(
+      Uri.parse("${AppConstants.baseURL}${AppConstants.provinceUser}"),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        HttpHeaders.authorizationHeader: "Token ${Get.put(HomeController()).token.value}"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var jsonString = jsonDecode(response.body);
+      print("response.body");
+      print(response.body);
+      return GetProvinceUserModel.fromJson(jsonString);
+    } else {
+      log(response.statusCode.toString());
+
+      //show error message
+      return null;
     }
   }
 

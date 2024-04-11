@@ -3,24 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/help.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/about.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/account_list.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/edit_profile.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/faq_view.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/notification_view.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/privacy_policy.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/store_list.dart';
+import 'package:giftcart/app/auth/login.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/component/drawer.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/about.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/account_list.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/edit_profile.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/faq_view.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/notification_view.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/privacy_policy.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/store_list.dart';
 
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/bottom_sheet.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/bottom_sheet.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 
 import '../../../home/controller/home_controller.dart';
 import '../component/game_mannual.dart';
@@ -242,22 +245,22 @@ class _ProfileViewState extends State<ProfileView> {
                     SizedBox(
                       height: Get.height * 0.034,
                     ),
-                    profileWidget(
-                        text: faceFinger.tr,
-                        image: "assets/icons/face.svg",
-                        child: toggleButton1(),
-                        onTap: () {}),
-                    SizedBox(
-                      height: Get.height * 0.034,
-                    ),
-                    profileWidget(
-                        text: switchTheme.tr,
-                        image: "assets/icons/theme.svg",
-                        child: toggleButton2(),
-                        onTap: () {}),
-                    SizedBox(
-                      height: Get.height * 0.034,
-                    ),
+                    // profileWidget(
+                    //     text: faceFinger.tr,
+                    //     image: "assets/icons/face.svg",
+                    //     child: toggleButton1(),
+                    //     onTap: () {}),
+                    // SizedBox(
+                    //   height: Get.height * 0.034,
+                    // ),
+                    // profileWidget(
+                    //     text: switchTheme.tr,
+                    //     image: "assets/icons/theme.svg",
+                    //     child: toggleButton2(),
+                    //     onTap: () {}),
+                    // SizedBox(
+                    //   height: Get.height * 0.034,
+                    // ),
                     profileWidget(
                         text: updateBankAcc.tr,
                         image: "assets/icons/banks.svg",
@@ -265,6 +268,30 @@ class _ProfileViewState extends State<ProfileView> {
                         onTap: () {
                           Get.to(const SaveBanks(),
                               transition: Transition.rightToLeft);
+                        }),
+                    SizedBox(
+                      height: Get.height * 0.034,
+
+                    ),
+                    profileWidget(
+                        text: faqs.tr,
+                        image: "assets/icons/frame8.svg",
+                        child:  SizedBox.shrink(),
+                        onTap: () {
+                          Get.to(AllData(name: "FAQ",link: "https://admin.mr-corp.ca/help/Faq",));
+                        }),
+                    SizedBox(
+                      height: Get.height * 0.034,
+
+                    ),
+                    profileWidget(
+                        text: helpAndSupport.tr,
+                        image: "assets/icons/frame9.svg",
+                        child:  SizedBox.shrink(),
+                        onTap: () {
+                          Get.to(HelpCenter(),
+                              transition: Transition.rightToLeft
+                          );
                         }),
                     SizedBox(
                       height: Get.height * 0.034,
@@ -290,11 +317,60 @@ class _ProfileViewState extends State<ProfileView> {
                           Get.to( AboutUs(),
                               transition: Transition.rightToLeft);
                         }),
+
                   ],
                 ),
               ),
             ),
           ),
+          SizedBox(height: 60,),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap:(){
+                    launchTwitter(urlDef: "https://www.facebook.com/mrcorp.ca");
+                  },
+                  child: Image.asset('assets/icons/facebook.png',
+                    height: 30,
+                    width: 30,
+                  ),
+                ),
+                SizedBox(width: 35,),
+                GestureDetector(
+                  onTap:(){launchTwitter(urlDef: "https://www.instagram.com/mrcorp.ca/");
+                  },
+                  child: Image.asset('assets/icons/instagram.png',
+                    height: 30,
+                    width: 30,
+                  ),
+                ),
+                SizedBox(width: 35,),
+                GestureDetector(
+                  onTap:(){
+                    launchTwitter(urlDef: "https://www.instagram.com/mrcorp.ca/");
+                  },
+                  child: Image.asset('assets/icons/linkedin.png',
+                    height: 30,
+                    width: 30,
+                  ),
+                ),
+                SizedBox(width: 35,),
+                GestureDetector(
+                  onTap:(){
+                    launchTwitter(urlDef: "https://twitter.com/mrcorp_ca");
+                  },
+                  child: Image.asset('assets/icons/twitter.png',
+                    height: 30,
+                    width: 30,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 30,),
           // Padding(
           //   padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04),
           //   child: GestureDetector(

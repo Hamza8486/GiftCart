@@ -8,18 +8,19 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/detail.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/promote_business.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/detail.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/promote_business.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -533,12 +534,8 @@ class _PromoteBusinessAdsNewState extends State<PromoteBusinessAdsNew> {
               right: 12,
               child: GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) => addsInfoWidget());
+                  Get.to(AllData(name: "Ads",link: "https://admin.mr-corp.ca/help/Banner%20add",));
+
                 },
                 child: Image.asset(
                   "assets/icons/info.png",

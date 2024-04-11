@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/drop_down.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
-import 'package:mr_bet/widgets/image_pick.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/drop_down.dart';
+import 'package:giftcart/widgets/helper_function.dart';
+import 'package:giftcart/widgets/image_pick.dart';
 
 class EditProfile extends StatefulWidget {
   EditProfile({Key? key}) : super(key: key);
@@ -249,7 +249,7 @@ class _EditProfileState extends State<EditProfile> {
                                         height: Get.height * 0.01,
                                       ),
                                       betField(
-                                        hint: "Occupation",
+                                        hint: occupation.tr,
                                         textInputAction: TextInputAction.done,
                                         controller: occup,
                                       ),
@@ -352,7 +352,7 @@ class _EditProfileState extends State<EditProfile> {
                   color: Colors.black26,
                   child: Center(
                       child: SpinKitThreeBounce(
-                          size: 25, color: AppColor.blackColor)),
+                          size: 25, color: AppColor.primaryColor)),
                 );
         })
       ],

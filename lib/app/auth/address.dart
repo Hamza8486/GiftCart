@@ -3,11 +3,11 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 import '../../util/translation_keys.dart';
 

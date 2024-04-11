@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_ads_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/payment_model.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/model/accoount_model.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/model/business_profile_model.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/my_ads_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/payment_model.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/model/accoount_model.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/model/business_profile_model.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 
 
 
@@ -19,7 +19,36 @@ class VendorController extends GetxController {
     update();
   }
   var accountLoading = false.obs;
+  var faqLoading = false.obs;
 
+  var faqList = [].obs;
+  RxBool expand = false.obs;
+  getFaqData() async {
+    try {
+
+      faqLoading(true);
+      update();
+
+      var profData = await ApiManger.getFaq();
+      if (profData != null) {
+        faqList.value =
+        profData.response?.data as dynamic;
+
+      } else {
+        faqLoading(false);
+        update();
+      }
+    } catch (e) {
+
+      faqLoading(false);
+      update();
+      debugPrint(e.toString());
+    } finally {
+      faqLoading(false);
+      update();
+    }
+    update();
+  }
   var accountList = <AllDataAccount>[].obs;
   getAccountData() async {
     try {

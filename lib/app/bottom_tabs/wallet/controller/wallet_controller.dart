@@ -6,8 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/toast.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/toast.dart';
 
 
 class PaymentController extends GetxController{
@@ -15,9 +15,20 @@ class PaymentController extends GetxController{
   var cardType = "".obs;
 
   var checkPayment="".obs;
+
+  var redeemLoader=false.obs;
+  updateRedeemLoader(val){
+    redeemLoader.value=val;
+    update();
+  }
   var checkLoader=false.obs;
+  var checkLoader1=false.obs;
   updateCheckLoader(val){
     checkLoader.value=val;
+    update();
+  }
+  updateCheckLoader1(val){
+    checkLoader1.value=val;
     update();
   }
   updateCheckPayment(val){
@@ -98,11 +109,7 @@ class PaymentController extends GetxController{
       paymentIntentData = await createPaymentIntent(amount, currency);
 
       if (paymentIntentData != null) {
-        var gPay= const PaymentSheetGooglePay(
-            merchantCountryCode: "cad",
-            currencyCode: "cad",
-            testEnv: true
-        );
+
         await Stripe.instance.initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
                 merchantDisplayName: 'Ikay',
@@ -110,7 +117,7 @@ class PaymentController extends GetxController{
                 paymentIntentClientSecret: paymentIntentData!['client_secret'],
                 customerEphemeralKeySecret: paymentIntentData!['ephemeralKey'],
                 style: ThemeMode.dark,
-                googlePay: gPay
+
             ));
 
         print(paymentIntentData);
@@ -126,13 +133,15 @@ class PaymentController extends GetxController{
 
   displayPaymentSheet({totalFee}) async {
     try {
+      Get.back();
       updateCheckLoader(false);
+
       await Stripe.instance.presentPaymentSheet().then((value) {
         paymentIntentData = null;
         print("This is value");
         print(PaymentId.value.toString());
 
-        updateCheckLoader(true);
+        updateCheckLoader1(true);
         ApiManger().addPaymentWalet(
           id: PaymentId.value.toString(),
           amount: checkPayment.value.toString()
@@ -144,12 +153,14 @@ class PaymentController extends GetxController{
 
       }).onError((error, stackTrace) {
         print("Payment Declined");
+        updateCheckLoader1(false);
         flutterToast(msg: "Payment Declined");
         throw Exception(error);
 
       });
     } on StripeException catch (e) {
       print("Payment Declined");
+      updateCheckLoader1(false);
       flutterToast(msg: "Payment Declined");
       print('Error is:---> $e');
 

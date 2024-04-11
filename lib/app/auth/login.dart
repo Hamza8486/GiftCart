@@ -7,15 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/account_type.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/auth/forget/view/forget_password.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/account_type.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/auth/forget/view/forget_password.dart';
+import 'package:giftcart/app/auth/social_login/view/social_login.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key? key,this.email,this.pass,this.login}) : super(key: key);
@@ -211,15 +212,30 @@ class _LoginViewState extends State<LoginView> {
                             SizedBox(
                               height: Get.height * 0.03,
                             ),
-                            Container(
-                              width: Get.width,
-                              height: 53,
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                  child: SvgPicture.asset(
-                                      "assets/icons/google.svg")),
+                            GestureDetector(
+                              onTap: (){
+                                Get.put(AuthController()).updateSocialLogin(true);
+                                AuthenticationHelper().googlebySignIn(context: context,token: token.toString());
+                              },
+                              child: Container(
+                                width: Get.width,
+                                height: 53,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                    child: Obx(
+                                      () {
+                                        return
+                                          Get.put(AuthController()).socialLogin.value?
+                                          Center(
+                                              child: SpinKitThreeBounce(
+                                                  size: 20, color: AppColor.primaryColor)):
+                                          SvgPicture.asset(
+                                            "assets/icons/google.svg");
+                                      }
+                                    )),
+                              ),
                             ),
 
                           ],

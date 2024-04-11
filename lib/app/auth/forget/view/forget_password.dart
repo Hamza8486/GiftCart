@@ -4,13 +4,13 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/app_textfield.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/app_textfield.dart';
 
 import '../../../../util/translation_keys.dart';
 
@@ -41,10 +41,10 @@ class ResetView extends StatelessWidget {
                           authController.clear();
                           authController.clearForget();
                         },
-                        child: Icon(
-                          Icons.arrow_back,
+                        child: Image.asset("assets/icons/backs.png",
+                          height: 30,
+                          width: 30,
                           color: Colors.black,
-                          size: Get.height * 0.035,
                         ))),
                 SizedBox(
                   height: Get.height * 0.04,
@@ -56,14 +56,17 @@ class ResetView extends StatelessWidget {
                   color: AppColor.boldBlackColor,
                 ),
                 SizedBox(
-                  height: Get.height * 0.025,
+                  height: Get.height * 0.015,
                 ),
-                AppText(
-                  title:enterEmailAssociateText.tr,
-                  size: AppSizes.size_13,
-                  fontFamily: AppFont.regular,
-                  textAlign: TextAlign.justify,
-                  color: AppColor.textGreyColor,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: AppText(
+                    title:"Enter your email ID associated with your account and we’ll send on email for reset your password",
+                    size: AppSizes.size_13,
+                    fontFamily: AppFont.regular,
+                    textAlign: TextAlign.justify,
+                    color: AppColor.textGreyColor,
+                  ),
                 ),
                 SizedBox(
                   height: Get.height * 0.025,
@@ -106,7 +109,7 @@ class ResetView extends StatelessWidget {
                       : AppButton(
                           buttonWidth: Get.width,
                           buttonRadius: BorderRadius.circular(10),
-                          buttonName: next.tr,
+                          buttonName: "Continue",
                           buttonColor: AppColor.primaryColor,
                           textColor: AppColor.whiteColor,
                           onTap: () {

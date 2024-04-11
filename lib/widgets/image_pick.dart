@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/util/theme.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/util/theme.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 
 
 Widget bottomSheet({onCamera ,onGallery}) {

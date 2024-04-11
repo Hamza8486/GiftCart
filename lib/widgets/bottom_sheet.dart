@@ -3,9 +3,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
 import 'package:shimmer/shimmer.dart';
 
 

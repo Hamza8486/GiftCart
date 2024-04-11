@@ -1,17 +1,18 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/privacy_policy.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/auth/login.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/privacy_policy.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 import '../../util/translation_keys.dart';
 
@@ -102,6 +103,9 @@ class _RegisterState extends State<Register> {
                         ),
                         betField(
                           hint: phoneNumber.tr,
+                            listInputParam: [
+                              LengthLimitingTextInputFormatter(13),
+                            ],
                           controller: authController.mobileController,
                           textInputType: TextInputType.phone,
                           textInputAction: TextInputAction.next
@@ -120,6 +124,7 @@ class _RegisterState extends State<Register> {
                                     height: Get.height * 0.01,
                                   ),
                                   betField(
+                                      textInputAction: TextInputAction.done,
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         return enterOccupation.tr;
@@ -129,7 +134,7 @@ class _RegisterState extends State<Register> {
                                       }
                                       return null;
                                     },
-                                    hint: "Bets Skills",
+                                    hint: occupation.tr.toLowerCase(),
                                     controller: authController.occuController,
                                   ),
                                 ],
@@ -149,6 +154,9 @@ class _RegisterState extends State<Register> {
                                         ? Get.height * 0.055
                                         : Get.height * 0.055,
                                     child: PopupMenuButton(
+                                      shadowColor: Colors.white,
+
+                                      surfaceTintColor:Colors.white,
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(10.0),
@@ -157,6 +165,7 @@ class _RegisterState extends State<Register> {
                                       offset: const Offset(0, 55),
                                       onSelected: (value) async {
                                         setState(() {
+
                                           for (int i = 0; i < Get.put(AuthController()).provinceList.length; i++) {
                                             if (value.toString() ==
                                                 Get.put(AuthController()).provinceList[i].id.toString()) {
@@ -198,8 +207,10 @@ class _RegisterState extends State<Register> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
+
                                               color: AppColor.blackColor.withOpacity(0.4),
                                             ),
+
                                             borderRadius: BorderRadius.circular(10)),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -207,7 +218,8 @@ class _RegisterState extends State<Register> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               Obx(() {
-                                                return SizedBox(
+                                                return Container(
+
                                                   width: Get.width*0.22,
                                                   child: AppText(
                                                     overFlow: TextOverflow.ellipsis,
@@ -268,7 +280,7 @@ class _RegisterState extends State<Register> {
                         SizedBox(
                           height: Get.height * 0.03,
                         ),
-                        textAuth(text: referralCodeOptional.tr),
+                        textAuth(text: referralCodeOptional.tr,color: Colors.transparent),
                         SizedBox(
                           height: Get.height * 0.01,
                         ),
@@ -320,21 +332,23 @@ class _RegisterState extends State<Register> {
                         SizedBox(
                           height: Get.height * 0.015,
                         ),
-                        GestureDetector(
-                          onTap: (){setState(() {
-                            if(isCheck){
-                              isCheck=false;
-                            }
-                            else{
-                              isCheck=true;
-                            }
-                          });},
-                          child: Container(
+                        Container(
 
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              GestureDetector(
+                                onTap:(){
+                                  setState(() {
+                                    if(isCheck){
+                                      isCheck=false;
+                                    }
+                                    else{
+                                      isCheck=true;
+                                    }
+                                  });
+                                },
+                                child: Container(
                                   height:22,
                                   width: 22,
                                   decoration: BoxDecoration(
@@ -354,48 +368,48 @@ class _RegisterState extends State<Register> {
                                   ),
                                 ),
                                 ),
-                                SizedBox(width: 10,),
-                                GestureDetector(
-                                  onTap: (){
-                                    Get.to( PrivacyPolicy(),
-                                        transition: Transition.rightToLeft);
-                                  },
-                                  child: Container(
-                                    color: Colors.transparent,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        AppText(
-                                          title: iAgreeeToThe.tr,
-                                          size: 12,
-                                          fontWeight: FontWeight.w400,
-                                          color: Color(0xff3E444D),
-                                        ),
-                                        AppText(
-                                          title: privacyPolicy.tr,
-                                          size: 12,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColor.blueColor,
-                                        ),
-                                      ],
-                                    ),
+                              ),
+                              SizedBox(width: 10,),
+                              GestureDetector(
+                                onTap: (){
+                                  Get.to( PrivacyPolicy(),
+                                      transition: Transition.rightToLeft);
+                                },
+                                child: Container(
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      AppText(
+                                        title: iAgreeeToThe.tr,
+                                        size: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff3E444D),
+                                      ),
+                                      AppText(
+                                        title: privacyPolicy.tr,
+                                        size: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColor.blueColor,
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                AppText(
-                                  title: termsConditions.tr,
-                                  size: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColor.blueColor,
-                                ),
-                                AppText(
-                                  title: and.tr,
-                                  size: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xff3E444D),
-                                ),
+                              ),
+                              AppText(
+                                title: termsConditions.tr,
+                                size: 12,
+                                fontWeight: FontWeight.w400,
+                                color: AppColor.blueColor,
+                              ),
+                              AppText(
+                                title: and.tr,
+                                size: 12,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xff3E444D),
+                              ),
 
-                              ],
-                            ),
+                            ],
                           ),
                         ),
                         SizedBox(

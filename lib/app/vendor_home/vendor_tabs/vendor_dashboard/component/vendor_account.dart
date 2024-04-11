@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/add_acc.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/add_acc.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class VendorSaveBanks extends StatefulWidget {
   const VendorSaveBanks({Key? key}) : super(key: key);
@@ -81,16 +81,16 @@ class _VendorSaveBanksState extends State<VendorSaveBanks> {
                                                   Row(
                                                     children: [
                                                       AppText(
-                                                        title: title.tr,
-                                                        size: AppSizes.size_15,
+                                                        title: "${title.tr}: ",
+                                                        size: 14,
                                                         fontFamily: AppFont.medium,
-                                                        fontWeight: FontWeight.w500,
+                                                        fontWeight: FontWeight.w400,
                                                         color: AppColor.blackColor,
                                                       ),
 
                                                       AppText(
                                                         title: Get.put(VendorController()).accountList[index].cardName.toString(),
-                                                        size: AppSizes.size_15,
+                                                        size: 15,
                                                         fontFamily: AppFont.medium,
                                                         fontWeight: FontWeight.w500,
                                                         color: AppColor.blackColor,
@@ -119,15 +119,14 @@ class _VendorSaveBanksState extends State<VendorSaveBanks> {
                                                 children: [
                                                   AppText(
                                                     title:ibanNumber.tr,
-                                                    size: AppSizes.size_15,
-                                                    fontFamily: AppFont.medium,
-                                                    fontWeight: FontWeight.w500,
+                                                    size: 14,
+                                                    fontWeight: FontWeight.w400,
                                                     color: AppColor.blackColor,
                                                   ),
 
                                                   AppText(
                                                     title: Get.put(VendorController()).accountList[index].ibnNo.toString(),
-                                                    size: AppSizes.size_15,
+                                                    size: 15,
                                                     fontFamily: AppFont.medium,
                                                     fontWeight: FontWeight.w500,
                                                     color: AppColor.blackColor,
@@ -139,15 +138,15 @@ class _VendorSaveBanksState extends State<VendorSaveBanks> {
                                                 children: [
                                                   AppText(
                                                     title: accountNumber.tr,
-                                                    size: AppSizes.size_15,
+                                                    size: 14,
                                                     fontFamily: AppFont.medium,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w400,
                                                     color: AppColor.blackColor,
                                                   ),
 
                                                   AppText(
                                                     title: Get.put(VendorController()).accountList[index].accountNo.toString(),
-                                                    size: AppSizes.size_15,
+                                                    size:15,
                                                     fontFamily: AppFont.medium,
                                                     fontWeight: FontWeight.w500,
                                                     color: AppColor.blackColor,

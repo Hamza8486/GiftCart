@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_bet/util/constant.dart';
-import 'package:mr_bet/util/theme.dart';
+import 'package:giftcart/util/constant.dart';
+import 'package:giftcart/util/theme.dart';
 
 
 
@@ -45,6 +46,7 @@ class AppTextField extends StatefulWidget {
     this.isFill = false,
     this.fontFamily = "regularMedium",
     this.maxLength,
+    this.listInputParam,
     this.onSuffixTap,
     this.autovalidateMode,
     this.isPrefix = false,
@@ -75,6 +77,7 @@ class AppTextField extends StatefulWidget {
   final Color borderColor;
   final Color borderColor1;
   final Color borderColor2;
+  List<TextInputFormatter>? listInputParam;
   final Color? cursorColor;
   void Function()? onEditingComplete;
   void Function(String)? onFieldSubmitted;
@@ -102,6 +105,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
 
       autovalidateMode: widget.autovalidateMode,
 
@@ -136,6 +140,7 @@ class _AppTextFieldState extends State<AppTextField> {
       readOnly: widget.isReadOnly,
       keyboardType: widget.textInputType,
       textInputAction: widget.textInputAction,
+      inputFormatters:  widget.listInputParam,
 
       decoration: InputDecoration(
         contentPadding: widget.padding,

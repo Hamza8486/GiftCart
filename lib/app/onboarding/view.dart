@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/login.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 final Shader linearGradient = const LinearGradient(
   colors: <Color>[Color(0xffF33F41), Color(0xffFB6D72)],
 ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
@@ -37,7 +37,7 @@ class OnBoardingView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                    "MR | Corporation",
+                    MRcorporation.tr,
                     style: GoogleFonts.poppins(
                       textStyle : TextStyle(
 
@@ -52,7 +52,7 @@ class OnBoardingView extends StatelessWidget {
                   padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04),
                   child: Center(
                     child: AppText(
-                      title:"At the heart of our business is a commitment to redefining your grocery experience. By offering premium grocery services, we aim to simplify your shopping needs, ensuring quality products are delivered to your doorstep.",
+                      title:atTheHeartOfText.tr,
                       color: AppColor.gray,
                       textAlign: TextAlign.center,
 
@@ -64,7 +64,7 @@ class OnBoardingView extends StatelessWidget {
                 SizedBox(height: Get.height*0.025),
                 Padding(
                   padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04),
-                  child: AppButton(buttonName: "Get started", buttonColor: AppColor.primaryColor, textColor: AppColor.whiteColor, onTap: (){
+                  child: AppButton(buttonName: getStarted.tr, buttonColor: AppColor.primaryColor, textColor: AppColor.whiteColor, onTap: (){
                     Get.to(LoginView(),
                     transition: Transition.native
                     );

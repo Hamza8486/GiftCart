@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/model/store_model.dart';
-import 'package:mr_bet/app/auth/province_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_ads_model.dart';
-import 'package:mr_bet/services/api_manager.dart';
+import 'package:giftcart/app/auth/model/store_model.dart';
+import 'package:giftcart/app/auth/province_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/my_ads_model.dart';
+import 'package:giftcart/services/api_manager.dart';
 
 class AuthController extends GetxController {
   File ?file;
@@ -15,6 +15,14 @@ class AuthController extends GetxController {
   var verifyEmailCon = "".obs;
   upddateEmailVerrify(val){
     verifyEmailCon.value=val;
+    update();
+  }
+
+
+  var socialLogin =false.obs;
+
+  updateSocialLogin(val){
+    socialLogin.value=val;
     update();
   }
 

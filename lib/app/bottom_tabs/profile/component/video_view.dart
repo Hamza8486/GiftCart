@@ -1,40 +1,34 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:giftcart/util/toast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/video_widget.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/video_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 
 
-class VideoViewDetail extends StatelessWidget {
+class VideoViewDetail extends StatefulWidget {
   VideoViewDetail({Key? key,this.data}) : super(key: key);
   var data;
 
+  @override
+  State<VideoViewDetail> createState() => _VideoViewDetailState();
+}
 
-
-  List videoList = [
-    "assets/videos/video3.mp4",
-    "assets/videos/video3.mp4",
-    "assets/videos/video3.mp4"
-
-  ];
-
+class _VideoViewDetailState extends State<VideoViewDetail> {
   var commentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final isKeyBoard = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       body:  Stack(
         children: [
@@ -43,7 +37,7 @@ class VideoViewDetail extends StatelessWidget {
               Expanded(child:Stack(
                 children: [
                   VideoPlayerItem(
-                    videoUrl: data.video.toString(),
+                    videoUrl: widget.data.video.toString(),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 50),
@@ -77,7 +71,7 @@ class VideoViewDetail extends StatelessWidget {
                                             child: ClipRRect(
                                                 borderRadius: BorderRadius.circular(1000),
                                                 child: CachedNetworkImage(
-                                                  imageUrl:data.image.toString(),
+                                                  imageUrl:widget.data.image.toString(),
                                                   fit: BoxFit.cover,
                                                   errorWidget: (context, url, error) => ClipRRect(
                                                     borderRadius: BorderRadius.circular(1000),
@@ -92,7 +86,7 @@ class VideoViewDetail extends StatelessWidget {
                                             width: Get.width * 0.02,
                                           ),
                                           AppText(
-                                            title: "@${data.firstName.toString()}00",
+                                            title: "@${widget.data.firstName.toString()}00",
                                             size: 16,
                                             fontWeight: FontWeight.w600,
                                             color: AppColor.whiteColor,
@@ -101,7 +95,7 @@ class VideoViewDetail extends StatelessWidget {
                                       ),
                                       SizedBox(height: Get.height*0.01,),
                                       AppText(
-                                        title: "Good morning every one #goodmorning",
+                                        title: "Stay tuned for new expressions and feedback",
                                         size: 11,
                                         fontWeight: FontWeight.w400,
                                         color: AppColor.whiteColor.withOpacity(0.9),
@@ -126,21 +120,21 @@ class VideoViewDetail extends StatelessWidget {
                                               (){
                                             if(Get.put(HomeController()).likeStatus.value==false){
                                               Get.put(HomeController()).updateLikeStatus(true);
-                                              ApiManger().likeTestMonial(id: data.id.toString());
+                                              ApiManger().likeTestMonial(id: widget.data.id.toString());
                                             }
                                             else{
                                               Get.put(HomeController()).updateLikeStatus(false);
-                                              ApiManger().unLikeTestMonial(id: data.id.toString());
+                                              ApiManger().unLikeTestMonial(id: widget.data.id.toString());
                                             }
 
                                           }:(){
                                             if(Get.put(HomeController()).likeStatus.value==false){
                                               Get.put(HomeController()).updateLikeStatus(true);
-                                              ApiManger().likeTestMonial(id: data.id.toString());
+                                              ApiManger().likeTestMonial(id: widget.data.id.toString());
                                             }
                                             else{
                                               Get.put(HomeController()).updateLikeStatus(false);
-                                              ApiManger().unLikeTestMonial(id: data.id.toString());
+                                              ApiManger().unLikeTestMonial(id: widget.data.id.toString());
                                             }
 
                                           },
@@ -183,7 +177,7 @@ class VideoViewDetail extends StatelessWidget {
                                     SizedBox(height: Get.height*0.05,),
                                     GestureDetector(
                                       onTap: (){
-                                        Share.share(data.video.toString(), subject: 'Look what I made!');
+                                        Share.share(widget.data.video.toString(), subject: 'Look what I made!');
                                       },
                                       child: Image.asset("assets/images/share.png",
                                         height: 26,
@@ -229,12 +223,13 @@ class VideoViewDetail extends StatelessWidget {
                           child:  Image.asset("assets/icons/backs.png",
                             height: 30,
                             width: 30,
+                            color: AppColor.blackColor,
                           ),
                         ),
                         SizedBox(width: 10,),
                         AppText(
-                          title: data.firstName.toString(),
-                          color: AppColor.primaryColor,
+                          title: widget.data.firstName.toString(),
+                          color: AppColor.blackColor,
                           size: 18,
                          fontWeight: FontWeight.w600,
                         ),
@@ -257,6 +252,7 @@ class VideoViewDetail extends StatelessWidget {
       ),
     );
   }
+
   Widget infoWidget({required BuildContext context}){
     final isKeyBoard = MediaQuery.of(context).viewInsets.bottom != 0;
     return DraggableScrollableSheet(
@@ -290,8 +286,8 @@ class VideoViewDetail extends StatelessWidget {
               SizedBox(
                 height: Get.height * 0.03,
               ),
-              const AppText(
-                  title: "Comments",
+               AppText(
+                  title: comments.tr,
                   size: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColor.blackColor),
@@ -337,7 +333,9 @@ class VideoViewDetail extends StatelessWidget {
                                 keyboardType: TextInputType.multiline,
                                 textInputAction: TextInputAction.done,
                                 onChanged: (val){
+setState(() {
 
+});
                                 },
 
 
@@ -358,7 +356,7 @@ class VideoViewDetail extends StatelessWidget {
                                   border: InputBorder.none,
 
 
-                                  hintText: "Write comments!",
+                                  hintText: writeComments.tr,
                                   hintStyle: GoogleFonts.poppins(
                                       textStyle : TextStyle(
                                         fontSize: 12,
@@ -388,14 +386,18 @@ class VideoViewDetail extends StatelessWidget {
                           Get.put(HomeController()).commentUpdate.value?
                           Center(
                               child: SpinKitThreeBounce(
-                                  size: 10, color: AppColor.primaryColor)):
+                                  size: 20, color: AppColor.primaryColor)):
                           GestureDetector(
-                            onTap: (){
-                              print(data.id.toString());
+                            onTap:
+                            commentController.text.isEmpty?(){
+                              flutterToast(msg: "Enter comment first");
+                            }:
+                                (){
+                              print(widget.data.id.toString());
                               print(commentController.text);
                               print(Get.put(HomeController()).token.value);
                               Get.put(HomeController()).updateComment(true);
-                              ApiManger().postCommentsModel(id:data.id.toString(),text: commentController.text);
+                              ApiManger().postCommentsModel(id:widget.data.id.toString(),text: commentController.text);
                               commentController.clear();
                             },
                             child: Container(
@@ -428,7 +430,7 @@ class VideoViewDetail extends StatelessWidget {
                     Get.put(HomeController()).allCommentLoader.value?
                     Center(
                         child: SpinKitThreeBounce(
-                            size: 10, color: AppColor.primaryColor)):
+                            size: 20, color: AppColor.primaryColor)):
                     ListView.builder(
                       itemCount:   Get.put(HomeController()).getCommentList.length,
                       shrinkWrap: true,

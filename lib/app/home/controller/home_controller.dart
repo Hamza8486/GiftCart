@@ -2,20 +2,25 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:giftcart/app/bottom_tabs/wallet/controller/wallet_controller.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/comment_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/like_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_ads_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/my_slots.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/payment_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/slot_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/transaction_model.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/model/winners_model.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/profile_model.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/user_store.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/model/winner_chat_model.dart';
-import 'package:mr_bet/services/api_manager.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/comment_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/like_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/my_ads_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/my_slots.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/payment_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/slot_model.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/model/transaction_model.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/profile_model.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/user_store.dart';
+import 'package:giftcart/app/bottom_tabs/profile/model/winner_chat_model.dart';
+import 'package:giftcart/app/coupon_app_rewards/model/rewards_model.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/model/accoount_model.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/widgets/helper_function.dart';
+import 'package:showcaseview/showcaseview.dart';
+
+import '../../bottom_tabs/dashboard/view/dashboard_view.dart';
 
 
 
@@ -24,15 +29,15 @@ class HomeController extends GetxController {
 
   var slotAddList=<AddSlotModel>[].obs;
 
+  var referrelController =  TextEditingController();
 
-  var userName="".obs;
-  updateUserName(val){
-    userName.value=val;
+  var currentTab = 0.obs;
 
+  var applyRef=false.obs;
+  updateApplyRef(val){
+    applyRef.value=val;
     update();
-
   }
-
 
   var showPopUp=false.obs;
   updatePopup(val){
@@ -247,10 +252,12 @@ class HomeController extends GetxController {
     HelperFunctions.getFromPreference("token").then((value) {
       token.value = value;
       getProfileData();
+      getAccountData();
       getPayHisData();
       getAdsData();
       getSlotData(id: "");
       getTransData();
+      getProvDataData();
 
 
 
@@ -277,6 +284,12 @@ class HomeController extends GetxController {
     update();
   }
 
+  var refCodeHave=false.obs;
+  updateRefCodeHave(val){
+    refCodeHave.value=val;
+    update();
+  }
+
   ProfileDataModel? profileAllData;
   getProfileData() async {
     try {
@@ -291,7 +304,11 @@ class HomeController extends GetxController {
         updateProfileImage(profData.response?.data?.logo==null?"":profData.response?.data?.logo.toString());
         updateReferCode(profData.response?.data?.referelCode.toString()==null?"":profData.response?.data?.referelCode.toString());
         updateToatlEaening(profData.response?.data?.reward==null?"0":profData.response?.data?.reward.toString());
-         updateRewardEarning(profData.response?.data?.gift==null?"0":profData.response?.data?.gift.toString());
+         updateRefCodeHave(profData.response?.data?.is_reference_used);
+         updateRewardEarning(
+             profData.response?.data?.gift.toString()=="0.0"?"0":
+             profData.response?.data?.gift.toString()=="0"?"0":
+             profData.response?.data?.gift==null?"0":profData.response?.data?.gift.toString());
         updateProfileId(profData.response?.data?.id==0?"0":profData.response?.data?.id.toString());
         print(
             "This is my profile ${profData.response?.data}");
@@ -557,18 +574,20 @@ class HomeController extends GetxController {
         updateTotalAmount(
             profData==null?"0":
             profData.response?.balance==null?"0":
-            profData.response?.balance==0?"0": profData.response?.balance.toString());
+            profData.response?.balance==0?"0": profData.response?.balance.toString().split(".").first);
 
       } else {
         transactionLoadingValue(false);
+        Get.put(PaymentController()).updateCheckLoader1(false);
         update();
       }
     } catch (e) {
-
+      Get.put(PaymentController()).updateCheckLoader1(false);
       transactionLoadingValue(false);
       update();
       debugPrint(e.toString());
     } finally {
+      Get.put(PaymentController()).updateCheckLoader1(false);
       transactionLoadingValue(false);
       update();
     }
@@ -579,17 +598,17 @@ class HomeController extends GetxController {
 
   var accountLoading = false.obs;
 
-  var accountList = [].obs;
+  var accountList = <AllDataAccount>[].obs;
   getAccountData() async {
     try {
 
       accountLoading(true);
       update();
 
-      var profData = await ApiManger.getAccount();
+      var profData = await ApiManger.getAccountVendor1();
       if (profData != null) {
         accountList.value =
-        profData.amount as dynamic;
+        profData.response?.data as dynamic;
 
       } else {
         accountLoading(false);
@@ -682,34 +701,7 @@ class HomeController extends GetxController {
   }
 
 
-  getAllBetData() async {
-    try {
 
-
-      update();
-
-      var profData = await ApiManger.getBetApi();
-      if (profData != null) {
-        updateGroceryId(profData.data?[0].id.toString());
-        print("This is bet Id${profData.data?[0].id.toString()}");
-
-
-
-      } else {
-
-        update();
-      }
-    } catch (e) {
-
-
-      update();
-      debugPrint(e.toString());
-    } finally {
-
-      update();
-    }
-    update();
-  }
 
 
   var getCommentList = <AllCommentData>[].obs;
@@ -861,6 +853,13 @@ class HomeController extends GetxController {
   var messageLoader=false.obs;
   var messageCheckLoader=false.obs;
   var addMessageLoader=false.obs;
+  var message="".obs;
+
+  updateMessage(val){
+    message.value
+        =val;
+    update();
+  }
 
 
   WinnerChatAllModelDData ? winnersChatModel;
@@ -874,6 +873,7 @@ class HomeController extends GetxController {
       if (profData != null) {
 
         winnersChatModel = profData.response as dynamic;
+        updateMessage(profData.response?.data?.text==""?"":profData.response?.data?.text.toString());
         print(
             "This is my like ${ profData.response}");
 
@@ -921,6 +921,76 @@ class HomeController extends GetxController {
       debugPrint(e.toString());
     } finally {
       isLoading(false);
+      update();
+    }
+    update();
+  }
+
+  var getProvUserList = [].obs;
+  var listLoader = false.obs;
+  getProvDataData() async {
+    try {
+      listLoader(true);
+      update();
+
+
+      var profData = await ApiManger.getProvUserModel();
+      if (profData != null) {
+        getProvUserList.value = profData.response?.data as dynamic;
+        print(
+            "This is my Slots ${ profData.response?.data}");
+        listLoader(false);
+        update();
+      } listLoader(false);
+      update();
+    } catch (e) {
+
+      listLoader(false);
+      update();
+
+      debugPrint(e.toString());
+    } finally {
+      listLoader(false);
+      update();
+    }
+    update();
+  }
+
+
+
+
+  var invoiceLoader = false.obs;
+  RewardsDataModel ? rewardsDataModel;
+
+  var coins="".obs;
+  updateCoins(val){
+    coins.value=val;
+    update();
+  }
+  getInvoiceData() async {
+    try {
+
+      invoiceLoader(true);
+      update();
+
+      var profData = await ApiManger.getRewardsModel();
+      if (profData != null) {
+        updateCoins(rewardsDataModel?.coins==null?"":rewardsDataModel?.coins.toString().split(".").first);
+        rewardsDataModel =
+        profData.response?.data as dynamic;
+
+
+      } else {
+        invoiceLoader(false);
+        update();
+      }
+    } catch (e) {
+
+      invoiceLoader(false);
+      update();
+      debugPrint(e.toString());
+    } finally {
+      invoiceLoader(false);
       update();
     }
     update();

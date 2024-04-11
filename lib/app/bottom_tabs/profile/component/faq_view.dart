@@ -3,10 +3,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
 
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/home/controller/home_controller.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/home/controller/home_controller.dart';
 
-import 'package:mr_bet/util/theme.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
 
 class FaqView extends StatelessWidget {
   const FaqView({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class FaqView extends StatelessWidget {
             body: Column(children: [
               TopBar(onTap1: (){},onTap: (){
                 Get.back();
-              },text: "FAQ",
+              },text: faqs.tr,
                   image: "assets/icons/share.svg",color: AppColor.whiteColor
               ),
           Expanded(

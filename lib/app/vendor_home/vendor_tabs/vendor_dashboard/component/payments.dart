@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:mr_bet/app/auth/component.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/add_acc.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/component.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/add_acc.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 class PaymentsView extends StatefulWidget {
   PaymentsView({Key? key, this.type}) : super(key: key);
@@ -421,12 +422,8 @@ class _PaymentsViewState extends State<PaymentsView> {
             right: 20,
             child: GestureDetector(
               onTap: () {
-                showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    isScrollControlled: true,
-                    isDismissible: true,
-                    context: context,
-                    builder: (context) => infoPaymentWidget());
+                Get.to(AllData(name: "Payment process",link: "https://admin.mr-corp.ca/help/Payment%20to%20grocery%20store",));
+
               },
               child: Image.asset(
                 "assets/icons/info.png",

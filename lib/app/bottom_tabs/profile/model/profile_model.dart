@@ -48,6 +48,7 @@ class Data {
   Province? province;
   String? email;
   bool? claimReward;
+  bool? is_reference_used;
   String? referelCode;
   var reward;
   var gift;
@@ -57,6 +58,7 @@ class Data {
         this.fullName,
         this.phoneNumber,
         this.gift,
+        this.is_reference_used,
         this.logo,
         this.occupation,
         this.province,
@@ -68,6 +70,7 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['full_name'];
+    is_reference_used = json['is_reference_used'];
     gift = json['gift'];
     phoneNumber = json['phone_number'];
     logo = json['logo'];
@@ -85,6 +88,7 @@ class Data {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['full_name'] = this.fullName;
+    data['is_reference_used'] = this.is_reference_used;
     data['phone_number'] = this.phoneNumber;
     data['gift'] = this.gift;
     data['logo'] = this.logo;

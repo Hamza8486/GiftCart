@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/util/theme.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/translation_keys.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
@@ -25,25 +26,22 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
         children: [
           TopBar(onTap1: (){},onTap: (){
             Get.back();
-          },text: "Privacy Policy",
+          },text: privacyPolicy.tr,
               image: "assets/icons/share.svg",color: AppColor.whiteColor
           ),
 
           Expanded(
             child: Stack(
               children: [
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: Get.width*0.04),
-                  child: WebView(
-                    key: _key,
-                    javascriptMode: JavascriptMode.unrestricted,
-                    onPageFinished: (finish) {
-                      setState(() {
-                        isLoading = false;
-                      });
-                    },
-                    initialUrl: 'https://slot-app-8c4916a05b3c.herokuapp.com/get_general/policy/',
-                  ),
+                WebView(
+                  key: _key,
+                  javascriptMode: JavascriptMode.unrestricted,
+                  onPageFinished: (finish) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                  },
+                  initialUrl: 'https://admin.mr-corp.ca/help/Privacy%20policy',
                 ),
                 isLoading ? Container(
                     height: Get.height,

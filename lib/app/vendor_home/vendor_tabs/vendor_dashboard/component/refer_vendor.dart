@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:whatsapp_share/whatsapp_share.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/all_data.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
+// import 'package:whatsapp_share/whatsapp_share.dart';
 
 class EarnRefrenceVendor extends StatelessWidget {
   const EarnRefrenceVendor({Key? key}) : super(key: key);
 
-  Future<void> share() async {
-    await WhatsappShare.share(
-      text: heyFriendsCheckAppText.tr +
-          "\n# ${Get.put(VendorController()).referCode.value.toString()}    Use this",
-      linkUrl: 'https://flutter.dev/',
-      phone: '911234567890',
-    );
-  }
+  // Future<void> share() async {
+  //   await WhatsappShare.share(
+  //     text: heyFriendsCheckAppText.tr +
+  //         "\n# ${Get.put(VendorController()).referCode.value.toString()}    Use this",
+  //     linkUrl: 'https://flutter.dev/',
+  //     phone: '911234567890',
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +191,7 @@ class EarnRefrenceVendor extends StatelessWidget {
                         Center(
                           child: GestureDetector(
                             onTap: () {
-                              share();
+                              //share();
                             },
                             child: Image.asset(
                               "assets/icons/whats.png",
@@ -314,12 +315,8 @@ class EarnRefrenceVendor extends StatelessWidget {
               right: 20,
               child: GestureDetector(
                 onTap: () {
-                  showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      isScrollControlled: true,
-                      isDismissible: true,
-                      context: context,
-                      builder: (context) => earnWidget());
+                  Get.to(AllData(name: "Earn and reference",link: "https://admin.mr-corp.ca/help/Earn%20and%20refrence",));
+
                 },
                 child: Image.asset(
                   "assets/icons/info.png",

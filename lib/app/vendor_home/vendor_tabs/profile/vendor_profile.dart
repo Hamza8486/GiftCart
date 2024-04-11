@@ -2,15 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/bottom_tabs/component/component.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/about.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/privacy_policy.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/component/update_store.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/component/vendor_setting.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/vendor_account.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/bottom_tabs/component/component.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/about.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/privacy_policy.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/component/update_store.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/component/vendor_setting.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/vendor_account.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 import '../../../../util/translation_keys.dart';
 

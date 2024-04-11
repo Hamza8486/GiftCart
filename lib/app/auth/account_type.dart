@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/business_register.dart';
-import 'package:mr_bet/app/auth/controller.dart';
-import 'package:mr_bet/app/auth/partner_signup/basic_info.dart';
-import 'package:mr_bet/app/auth/register.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/widgets/app_button.dart';
-import 'package:mr_bet/widgets/app_text.dart';
+import 'package:giftcart/app/auth/controller.dart';
+import 'package:giftcart/app/auth/partner_signup/basic_info.dart';
+import 'package:giftcart/app/auth/register.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/widgets/app_button.dart';
+import 'package:giftcart/widgets/app_text.dart';
 
 import '../../util/translation_keys.dart';
 
@@ -37,6 +36,18 @@ class _AccountTypeState extends State<AccountType> {
                   child: Column(
 
                     children: [
+                      SizedBox(height: Get.height*0.0,),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Image.asset("assets/icons/backs.png",
+                                height: 30,
+                                width: 30,
+                                color: Colors.black,
+                              ))),
                       SizedBox(height: Get.height*0.17,),
                       Center(
                           child: Image.asset(
@@ -56,7 +67,7 @@ class _AccountTypeState extends State<AccountType> {
                               size: 20),
 
                           AppText(
-                              title: chooseAccType,
+                              title: chooseAccType.tr,
                               color: AppColor.greyColor,
                               fontWeight: FontWeight.w400,
                               size: 14),

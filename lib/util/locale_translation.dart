@@ -1,14 +1,14 @@
 import 'dart:core';
 
 import 'package:get/get.dart';
-import 'package:mr_bet/util/locales/en.dart';
-import 'package:mr_bet/util/locales/es.dart';
-import 'package:mr_bet/util/locales/fr.dart';
-import 'package:mr_bet/util/locales/it.dart';
-import 'package:mr_bet/util/locales/nl.dart';
-import 'package:mr_bet/util/locales/pa.dart';
-import 'package:mr_bet/util/locales/tl.dart';
-import 'package:mr_bet/util/locales/zh.dart';
+import 'package:giftcart/util/locales/en.dart';
+import 'package:giftcart/util/locales/es.dart';
+import 'package:giftcart/util/locales/fr.dart';
+import 'package:giftcart/util/locales/it.dart';
+import 'package:giftcart/util/locales/nl.dart';
+import 'package:giftcart/util/locales/pa.dart';
+import 'package:giftcart/util/locales/tl.dart';
+import 'package:giftcart/util/locales/zh.dart';
 
 class AppTranslation extends Translations {
   @override

@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:mr_bet/app/auth/login.dart';
-import 'package:mr_bet/app/bottom_tabs/dashboard/component/promote_business.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/earn_refrence.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/faq_view.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/help.dart';
-import 'package:mr_bet/app/bottom_tabs/profile/component/store_list.dart';
-import 'package:mr_bet/app/vendor_home/controller/vendor_controller.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/profile/vendor_profile.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/add_Ads_business.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/orders.dart';
-import 'package:mr_bet/app/vendor_home/vendor_tabs/vendor_dashboard/component/refer_vendor.dart';
-import 'package:mr_bet/util/theme.dart';
-import 'package:mr_bet/util/toast.dart';
-import 'package:mr_bet/util/translation_keys.dart';
-import 'package:mr_bet/widgets/app_text.dart';
-import 'package:mr_bet/widgets/helper_function.dart';
+import 'package:giftcart/app/auth/login.dart';
+import 'package:giftcart/app/bottom_tabs/dashboard/component/promote_business.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/earn_refrence.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/faq_view.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/help.dart';
+import 'package:giftcart/app/bottom_tabs/profile/component/store_list.dart';
+import 'package:giftcart/app/vendor_home/controller/vendor_controller.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/profile/vendor_profile.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/add_Ads_business.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/orders.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/refer_vendor.dart';
+import 'package:giftcart/app/vendor_home/vendor_tabs/vendor_dashboard/component/vendor_faq.dart';
+import 'package:giftcart/services/api_manager.dart';
+import 'package:giftcart/util/theme.dart';
+import 'package:giftcart/util/toast.dart';
+import 'package:giftcart/util/translation_keys.dart';
+import 'package:giftcart/widgets/app_text.dart';
+import 'package:giftcart/widgets/helper_function.dart';
 
 class PartnerDrawer extends StatelessWidget {
   @override
@@ -329,8 +331,8 @@ class PartnerDrawer extends StatelessWidget {
 
                       GestureDetector(
                         onTap: () {
-
-                          Get.to(FaqView(),
+                          Get.put(VendorController()).getFaqData();
+                          Get.to(VendorFaqView(),
                               transition: Transition.rightToLeft);
                         },
                         child: Container(
@@ -397,7 +399,7 @@ class PartnerDrawer extends StatelessWidget {
                       showExit(
                           context: context,
                           onTap: () async {
-
+                            ApiManger().logoutApi1();
                             await  Get.delete<VendorController>();
                             await  HelperFunctions().clearPrefs();
                             Get.offAll(LoginView());

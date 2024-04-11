@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mr_bet/util/theme.dart';
+import 'package:giftcart/util/theme.dart';
 
 
 class SortedByDropDown extends StatelessWidget {
