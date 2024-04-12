@@ -102,7 +102,7 @@ Map<String, String> get esMap => {
   translation.read10_04: "Lea 10:04",
   translation.congratulationsScratchCoupon: "¡felicidades!",
   translation.congrats: "¡felicidades!",
-  translation.friendsReferred: "Amigos\\nreferido",
+  translation.friendsReferred: "Amigos\nreferido",
   translation.redeemRewards: "Canjear recompensas",
   translation.specialOffer: "Oferta especial",
   translation.fiftyOff: "50% de descuento",

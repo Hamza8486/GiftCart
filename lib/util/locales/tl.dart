@@ -102,7 +102,7 @@ Map<String, String> get tlMap => {
   translation.read10_04: "Basahin 10:04",
   translation.congratulationsScratchCoupon: "Binabati kita!",
   translation.congrats: "Congrats!",
-  translation.friendsReferred: "Mga Kaibigan\\nreferred",
+  translation.friendsReferred: "Mga Kaibigan\nreferred",
   translation.redeemRewards: "Gantimpalaan",
   translation.specialOffer: "Espesyal na alok",
   translation.fiftyOff: "50% Off",

@@ -102,7 +102,7 @@ Map<String, String> get paMap => {
   translation.read10_04: "10:04 ਪੜ੍ਹੋ",
   translation.congratulationsScratchCoupon: "ਵਧਾਈ!",
   translation.congrats: "ਮੁਬਾਰਕ!",
-  translation.friendsReferred: "Friends\\nreferred",
+  translation.friendsReferred: "Friends\nreferred",
   translation.redeemRewards: "ਇਨਾਮ ਛੁਡਾਓ",
   translation.specialOffer: "ਵਿਸ਼ੇਸ਼ ਪੇਸ਼ਕਸ਼",
   translation.fiftyOff: "50% ਦੀ ਛੂਟ",

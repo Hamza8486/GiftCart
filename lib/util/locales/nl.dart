@@ -102,7 +102,7 @@ Map<String, String> get nlMap => {
   translation.read10_04: "Lees 10:04",
   translation.congratulationsScratchCoupon: "Gefeliciteerd!",
   translation.congrats: "Gefeliciteerd!",
-  translation.friendsReferred: "Vrienden\\nreferred",
+  translation.friendsReferred: "Vrienden\nreferred",
   translation.redeemRewards: "Beloningen inwisselen",
   translation.specialOffer: "Speciale aanbieding",
   translation.fiftyOff: "50% korting",

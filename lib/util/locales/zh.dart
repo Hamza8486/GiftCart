@@ -102,7 +102,7 @@ Map<String, String> get zhMap => {
   translation.read10_04: "阅读10:04",
   translation.congratulationsScratchCoupon: "恭喜你！",
   translation.congrats: "恭喜！",
-  translation.friendsReferred: "朋友\\推荐",
+  translation.friendsReferred: "朋友\n推荐",
   translation.redeemRewards: "赎回奖励",
   translation.specialOffer: "特别优惠",
   translation.fiftyOff: "优惠50",

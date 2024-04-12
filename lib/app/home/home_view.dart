@@ -108,16 +108,12 @@ class _HomeState extends State<Home> {
             bucket: bucket,
           ),
           floatingActionButton: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: AppColor.whiteColor),
-            child: FloatingActionButton(
-              backgroundColor: AppColor.primaryColor,
-              child: Image.asset(
-                "assets/images/scans.png",
-                height: Get.height * 0.03,
-              ),
-              onPressed: () {
+            width: 80,
+            // decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(20),
+            //     color: AppColor.whiteColor),
+            child:InkWell(
+              onTap: () {
                 homeController.currentTab.value = 4;
                 // setState(() {
                 //   currentScreen = ShowCaseWidget(
@@ -129,7 +125,30 @@ class _HomeState extends State<Home> {
                 //   widget.currentTab = 4;
                 // });
               },
+              child: Image.asset(
+                "assets/icons/ic_scanner.png",
+
+              ),
             ),
+            // child: FloatingActionButton(
+            //   // backgroundColor: AppColor.primaryColor,
+            //   child: Image.asset(
+            //     "assets/icons/ic_scanner.png",
+            //     height: Get.height * 0.03,
+            //   ),
+            //   onPressed: () {
+            //     homeController.currentTab.value = 4;
+            //     // setState(() {
+            //     //   currentScreen = ShowCaseWidget(
+            //     //     builder: Builder(
+            //     //       builder: (context) => ScanQrPage(),
+            //     //     ),
+            //     //   );
+            //     //   // if user taps on this dashboard tab will be active
+            //     //   widget.currentTab = 4;
+            //     // });
+            //   },
+            // ),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,

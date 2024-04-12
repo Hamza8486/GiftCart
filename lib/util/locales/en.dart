@@ -106,7 +106,7 @@ Map<String, String> get enMap => {
       translation.read10_04: "Read 10:04",
       translation.congratulations: "Congratulations!",
       translation.congrats: "Congrats!",
-      translation.friendsReferred: "Friends\\nreferred",
+      translation.friendsReferred: "Friends\nreferred",
       translation.redeemRewards: "Redeem rewards",
       translation.specialOffer: "Special offer",
       translation.fiftyOff: "50% Off",

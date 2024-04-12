@@ -293,7 +293,7 @@ class CustomDrawer extends StatelessWidget {
                   SizedBox(height: 10,),
                   GestureDetector(
                     onTap: (){
-                      Get.to(AffliateViewMain(),
+                      Get.to(AffiliateViewMain(),
                       transition: Transition.rightToLeft
                       );
 
